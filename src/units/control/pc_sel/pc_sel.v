@@ -1,10 +1,10 @@
-module pc_sel( input [31:0] inst,
-               output       pc_sel
+module PCSEL( input [6:0]   opcode,
+              output       pc_sel
 );
 
-    always @(*)
+    always @(opcode)
     begin
-            case(inst[6:0])
+            case(opcode)
                 7'h63: pc_sel   = 1'b1;
                 7'h67: pc_sel   = 1'b1;
                 7'h6f: pc_sel   = 1'b1;

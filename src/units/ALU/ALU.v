@@ -5,8 +5,8 @@ module ALU ( input      [31:0] i_1,
              output reg        zero_flag
 );
 
-    always @(*)
-    begin
+    always @(*) begin
+    
         case(control)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
