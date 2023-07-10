@@ -9,7 +9,7 @@ module PC(
   output [31:0] pc       // Program Counter output
 );
   
-  always @(posedge clk or posedge reset) begin
+  always @(posedge clk or posedge rst) begin
     if (rst) begin
         pc     <= 0;  // Reset the program counter to 0
         pc_nxt <=0;
