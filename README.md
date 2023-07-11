@@ -1,7 +1,7 @@
 # rv32_processor
 
 <h3>Datapath Pipeline </h3><br>
-![alt text](diagrams/block_diagrams/Datapath Pipeline.png)
+![alt text]([diagrams/block_diagrams/Datapath Pipeline.png](https://github.com/sprsr/rv32_processor/blob/57d4b5fbd6e21e916dc2b8a1a037a8581dd1775b/diagrams/block_diagrams/Datapath%20Pipeline.png))
 Right Now IMEM is a 4Kb Instruction Cache.  No method of fetching from main memory or dynamic cache transfer <br>
 To be added later <br>
 <h3>Risc V RV32I Instruction Format </h3><br>
