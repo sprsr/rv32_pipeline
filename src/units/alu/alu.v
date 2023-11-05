@@ -6,7 +6,7 @@ module alu (
     output reg        zero_flag
 );
 
-    always @(*) begingit@github.com:sprsr/vimrc.git
+    always @(*) begin
     
         case(aluSel)
             4'b0000: result = i_1 & i_2;

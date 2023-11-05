@@ -8,18 +8,25 @@ module PC(
   output [31:0] pc_nxt,  // Next
   output [31:0] pc       // Program Counter output
 );
-  
-  always @(posedge clk or posedge rst) begin
-    if (rst) begin
-        pc     <= 0;  // Reset the program counter to 0
-        pc_nxt <=0;
-    end else if (sel_pc) begin
-        pc <= in_alu;          // Increment the program counter if enabled
-        pc_nxt <= in_alu + 'd4;
-    end else if (!sel_pc) begin
-        pc <= in_pc;          // Increment the program counter if enabled
-        pc_nxt <= in_pc + 'd4;
+
+    reg [31:0] w_pc;
+    reg [31:0] w_pc_nxt;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            w_pc <= 0;  // Reset the program counter to 0
+            w_pc_nxt <=0;
+        end else if (sel_pc) begin
+            w_pc <= in_alu;          // Increment the program counter if enabled
+            w_pc_nxt <= in_alu + 'd4;
+        end else if (!sel_pc) begin
+            w_pc <= pc_nxt;          // Increment the program counter if enabled
+            w_pc_nxt <= pc + 'd4;
+        end
     end
-  end
+
+    assign pc = w_pc;
+    assign pc_nxt = w_pc_nxt;
+
 endmodule
 
