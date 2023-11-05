@@ -6,14 +6,13 @@ module imem(
     output [31:0] o_data
 );
 
-reg [31:0] memory [0:1023];
+    reg  [31:0]  r_memory [0:1023];
 
     initial begin
-        mem[0] <= 32'h12345678;
-        mem[1] <= 32'hABCDEF01;
+        r_memory[0] <= 32'h12345678;
+        r_memory[1] <= 32'hABCDEF01;
     end
 
-    always @(address) begin
-        o_inst<=memory[i_addr];
-    end    
+    assign o_data = r_memory[i_addr];
+
 endmodule
