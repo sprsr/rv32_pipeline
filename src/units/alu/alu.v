@@ -1,11 +1,12 @@
-module alu ( input      [31:0] i_1,
-             input      [31:0] i_2,
-             input      [3:0]  aluSel,
-             output reg [31:0] result,
-             output reg        zero_flag
+module alu ( 
+    input      [31:0] i_1,
+    input      [31:0] i_2,
+    input      [3:0]  aluSel,
+    output reg [31:0] result,
+    output reg        zero_flag
 );
 
-    always @(*) begin
+    always @(*) begingit@github.com:sprsr/vimrc.git
     
         case(aluSel)
             4'b0000: result = i_1 & i_2;
