@@ -5,20 +5,19 @@ module dmem(
     input  [31:0] i_addr,
     input  [31:0]  dataW,
     input          memRW,
-    output wire [31:0] o_data
+    output [31:0] o_data
 );
 
-wire [31:0] w_data;
-reg [31:0] memory [0:1023];
-assign o_data = w_data;
+logic [31:0] memory [0:1023];
+assign o_data = memory[i_addr];
 
-    always @(posedge clk or posedge rst) begin
+    always @(posedge clk) begin
         if (rst) begin
-            w_data[31:0] <= 32'd0;
+            for (int i = 0; i <= 1023; i = i + 1) begin
+                memory[i] <= 32'h0;
+            end
         end else if (memRW) begin
             memory[i_addr] <= dataW;
-        end else begin
-            w_data <= memory[i_addr];
         end
     end    
 endmodule
