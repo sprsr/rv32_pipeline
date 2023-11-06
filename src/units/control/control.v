@@ -14,4 +14,5 @@ module control( input [31:0] inst,
 
     PCSEL inst_pcSel(.opcode(inst[6:0]),.pc_sel(pcSel));
     IMMSEL inst_immSel(.opcode(inst[6:0]),.immSel(ImmSel));
+    BRCTL inst_brctl(.instruction(inst),.brun(BrUn));
 endmodule
