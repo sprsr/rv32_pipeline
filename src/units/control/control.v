@@ -12,5 +12,6 @@ module control( input [31:0] inst,
                 output       WBSel
 );
 
-    PCSEL inst_pcSel(.opcode(inst[6:0]),pcSel);
-    
+    PCSEL inst_pcSel(.opcode(inst[6:0]),.pc_sel(pcSel));
+    IMMSEL inst_immSel(.opcode(inst[6:0]),.immSel(ImmSel));
+endmodule
