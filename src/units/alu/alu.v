@@ -19,9 +19,10 @@ module alu (
                         else 
                             result = 1'b0;
                      end
+            4'b1001: result = i_2;
         endcase
 
-        if (result ==0)
+        if (result == 0 )
             zero_flag = 1'b1;
         else
             zero_flag = 1'b0;
