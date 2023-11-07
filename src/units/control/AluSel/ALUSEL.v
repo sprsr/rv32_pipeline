@@ -110,8 +110,8 @@ always @(*) begin
                     r_immSel  <= 4'h3;
                     r_BrUn    <= 1'bx; 
                     case (BrEq)
-                        1'b0: r_pc_sel <= 1'b0;
-                        1'b1: r_pc_sel <= 1'b1;
+                        1'b0: r_pc_sel <= 1'b1;
+                        1'b1: r_pc_sel <= 1'b0;
                     endcase
                     r_wb_sel  <= 2'bx;
 
