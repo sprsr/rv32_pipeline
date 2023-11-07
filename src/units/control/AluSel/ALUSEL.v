@@ -1,5 +1,7 @@
 module instr_ctl(
     input [31:0] instruction,
+    input        BrEq,
+    input        BrLT,
     output       a_sel,
     output       b_sel,
     output       alu_sel,
@@ -81,13 +83,37 @@ always @(*) begin
             r_pc_sel  <= 1'b1;
             r_wb_sel  <= 2'b10;
         end
-        // BEQ Instruction:
         7'b1100011: begin
             case (instruction[14:12])
+                // BEQ Instruction:
                 3'b000: begin
-
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h3;
+                    r_BrUn    <= 1'bx; 
+                    case (BrEq)
+                        1'b0: r_pc_sel <= 1'b0;
+                        1'b1: r_pc_sel <= 1'b1;
+                    endcase
+                    r_wb_sel  <= 2'bx;
                 end
+                // BNE Instruction
                 3'b001: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h3;
+                    r_BrUn    <= 1'bx; 
+                    case (BrEq)
+                        1'b0: r_pc_sel <= 1'b0;
+                        1'b1: r_pc_sel <= 1'b1;
+                    endcase
+                    r_wb_sel  <= 2'bx;
 
                 end
             
