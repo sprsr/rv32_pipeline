@@ -114,7 +114,21 @@ always @(*) begin
                         1'b1: r_pc_sel <= 1'b0;
                     endcase
                     r_wb_sel  <= 2'bx;
-
+                end
+                //BLT Instruction
+                3'b010: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h3;
+                    r_BrUn    <= 1'b0; 
+                    case (BrLT)
+                        1'b0: r_pc_sel <= 1'b0;
+                        1'b1: r_pc_sel <= 1'b1;
+                    endcase
+                    r_wb_sel  <= 2'bx;
                 end
             
     endcase
