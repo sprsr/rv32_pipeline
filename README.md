@@ -21,4 +21,6 @@ Control Unit <br>
 pc_sel Signal <br> 
 ![alt text](https://github.com/sprsr/rv32_processor/blob/main/diagrams/block_diagrams/pc_sel.png)
 ![alt text](https://github.com/sprsr/rv32_processor/blob/main/diagrams/block_diagrams/pc_sel2.png)
-TODO
+
+Current Status <br>
+11/6/23 : Currently adding instructions into control unit <br>
