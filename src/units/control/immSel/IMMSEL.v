@@ -1,5 +1,5 @@
 module IMMSEL( input opcode,
-               output [4:0] immSel
+               output [3:0] immSel
 );
 reg r_immSel;
 assign immSel = r_immSel;
