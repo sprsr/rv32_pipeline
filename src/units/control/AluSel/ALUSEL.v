@@ -63,11 +63,33 @@ always @(*) begin
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0010;
             r_mem_wr  <= 1'b0;
+            r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h5;
             r_BrUn    <= 1'bx; 
             r_pc_sel  <= 1'b1;
             r_wb_sel  <= 2'b10;
         end
+        // JALR Instruction:
+        7'b1101111: begin
+            r_a_sel   <= 1'b0;
+            r_b_sel   <= 1'b1;
+            r_alu_sel <= 4'b0010;
+            r_mem_wr  <= 1'b0;
+            r_RegWEn  <= 1'b1;
+            r_immSel  <= 4'h1;
+            r_BrUn    <= 1'bx; 
+            r_pc_sel  <= 1'b1;
+            r_wb_sel  <= 2'b10;
+        end
+        // BEQ Instruction:
+        7'b1100011: begin
+            case (instruction[14:12])
+                3'b000: begin
+
+                end
+                3'b001: begin
+
+                end
             
     endcase
 end
