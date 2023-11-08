@@ -190,7 +190,56 @@ always @(*) begin
                     r_pc_sel <= 1'b0;
                     r_wb_sel  <= 2'b0;
                 end
-            
+                //LH Instruction
+                3'b001: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                //LW Instruction
+                3'b010: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                //LBU Instruction
+                3'b100: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                //LHU Instruction
+                3'b101: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+            endcase
+        end
     endcase
 end
 endmodule
