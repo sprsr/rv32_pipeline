@@ -176,6 +176,7 @@ always @(*) begin
                     r_wb_sel  <= 2'bx;
                 end
             endcase
+        end
         7'b0000011: begin
             case (Instruction[14:12])
                 //LB Instruction
@@ -239,11 +240,46 @@ always @(*) begin
                     r_wb_sel  <= 2'b0;
                 end
             endcase
+        end
         7'b0100011: begin
             case (instruction[14:12])
                 // SB Instruction
                 3'b000: begin
-
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b1;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h2;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                // SH Instruction
+                3'b001: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b1;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h2;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                // SW Instruction
+                3'b010: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0010;
+                    r_mem_wr  <= 1'b1;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h2;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+            endcase
         end
     endcase
 end
