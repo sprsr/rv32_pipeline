@@ -239,6 +239,11 @@ always @(*) begin
                     r_wb_sel  <= 2'b0;
                 end
             endcase
+        7'b0100011: begin
+            case (instruction[14:12])
+                // SB Instruction
+                3'b000: begin
+
         end
     endcase
 end
