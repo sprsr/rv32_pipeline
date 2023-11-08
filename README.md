@@ -24,33 +24,43 @@ pc_sel Signal <br>
 
 Current Status <br>
 11/6/23 : Currently adding instructions into control unit <br>
-Inst  BrEq	BrLT	a_sel	b_sel	alu_sel	mem_wr	RegWEn	immSel	BrUn	pc_sel	wb_sel
-
-Ctl   1 2 3 4 5 6 7 8 9 A B
-LUI	  x	x	0	1	9	0	1	4	x	0	1
-AUIPC	x	x	1	1	2	0	1	4	x	0	1
-JAL	  x	x	1	1	2	0	1	5	x	1	2
-JALR	x	x	0	1	2	0	1	1	x	1	2
-BEQ	  0	x	0	0	2	0	0	3	x	0	x
-BEQ	  1	x	0	0	2	0	0	3	x	1	x
-BNE	  1	x	0	0	2	0	0	3	x	0	x
-BNE	  0	x	0	0	2	0	0	3	x	1	x
-BLT	  x	0	0	0	2	0	0	3	0	0	x
-BLT	  x	1	0	0	2	0	0	3	0	1	x
-BGE	  x	0	0	0	2	0	0	3	0	1	x
-BGE	  x	1	0	0	2	0	0	3	0	0	x
-BLT	  x	0	0	0	2	0	0	3	1	0	x
-BLT	  x	1	0	0	2	0	0	3	1	1	x
-BGE	  x	0	0	0	2	0	0	3	1	1	x
-BGE	  x	1	0	0	2	0	0	3	1	0	x
-LB	  x	x	0	1	2	0	1	1	0	0	0
-LH	  x	x	0	1	2	0	1	1	0	0	0
-LW	  x	x	0	1	2	0	1	1	0	0	0
-LBU	  x	x	0	1	2	0	1	1	0	0	0
-LHU	  x	x	0	1	2	0	1	1	0	0	0
-SB	  x	x	0	1	2	1	0	2	0	0	0
-SH	  x	x	0	1	2	1	0	2	0	0	0
-SW	  x	x	0	1	2	1	0	2	0	0	0
-ADDI	x	x	0	1	2	0	1	1	0	0	1
-STLI	x	x	0	1	8	0	1	1	0	0	1
+Control Signals <br>
+BrEq	  :  1<br>
+BrLT	  :  2<br>
+a_sel	  ... <br>
+b_sel		... <br>
+alu_sel	... <br>
+mem_wr	... <br>
+RegWEn	... <br>
+immSel	... <br>
+BrUn	  :  9<br>
+pc_sel	:  A<br>
+wb_sel  :  B<br><br>
+Ctl   1 2 3 4 5 6 7 8 9 A B<br>
+LUI	  x	x	0	1	9	0	1	4	x	0	1<br>
+AUIPC	x	x	1	1	2	0	1	4	x	0	1<br>
+JAL	  x	x	1	1	2	0	1	5	x	1	2<br>
+JALR	x	x	0	1	2	0	1	1	x	1	2<br>
+BEQ	  0	x	0	0	2	0	0	3	x	0	x<br>
+BEQ	  1	x	0	0	2	0	0	3	x	1	x<br>
+BNE	  1	x	0	0	2	0	0	3	x	0	x<br>
+BNE	  0	x	0	0	2	0	0	3	x	1	x<br>
+BLT	  x	0	0	0	2	0	0	3	0	0	x<br>
+BLT	  x	1	0	0	2	0	0	3	0	1	x<br>
+BGE	  x	0	0	0	2	0	0	3	0	1	x<br>
+BGE	  x	1	0	0	2	0	0	3	0	0	x<br>
+BLT	  x	0	0	0	2	0	0	3	1	0	x<br>
+BLT	  x	1	0	0	2	0	0	3	1	1	x<br>
+BGE	  x	0	0	0	2	0	0	3	1	1	x<br>
+BGE	  x	1	0	0	2	0	0	3	1	0	x<br>
+LB	  x	x	0	1	2	0	1	1	0	0	0<br>
+LH	  x	x	0	1	2	0	1	1	0	0	0<br>
+LW	  x	x	0	1	2	0	1	1	0	0	0<br>
+LBU	  x	x	0	1	2	0	1	1	0	0	0<br>
+LHU	  x	x	0	1	2	0	1	1	0	0	0<br>
+SB	  x	x	0	1	2	1	0	2	0	0	0<br>
+SH	  x	x	0	1	2	1	0	2	0	0	0<br>
+SW	  x	x	0	1	2	1	0	2	0	0	0<br>
+ADDI	x	x	0	1	2	0	1	1	0	0	1<br>
+STLI	x	x	0	1	8	0	1	1	0	0	1<br>
 
