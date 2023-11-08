@@ -178,7 +178,7 @@ always @(*) begin
             endcase
         end
         7'b0000011: begin
-            case (Instruction[14:12])
+            case (instruction[14:12])
                 //LB Instruction
                 3'b000: begin
                     r_a_sel   <= 1'b0;
