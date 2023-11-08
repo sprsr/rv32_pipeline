@@ -35,7 +35,7 @@ assign wb_sel  = r_wb_sel;
 
 always @(*) begin
     case (instruction[6:0])
-        // LUI Instruction: 
+        // LUI Instruction:
         7'b0110111: begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
@@ -47,7 +47,7 @@ always @(*) begin
             r_pc_sel  <= 1'b0;
             r_wb_sel  <= 2'b01;
         end
-        // AUIPC Instruction: 
+        // AUIPC Instruction:
         7'b0010111: begin
             r_a_sel   <= 1'b1;
             r_b_sel   <= 1'b1;
@@ -67,7 +67,7 @@ always @(*) begin
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h5;
-            r_BrUn    <= 1'bx; 
+            r_BrUn    <= 1'bx;
             r_pc_sel  <= 1'b1;
             r_wb_sel  <= 2'b10;
         end
@@ -79,7 +79,7 @@ always @(*) begin
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h1;
-            r_BrUn    <= 1'bx; 
+            r_BrUn    <= 1'bx;
             r_pc_sel  <= 1'b1;
             r_wb_sel  <= 2'b10;
         end
@@ -93,7 +93,7 @@ always @(*) begin
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
-                    r_BrUn    <= 1'bx; 
+                    r_BrUn    <= 1'bx;
                     case (BrEq)
                         1'b0: r_pc_sel <= 1'b0;
                         1'b1: r_pc_sel <= 1'b1;
@@ -108,7 +108,7 @@ always @(*) begin
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
-                    r_BrUn    <= 1'bx; 
+                    r_BrUn    <= 1'bx;
                     case (BrEq)
                         1'b0: r_pc_sel <= 1'b1;
                         1'b1: r_pc_sel <= 1'b0;
@@ -123,7 +123,7 @@ always @(*) begin
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
-                    r_BrUn    <= 1'b0; 
+                    r_BrUn    <= 1'b0;
                     case (BrLT)
                         1'b0: r_pc_sel <= 1'b0;
                         1'b1: r_pc_sel <= 1'b1;
@@ -180,7 +180,7 @@ always @(*) begin
             case (Instruction[14:12])
                 //LB Instruction
                 3'b000: begin
-            
+
     endcase
 end
 endmodule
