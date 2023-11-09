@@ -12,14 +12,19 @@ module alu (
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
             4'b0010: result = i_1 + i_2;
-            4'b0100: result = i_1 - i_2;
-            4'b1000: begin
+            4'b0011: result = i_1 - i_2;
+            // Less than Unsigned
+            4'b0100: begin
                         if (i_1 < i_2) 
                             result = 1'b1;
                         else 
                             result = 1'b0;
                      end
-            4'b1001: result = i_2;
+            // Pass Input 2
+            4'b0101: result = i_2;
+            // Shift Immediate 12 bytes and add
+            4'b0111: result <= ((i_2 <<< 12) + i_1);
+            4'b1000: 
         endcase
 
         if (result == 0 )

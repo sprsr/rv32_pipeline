@@ -39,7 +39,7 @@ always @(*) begin
         7'b0110111: begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
-            r_alu_sel <= 4'b1001;
+            r_alu_sel <= 4'b0101;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h4;
@@ -299,7 +299,7 @@ always @(*) begin
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
-                    r_alu_sel <= 4'b1000;
+                    r_alu_sel <= 4'b0100;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -311,7 +311,7 @@ always @(*) begin
                 3'b011: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
-                    r_alu_sel <= 4'b1000;
+                    r_alu_sel <= 4'b0100;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
