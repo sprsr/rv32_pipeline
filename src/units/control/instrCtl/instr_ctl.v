@@ -34,6 +34,8 @@ assign pc_sel  = r_pc_sel;
 assign wb_sel  = r_wb_sel;
 
 always @(*) begin
+    // Currently every RV32I instruction is implemented in control.  
+    // EFENCE, EBREAK, and ECALL require further control implementation.
     case (instruction[6:0])
         // LUI Instruction: 
         7'b0110111: begin
@@ -527,6 +529,7 @@ always @(*) begin
             end
         7'b1110011: begin
             case (instruction[31:20])
+                //  @todo
                 //  ECALL Instruction
                 7'h0: begin
                     r_a_sel   <= 1'b0;
@@ -539,6 +542,7 @@ always @(*) begin
                     r_pc_sel  <= 1'b0;
                     r_wb_sel  <= 2'b0;
                 end
+                //  @todo 
                 //  EBREAK Instruction
                 7'h1: begin
                     r_a_sel   <= 1'b0;
@@ -551,9 +555,8 @@ always @(*) begin
                     r_pc_sel  <= 1'b0;
                     r_wb_sel  <= 2'b0;
                 end
-
-                    
-
+            endcase
+        end
     endcase
 end
 endmodule
