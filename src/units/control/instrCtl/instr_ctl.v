@@ -381,7 +381,7 @@ always @(*) begin
                             r_pc_sel <= 1'b0;
                             r_wb_sel  <= 2'b1;
                         end
-                        // SRLI Instruction
+                        // SRAI Instruction
                         7'b0100000: begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b1;
@@ -393,9 +393,101 @@ always @(*) begin
                             r_pc_sel <= 1'b0;
                             r_wb_sel  <= 2'b1;
                         end
-
+                    endcase
+                end
             endcase
         end
+        7'b0110011: begin
+            case (instruction[14:12]) 
+                3'b000: begin
+                    case (instruction[31:25])
+                        // ADD Instruction
+                        7'b0000000: begin
+                            r_a_sel   <= 1'b0;
+                            r_b_sel   <= 1'b0;
+                            r_alu_sel <= 4'b0010;
+                            r_mem_wr  <= 1'b0;
+                            r_RegWEn  <= 1'b1;
+                            r_immSel  <= 4'h0;
+                            r_BrUn    <= 1'b0;
+                            r_pc_sel <= 1'b0;
+                            r_wb_sel  <= 2'b1;
+                        end
+                        // SUB Instruction
+                        7'b0100000: begin
+                            r_a_sel   <= 1'b0;
+                            r_b_sel   <= 1'b0;
+                            r_alu_sel <= 4'b0011;
+                            r_mem_wr  <= 1'b0;
+                            r_RegWEn  <= 1'b1;
+                            r_immSel  <= 4'h0;
+                            r_BrUn    <= 1'b0;
+                            r_pc_sel <= 1'b0;
+                            r_wb_sel  <= 2'b1;
+                        end
+                    endcase
+                end
+                // SLL Instruction
+                3'b001: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b1000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // SLT Instruction
+                3'b010: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b1011;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // SLTU Instruction
+                3'b011: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b1000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // XOR Instruction
+                3'b100: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b1001;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // SRA Instruction
+                3'b100: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b1111;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+
                     
 
     endcase
