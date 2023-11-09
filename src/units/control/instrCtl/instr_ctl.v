@@ -281,10 +281,10 @@ always @(*) begin
                 end
             endcase
         end
-        7'0010011: begin
+        7'b0010011: begin
             case (instruction[14:12])
                 // ADDI Instruction
-                3'000: begin
+                3'b000: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0010;
@@ -486,6 +486,70 @@ always @(*) begin
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
                     r_wb_sel  <= 2'b1;
+                end
+                // OR Instruction
+                3'b110: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0001;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // AND Instruction
+                3'b111: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+            endcase
+        end
+        //  FENCE Instruction
+        7'b0001111: begin
+                r_a_sel   <= 1'b0;
+                r_b_sel   <= 1'b0;
+                r_alu_sel <= 4'b0000;
+                r_mem_wr  <= 1'b0;
+                r_RegWEn  <= 1'b0;
+                r_immSel  <= 4'h0;
+                r_BrUn    <= 1'b0;
+                r_pc_sel  <= 1'b0;
+                r_wb_sel  <= 2'b0;
+            end
+        7'b1110011: begin
+            case (instruction[31:20])
+                //  ECALL Instruction
+                7'h0: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b0;
+                end
+                //  EBREAK Instruction
+                7'h1: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b0;
+                    r_alu_sel <= 4'b0000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b0;
+                    r_immSel  <= 4'h0;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel  <= 1'b0;
+                    r_wb_sel  <= 2'b0;
                 end
 
                     
