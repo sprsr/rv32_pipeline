@@ -11,11 +11,18 @@ module alu (
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
+            4'b1001: result = i_1 ^ i_2;
             4'b0010: result = i_1 + i_2;
             4'b0011: result = i_1 - i_2;
             // Less than Unsigned
             4'b0100: begin
                         if (i_1 < i_2) 
+                            result = 1'b1;
+                        else 
+                            result = 1'b0;
+                     end
+            4'b1011: begin
+                        if ($signed(i_1) < $signed(i_2))
                             result = 1'b1;
                         else 
                             result = 1'b0;
