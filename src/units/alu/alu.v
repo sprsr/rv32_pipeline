@@ -32,6 +32,8 @@ module alu (
             // Shift Immediate 12 bytes and add
             4'b0111: result <= ((i_2 <<< 12) + i_1);
             4'b1000: result <= (i_1 <<< i_2[4:0]);
+            4'b1100: result <= (i_1 >>> i_2[4:0]);
+            4'b1101: result <= (5'b10000 + (i_1 >>> i_2[3:0]);
         endcase
 
         if (result == 0 )
