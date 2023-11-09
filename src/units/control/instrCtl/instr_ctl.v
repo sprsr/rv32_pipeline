@@ -319,6 +319,67 @@ always @(*) begin
                     r_pc_sel <= 1'b0;
                     r_wb_sel  <= 2'b1;
                 end
+                // XORI Instruction
+                3'b100: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b1001;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // ORI Instruction
+                3'b100: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0001;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // ANDI Instruction
+                3'b111: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0000;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // SLTI Instruction
+                3'b010: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b1011;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+                // SLTIU Instruction
+                3'b011: begin
+                    r_a_sel   <= 1'b0;
+                    r_b_sel   <= 1'b1;
+                    r_alu_sel <= 4'b0100;
+                    r_mem_wr  <= 1'b0;
+                    r_RegWEn  <= 1'b1;
+                    r_immSel  <= 4'h1;
+                    r_BrUn    <= 1'b0;
+                    r_pc_sel <= 1'b0;
+                    r_wb_sel  <= 2'b1;
+                end
+
             endcase
         end
                     
