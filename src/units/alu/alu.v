@@ -6,6 +6,17 @@ module alu (
     output reg        zero_flag
 );
 
+    function [31:0] shift(input [31:0] fi_val, fi_op);
+        begin
+            case fi_pp
+                0: shift = i_2;
+                1: shift = 
+                2: shift = 
+
+                    
+
+        end
+
     always @(*) begin
         case(aluSel)
             4'b0000: result = i_1 & i_2;
@@ -13,30 +24,23 @@ module alu (
             4'b1001: result = i_1 ^ i_2;
             4'b0010: result = i_1 + i_2;
             4'b0011: result = i_1 - i_2;
-            // Less than Unsigned
+            // Less than
             4'b0100: begin
                         if (i_1 < i_2) 
                             result = 1'b1;
                         else 
                             result = 1'b0;
                      end
-            4'b1011: begin
-                        if ($signed(i_1) < $signed(i_2))
-                            result = 1'b1;
-                        else 
-                            result = 1'b0;
-                     end
             // Pass Input 2
             4'b0101: result = i_2;
-            // Shift Immediate 12 bytes and add
-            4'b0111: result <= ((i_2 <<< 12) + i_1);
             // Shift Left Logical
-            4'b1000: result <= (i_1 <<< i_2[4:0]);
-            4'b1100: result <= (i_1 >>> i_2[4:0]);
+            4'b1000: result <= (i_1 << i_2[4:0]);
+            // Shift Right Logical
+            4'b1100: result <= (i_1 >> i_2[4:0]);
             // Shift Left Arithmetic
-            4'b1101: result <= (5'b10000 + (i_1 >>> i_2[3:0]);
+            4'b1101: result <= (i_1 >>> i_2[4:0]);
             // Shift Right Arithmetic
-            4'b1111: result <= (5'b10000 + (i_1 <<< i_2[3:0]);
+            4'b1111: result <= (i_1 <<< i_2[4:0]);
         endcase
 
         if (result == 0 )
