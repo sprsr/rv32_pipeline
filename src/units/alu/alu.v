@@ -7,7 +7,6 @@ module alu (
 );
 
     always @(*) begin
-    
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
