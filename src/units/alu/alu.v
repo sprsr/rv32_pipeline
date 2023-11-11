@@ -15,13 +15,6 @@ module alu (
             4'b0010: result = i_1 ^ i_2;
             4'b0011: result = i_1 + i_2;
             4'b0100: result = i_1 - i_2;
-            // Less than signed
-            4'b0101: begin
-                        if ($signed(i_1) < $signed(i_2))
-                            result = 1'b1;
-                        else 
-                            result = 1'b0;
-                     end
             // Pass Input 2
             4'b0110: result = i_2;
             // Shift Left Logical
@@ -35,6 +28,13 @@ module alu (
             // Less than Unsigned 
             4'b1011: begin
                         if ($unsigned(i_1) < $unsigned(i_2))
+                            result = 1'b1;
+                        else 
+                            result = 1'b0;
+                     end
+            // Less than signed
+            4'b1100: begin
+                        if ($signed(i_1) < $signed(i_2))
                             result = 1'b1;
                         else 
                             result = 1'b0;
