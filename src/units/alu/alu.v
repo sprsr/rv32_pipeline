@@ -2,11 +2,20 @@ module alu (
     input      [31:0] i_1,
     input      [31:0] i_2,
     input      [3:0]  aluSel,
+    input             sign,
     output reg [31:0] result,
     output reg        zero_flag
 );
 
+reg [31:0] r_operand_2_converted;
+
     always @(*) begin
+        // I don't like this, but keeping for now
+        if (sign)
+            r_operand_2_converted = $signed(r_operand_2_converted);
+        else
+            r_operand_2_converted = $unsigned(r_operand_2_converted);
+
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
