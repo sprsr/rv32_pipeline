@@ -12,6 +12,6 @@ XORI
 ORI
 ANDI
 
-Both Signed Comp: 
+Both Signed Comp:  ALU: (Signed: 1100, Unsigned: 1011)
 SLT
 SLTI
