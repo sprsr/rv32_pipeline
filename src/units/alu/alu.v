@@ -9,8 +9,6 @@ module alu (
 );
 
     always @(*) begin
-       r_operand_1 = sign_op(i_1,sign);
-       r_operand_2 = sign_op(i_2,sign);
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
