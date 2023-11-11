@@ -9,8 +9,8 @@ module alu (
     function [31:0] shift(input [31:0] fi_val, fi_op);
         begin
             case fi_pp
-                0: shift = i_2;
-                1: shift = 
+                0: shift = fi_val;
+                1: shift = fi_val  
                 2: shift = 
 
                     
@@ -21,26 +21,26 @@ module alu (
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
-            4'b1001: result = i_1 ^ i_2;
-            4'b0010: result = i_1 + i_2;
-            4'b0011: result = i_1 - i_2;
+            4'b0010: result = i_1 ^ i_2;
+            4'b0011: result = i_1 + i_2;
+            4'b0100: result = i_1 - i_2;
             // Less than
-            4'b0100: begin
+            4'b0101: begin
                         if (i_1 < i_2) 
                             result = 1'b1;
                         else 
                             result = 1'b0;
                      end
             // Pass Input 2
-            4'b0101: result = i_2;
+            4'b0110: result = i_2;
             // Shift Left Logical
-            4'b1000: result <= (i_1 << i_2[4:0]);
+            4'b0111: result <= (i_1 << i_2[4:0]);
             // Shift Right Logical
-            4'b1100: result <= (i_1 >> i_2[4:0]);
+            4'b1000: result <= (i_1 >> i_2[4:0]);
             // Shift Left Arithmetic
-            4'b1101: result <= (i_1 >>> i_2[4:0]);
+            4'b1001: result <= (i_1 >>> i_2[4:0]);
             // Shift Right Arithmetic
-            4'b1111: result <= (i_1 <<< i_2[4:0]);
+            4'b1010: result <= (i_1 <<< i_2[4:0]);
         endcase
 
         if (result == 0 )

@@ -41,7 +41,7 @@ always @(*) begin
         7'b0110111: begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
-            r_alu_sel <= 4'b0101;
+            r_alu_sel <= 4'b0110;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h4;
