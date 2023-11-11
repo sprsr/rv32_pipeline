@@ -2,22 +2,29 @@ module alu (
     input      [31:0] i_1,
     input      [31:0] i_2,
     input      [3:0]  aluSel,
-    output reg [31:0] result,
+    input             sign,
+    input             shift,
+    output     [31:0] result,
     output reg        zero_flag
 );
 
-    function [31:0] shift(input [31:0] fi_val, fi_op);
-        begin
-            case fi_pp
-                0: shift = fi_val;
-                1: shift = fi_val  
-                2: shift = 
+    reg [31:0] r_operand_1;
+    reg [31:0] r_operand_2;
 
-                    
+    function [31:0] sign_op;
+        input [31:0] fi_val;
+        input fi_op;
+            if (fi_op == 1'b1) begin
+                sign_op <= $signed(fi_val);
+            end else begin
+                sign_op <= $unsigned(fi_val);
+            end
+    endfunction
 
-        end
 
     always @(*) begin
+       r_operand_1 = sign_op(i_1,sign);
+       r_operand_2 = sign_op(i_2,sign);
         case(aluSel)
             4'b0000: result = i_1 & i_2;
             4'b0001: result = i_1 | i_2;
