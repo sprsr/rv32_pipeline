@@ -344,7 +344,7 @@ always @(*) begin
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
-                    r_alu_sel <= 4'b0101;
+                    r_alu_sel <= 4'b1100;
                     r_sign    <= 2'b11;
                     r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
@@ -358,7 +358,7 @@ always @(*) begin
                 3'b011: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
-                    r_alu_sel <= 4'b0101;
+                    r_alu_sel <= 4'b1011;
                     r_sign    <= 2'b0;
                     r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
@@ -510,7 +510,7 @@ always @(*) begin
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
-                    r_alu_sel <= 4'b0101;
+                    r_alu_sel <= 4'b1100;
                     r_sign    <= 2'b11;
                     r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
@@ -524,7 +524,7 @@ always @(*) begin
                 3'b011: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
-                    r_alu_sel <= 4'b0101;
+                    r_alu_sel <= 4'b1011;
                     r_sign    <= 2'b0;
                     r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
