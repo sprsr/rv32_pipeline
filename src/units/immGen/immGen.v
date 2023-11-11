@@ -17,7 +17,7 @@ module immGen(
         4'd0:   r_immediate <= 0;
         // 1 -> I-Type, [24:13]
         4'd1:   begin
-                    r_immediate[31:11] <= instr[24];
+                    r_immediate[11] <= instr[24];
                     r_immediate[10:5]  <= instr[23:18];
                     r_immediate[4:1]   <= instr[17:14];
                     r_immediate[0]     <= instr[13];
