@@ -2,8 +2,6 @@ module alu (
     input      [31:0] i_1,
     input      [31:0] i_2,
     input      [3:0]  aluSel,
-    input             sign,
-    input             shift,
     output reg [31:0] result,
     output reg        zero_flag
 );
