@@ -4,7 +4,9 @@ module instr_ctl(
     input        BrLT,
     output       a_sel,
     output       b_sel,
-    output       alu_sel,
+    output [3:0] alu_sel,
+    output       alu_sign,
+    output       alu_shift,
     output       mem_wr,
     output       RegWEn,
     output [3:0] immSel,
@@ -16,6 +18,8 @@ module instr_ctl(
 reg       r_a_sel;
 reg       r_b_sel;
 reg [3:0] r_alu_sel;
+reg       r_alu_sign;
+reg       r_alu_shift;
 reg       r_mem_wr;
 reg       r_RegWEn;
 reg [3:0] r_immSel;
@@ -53,7 +57,7 @@ always @(*) begin
         7'b0010111: begin
             r_a_sel   <= 1'b1;
             r_b_sel   <= 1'b1;
-            r_alu_sel <= 4'b0010;
+            r_alu_sel <= 4'b0011;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h4;
