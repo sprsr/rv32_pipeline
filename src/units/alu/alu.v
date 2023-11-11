@@ -4,23 +4,9 @@ module alu (
     input      [3:0]  aluSel,
     input             sign,
     input             shift,
-    output     [31:0] result,
+    output reg [31:0] result,
     output reg        zero_flag
 );
-
-    reg [31:0] r_operand_1;
-    reg [31:0] r_operand_2;
-
-    function [31:0] sign_op;
-        input [31:0] fi_val;
-        input fi_op;
-            if (fi_op == 1'b1) begin
-                sign_op <= $signed(fi_val);
-            end else begin
-                sign_op <= $unsigned(fi_val);
-            end
-    endfunction
-
 
     always @(*) begin
        r_operand_1 = sign_op(i_1,sign);
@@ -31,9 +17,9 @@ module alu (
             4'b0010: result = i_1 ^ i_2;
             4'b0011: result = i_1 + i_2;
             4'b0100: result = i_1 - i_2;
-            // Less than
+            // Less than signed
             4'b0101: begin
-                        if (i_1 < i_2) 
+                        if ($signed(i_1) < $signed(i_2))
                             result = 1'b1;
                         else 
                             result = 1'b0;
@@ -48,6 +34,13 @@ module alu (
             4'b1001: result <= (i_1 >>> i_2[4:0]);
             // Shift Right Arithmetic
             4'b1010: result <= (i_1 <<< i_2[4:0]);
+            // Less than Unsigned 
+            4'b1011: begin
+                        if ($unsigned(i_1) < $unsigned(i_2))
+                            result = 1'b1;
+                        else 
+                            result = 1'b0;
+                     end
         endcase
 
         if (result == 0 )
