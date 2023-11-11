@@ -18,8 +18,6 @@ module instr_ctl(
 reg       r_a_sel;
 reg       r_b_sel;
 reg [3:0] r_alu_sel;
-reg [1:0] r_sign;
-reg       r_shift;
 reg       r_mem_wr;
 reg       r_RegWEn;
 reg [3:0] r_immSel;
@@ -46,8 +44,6 @@ always @(*) begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0110;
-            r_sign    <= 2'b0;
-            r_shift   <= 1'b0;
             r_alu_sel <= 4'b0110;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
@@ -61,8 +57,6 @@ always @(*) begin
             r_a_sel   <= 1'b1;
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0011;
-            r_sign    <= 2'b0;
-            r_shift   <= 1'b0;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h4;
@@ -75,8 +69,6 @@ always @(*) begin
             r_a_sel   <= 1'b1;
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0011;
-            r_sign    <= 2'b1;
-            r_shift   <= 1'b0;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h5;
@@ -89,8 +81,6 @@ always @(*) begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0010;
-            r_sign    <= 2'b1;
-            r_shift   <= 1'b0;
             r_mem_wr  <= 1'b0;
             r_RegWEn  <= 1'b1;
             r_immSel  <= 4'h1;
@@ -105,8 +95,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -122,8 +110,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -139,8 +125,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -156,8 +140,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -173,8 +155,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -190,8 +170,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h3;
@@ -211,8 +189,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -225,8 +201,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -239,8 +213,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -253,8 +225,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -267,8 +237,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -285,8 +253,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b1;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h2;
@@ -299,8 +265,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b1;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h2;
@@ -313,8 +277,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b1;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h2;
@@ -331,8 +293,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -345,8 +305,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b1100;
-                    r_sign    <= 2'b11;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -359,8 +317,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b1011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -373,8 +329,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0010;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -387,8 +341,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0001;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -401,8 +353,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0000;
-                    r_sign    <= 2'b1;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -415,8 +365,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0111;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h1;
@@ -431,8 +379,6 @@ always @(*) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b1;
                             r_alu_sel <= 4'b1000;
-                            r_sign    <= 2'b0;
-                            r_shift   <= 1'b0;
                             r_mem_wr  <= 1'b0;
                             r_RegWEn  <= 1'b1;
                             r_immSel  <= 4'h1;
@@ -445,8 +391,6 @@ always @(*) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b1;
                             r_alu_sel <= 4'b1010;
-                            r_sign    <= 2'b0;
-                            r_shift   <= 1'b0;
                             r_mem_wr  <= 1'b0;
                             r_RegWEn  <= 1'b1;
                             r_immSel  <= 4'h1;
@@ -467,8 +411,6 @@ always @(*) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b0;
                             r_alu_sel <= 4'b0011;
-                            r_sign    <= 2'b0;
-                            r_shift   <= 1'b0;
                             r_mem_wr  <= 1'b0;
                             r_RegWEn  <= 1'b1;
                             r_immSel  <= 4'h0;
@@ -481,8 +423,6 @@ always @(*) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b0;
                             r_alu_sel <= 4'b0100;
-                            r_sign    <= 2'b0;
-                            r_shift   <= 1'b0;
                             r_mem_wr  <= 1'b0;
                             r_RegWEn  <= 1'b1;
                             r_immSel  <= 4'h0;
@@ -497,8 +437,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0111;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -511,8 +449,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1100;
-                    r_sign    <= 2'b11;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -525,8 +461,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1011;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -539,8 +473,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0010;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -553,8 +485,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1010;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -567,8 +497,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0001;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -581,8 +509,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b1;
                     r_immSel  <= 4'h0;
@@ -597,8 +523,6 @@ always @(*) begin
                 r_a_sel   <= 1'b0;
                 r_b_sel   <= 1'b0;
                 r_alu_sel <= 4'b0000;
-                r_sign    <= 2'b0;
-                r_shift   <= 1'b0;
                 r_mem_wr  <= 1'b0;
                 r_RegWEn  <= 1'b0;
                 r_immSel  <= 4'h0;
@@ -614,8 +538,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h0;
@@ -629,8 +551,6 @@ always @(*) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_sign    <= 2'b0;
-                    r_shift   <= 1'b0;
                     r_mem_wr  <= 1'b0;
                     r_RegWEn  <= 1'b0;
                     r_immSel  <= 4'h0;
