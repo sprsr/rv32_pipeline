@@ -1,0 +1,17 @@
+Immediate Sign Extend:
+JAL
+JALR
+LB
+LH
+LW
+SB
+SH
+SW
+ADDI
+XORI
+ORI
+ANDI
+
+Both Signed Comp: 
+SLT
+SLTI
