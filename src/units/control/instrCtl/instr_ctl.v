@@ -6,7 +6,6 @@ module instr_ctl(
     output       b_sel,
     output [3:0] alu_sel,
     output       sign,
-    output       alu_shift,
     output       mem_wr,
     output       RegWEn,
     output [3:0] immSel,
