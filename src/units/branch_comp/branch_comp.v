@@ -14,10 +14,10 @@ module branch_comp(
     
     always @(i_dataA or i_dataB) begin
         if (brUn) begin
-            if (i_dataA == i_dataB) begin
+            if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
                 r_Eq <= 1'b1;
                 r_LT <= 1'b0;
-            end else if (i_dataA < i_dataB) begin
+            end else if ($unsigned(i_dataA) < $unsigned(i_dataB)) begin
                 r_Eq <= 1'b0;
                 r_LT <= 1'b1;
             end else begin
@@ -25,10 +25,10 @@ module branch_comp(
                 r_LT <= 1'b0;
             end
         end else begin
-            if (i_dataA == i_dataB) begin
+            if ($signed(i_dataA) == $signed(i_dataB)) begin
                 r_Eq <= 1'b1;
                 r_LT <= 1'b0;
-            end else if (i_dataA < i_dataB) begin
+            end else if ($signed(i_dataA) < $signed(i_dataB)) begin
                 r_Eq <= 1'b0;
                 r_LT <= 1'b1;
             end else begin
