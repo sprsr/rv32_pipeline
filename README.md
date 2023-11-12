@@ -64,3 +64,7 @@ SW	  x	x	0	1	2	1	0	2	0	0	0<br>
 ADDI	x	x	0	1	2	0	1	1	0	0	1<br>
 STLI	x	x	0	1	8	0	1	1	0	0	1<br>
 
+
+FPGA Tests:
+Assembly Programs:
+https://marz.utk.edu/my-courses/cosc230/book/example-risc-v-assembly-programs/
