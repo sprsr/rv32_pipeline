@@ -9,6 +9,8 @@ wire        w_regWEn;
 wire        w_pc_sel;
 wire        w_a_sel;
 wire        w_b_sel;
+wire        w_sign;
+wire  [4:0] w_alu_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_o_alu;
 wire [31:0] w_pc;
@@ -17,6 +19,8 @@ wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_B;
 wire [31:0] w_alu_in_A;
 wire [31:0] w_alu_in_B;
+wire [31:0] w_alu_out;
+wire        w_alu_zero_flag;
 
 control inst_control(
 )
@@ -71,5 +75,10 @@ mux2x1 inst_mux2x1_B(
 );
 
 alu inst_alu(
-
-)
+    .i_1(w_reg_data_A),
+    .i_2(w_reg_data_B),
+    .aluSel(w_alu_sel),
+    .sign(w_sign),
+    .result(w_alu_out),
+    .zero_flag(w_alu_zero_flag)
+);
