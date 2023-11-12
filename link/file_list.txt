@@ -10,4 +10,5 @@
 ../src/units/imem/imem.v
 ../src/units/immGen/immGen.v
 ../src/units/pc/PC.v
+../tb/pc_tb.v
 ../src/units/reg/reg.v
