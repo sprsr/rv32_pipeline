@@ -1,4 +1,5 @@
 ../src/units/top_module/rv32.v
+../tb/rv32_tb.v
 ../src/units/alu/alu.v
 ../src/units/branch_comp/branch_comp.v
 ../src/units/common/mux2x1.v
