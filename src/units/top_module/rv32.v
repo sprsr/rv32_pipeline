@@ -1,7 +1,6 @@
 module rv32(
     input clk,
-    input rst,
-    output zero
+    input rst
 );
 
 
