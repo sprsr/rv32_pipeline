@@ -2,20 +2,20 @@ module control( input [31:0] inst,
                 input        brEq,
                 input        brLT,
                 output       pcSel,
-                output       ImmS:l,
+                output [3:0] ImmSel,
                 output       RegWEn,
                 output       BrUn,
                 output       BSel,
                 output       ASel,
-                output       ALUSel,
+                output [3:0] ALUSel,
                 output       sign,
                 output       MemRW,
-                output       WBSel
+                output [1:0] WBSel
 );
 
     //Leaving this buffer module for more logic
     //
-    inst_ctl inst_inst_ctl(
+    instr_ctl inst_instr_ctl(
         .instruction(inst), 
         .BrEq(brEq),
         .BrLT(brLT),
