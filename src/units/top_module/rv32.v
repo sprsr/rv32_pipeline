@@ -13,15 +13,15 @@ wire        w_sign;
 wire  [4:0] w_alu_sel;
 wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
-wire [31:0] w_o_alu;
 wire [31:0] w_pc;
 wire [31:0] w_instruction;
-wire [31:0] w_data_D;
+wire [31:0] w_wr_back;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_B;
 wire [31:0] w_alu_in_A;
 wire [31:0] w_alu_in_B;
 wire [31:0] w_alu_out;
+wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
 
 control inst_control(
@@ -32,7 +32,7 @@ PC inst_pc(
     .rst(rst),
     .sel_pc(w_sel_pc),
     .in_pc(w_pc_4),
-    .in_alu(w_o_alu),
+    .in_alu(w_alu_out),
     .pc_nxt(w_pc_4),
     .pc(w_pc)
 );
@@ -46,12 +46,12 @@ register inst_register(
     .clk(clk),
     .rst(rst),
     .regWEn(w_regWEn),
-    .dataD(w_o_alu),
+    .dataD(w_wr_back),
     .addrD(w_instruction[11:7]),
     .addrA(w_instruction[19:15]),
     .addrB(w_instruction[24:20]),
     .dataA(w_reg_data_A),
-    .dataB(w_reg_data_B),
+    .dataB(w_reg_data_B)
 );
     
 branch_comp inst_branch_comp(
@@ -86,7 +86,12 @@ alu inst_alu(
 );
 
 dmem inst_dmem(
-
+   .clk(clk),
+   .rst(rst),
+   .i_addr(w_alu_out),
+   .dataW(w_reg_data_B),
+   .memRW(w_mem_rw),
+   .o_data(w_dmem_out)
 );
 
 mux3x1 inst_mux3x1_wb(
@@ -94,6 +99,7 @@ mux3x1 inst_mux3x1_wb(
     .b(w_alu_out),
     .c(w_dmem_out),
     .sel(w_wb_sel),
-    .y(w_data_D)
+    .y(w_wr_back)
 );
 
+endmodule
