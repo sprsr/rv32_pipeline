@@ -1,22 +1,25 @@
-from riscv_assembler.convert import AssemblyConverter as AC
+import sys
+import os
+
+from riscv_assembler.convert import AssemblyConverter
+
 # instantiate
-convert = AC(output_mode = 'f', nibble_mode = True, hex_mode = False)
+convert = AssemblyConverter(output_mode = 'f', nibble_mode = True, hex_mode = False)
 
-# Convert a whole .s file to text file
-convert("test.s" "test.out")
+def convert_file(file):
+    # Convert a whole .s file to text file
+    root, old_ext = os.path.splitext(file)
+    output = f"{root}.txt"
+    convert(file, output)
+    print(f'Generated Machine Code: {output}')
 
-# Convert string of assembly to bin
-#cnv_str = "add x1 0x 0x\nadd x2 x0 x1"
-#convert(cnv_str, "result.bin")
+def main():
+    if len(sys.argv)!=2:
+        print("Usage: python assembler.py <assembly_file>")
+        sys.exit(1)
+    file_name = sys.argv[1]
+    convert_file(file_name)
 
-
-# Convert a string and print output with no nibbles
-#convert.output_mode = 'p'
-#convert.nibble_mode = False
-#convert.convert(cnv_str)
-
-
-# Convert a string and save to array
-#convert.output_mode = 'a'
-#result = convert(cnv_str)
+if __name__ == "__main__":
+    main()
 
