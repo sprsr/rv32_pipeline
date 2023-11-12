@@ -7,12 +7,16 @@ module rv32(
 
 wire        w_regWEn;
 wire        w_pc_sel;
+wire        w_a_sel;
+wire        w_b_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_o_alu;
 wire [31:0] w_pc;
 wire [31:0] w_instruction;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_B;
+wire [31:0] w_alu_in_A;
+wire [31:0] w_alu_in_B;
 
 control inst_control(
 )
@@ -43,5 +47,29 @@ register inst_register(
     .dataA(w_reg_data_A),
     .dataB(w_reg_data_B),
 );
+    
+branch_comp inst_branch_comp(
+    .i_dataA(w_reg_data_A),
+    .i_dataB(w_reg_data_B),
+    .brUn(w_brUn),
+    .brEq(w_brEq),
+    .brLT(w_brLT)
+);
 
+mux2x1 inst_mux2x1_A(
+    .a(w_pc),
+    .b(w_reg_data_A),
+    .sel(w_a_sel),
+    .y(w_alu_in_A)
+);
 
+mux2x1 inst_mux2x1_B(
+    .a(w_pc),
+    .b(w_reg_data_B),
+    .sel(w_b_sel),
+    .y(w_alu_in_B)
+);
+
+alu inst_alu(
+
+)
