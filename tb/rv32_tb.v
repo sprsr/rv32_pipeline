@@ -19,11 +19,9 @@ module rv32_tb;
         $dumpfile("rv32_tb.vcd");
         $dumpvars(0,rv32_tb);
 
-        # 17 reset = 1'b1;
-        # 11 reset = 1'b0;
-        # 29 reset = 1'b1;
-        # 11 reset = 1'b0;
-        # 100 $finish;
+        # 10 reset = 1'b1;
+        # 12 reset = 1'b0;
+        # 200 $finish;
     end
 
 endmodule
