@@ -14,16 +14,16 @@ module instr_ctl(
     output [1:0] wb_sel
 );
 
-reg       r_a_sel;
-reg       r_b_sel;
-reg [3:0] r_alu_sel;
-reg       r_sign;
-reg       r_mem_wr;
-reg       r_RegWEn;
-reg [3:0] r_immSel;
-reg       r_BrUn;
-reg       r_pc_sel;
-reg [1:0] r_wb_sel;
+reg       r_a_sel   = 1'b0;
+reg       r_b_sel   = 1'b0;
+reg [3:0] r_alu_sel = 4'b0;
+reg       r_sign    = 1'b0;
+reg       r_mem_wr  = 1'b0;
+reg       r_RegWEn  = 1'b0;
+reg [3:0] r_immSel  = 4'b0;
+reg       r_BrUn    = 1'b0;
+reg       r_pc_sel  = 1'b0;
+reg [1:0] r_wb_sel  = 2'b0;
 
 assign a_sel   = r_a_sel;
 assign b_sel   = r_b_sel;
@@ -573,6 +573,16 @@ always @(*) begin
                 end
             endcase
         end
+        default: begin
+            r_a_sel   <= 1'b0;
+            r_b_sel   <= 1'b0;
+            r_alu_sel <= 4'b0000;
+            r_mem_wr  <= 1'b0;
+            r_RegWEn  <= 1'b0;
+            r_immSel  <= 4'h0;
+            r_BrUn    <= 1'b0;
+            r_pc_sel  <= 1'b0;
+            r_wb_sel  <= 2'b0;
     endcase
 end
 endmodule
