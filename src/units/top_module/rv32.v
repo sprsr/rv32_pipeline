@@ -11,10 +11,12 @@ wire        w_a_sel;
 wire        w_b_sel;
 wire        w_sign;
 wire  [4:0] w_alu_sel;
+wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_o_alu;
 wire [31:0] w_pc;
 wire [31:0] w_instruction;
+wire [31:0] w_data_D;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_B;
 wire [31:0] w_alu_in_A;
@@ -82,3 +84,16 @@ alu inst_alu(
     .result(w_alu_out),
     .zero_flag(w_alu_zero_flag)
 );
+
+dmem inst_dmem(
+
+);
+
+mux3x1 inst_mux3x1_wb(
+    .a(w_pc_4),
+    .b(w_alu_out),
+    .c(w_dmem_out),
+    .sel(w_wb_sel),
+    .y(w_data_D)
+);
+
