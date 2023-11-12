@@ -8,7 +8,7 @@ module mux3x1(
 
     always @(*) begin
         case(sel)
-            2'h2 : y = a
+            2'h2 : y = a;
             2'h1 : y = b;
             2'h0 : y = c;
         endcase    

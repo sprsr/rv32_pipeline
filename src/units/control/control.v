@@ -2,7 +2,7 @@ module control( input [31:0] inst,
                 input        brEq,
                 input        brLT,
                 output       pcSel,
-                output       ImmSel,
+                output       ImmS:l,
                 output       RegWEn,
                 output       BrUn,
                 output       BSel,
@@ -28,6 +28,7 @@ module control( input [31:0] inst,
         .immSel(ImmSel),
         .BrUn(BrUn),
         .pc_sel(pcSel),
-        .wb_sel(WBSel));
+        .wb_sel(WBSel)
+    );
 
 endmodule
