@@ -10,11 +10,17 @@ wire        w_pc_sel;
 wire        w_a_sel;
 wire        w_b_sel;
 wire        w_sign;
+wire        w_brEq;
+wire        w_brLT;
+wire        w_brUn;
+wire        w_mem_rw;
 wire  [4:0] w_alu_sel;
+wire  [7:0] w_imm_sel;
 wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_pc;
 wire [31:0] w_instruction;
+wire [31:0] w_immediate;
 wire [31:0] w_wr_back;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_B;
@@ -25,7 +31,20 @@ wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
 
 control inst_control(
-)
+   .inst(w_instruction),
+   .brEq(w_brEq),
+   .brLT(w_brLT),
+   .pcSel(w_pc_sel),
+   .ImmSel(w_imm_sel),
+   .RegWEn(w_regWEn),
+   .BrUn(w_BrUn),
+   .BSel(w_b_sel),
+   .ASel(w_a_sel),
+   .ALUSel(w_alu_sel),
+   .sign(w_sign),
+   .MemRW(w_mem_rw),
+   .WBSel(w_wb_sel)
+);
 
 PC inst_pc(
     .clk(clk),
@@ -40,6 +59,12 @@ PC inst_pc(
 imem inst_imem(
     .i_addr(w_pc),
     .o_data(w_instruction)
+);
+
+immGen inst_immGen(
+    .immSel(w_imm_sel),
+    .instr(w_instruction[31:7]),
+    .immediate(w_immediate)
 );
 
 register inst_register(
@@ -70,7 +95,7 @@ mux2x1 inst_mux2x1_A(
 );
 
 mux2x1 inst_mux2x1_B(
-    .a(w_pc),
+    .a(w_immediate),
     .b(w_reg_data_B),
     .sel(w_b_sel),
     .y(w_alu_in_B)
