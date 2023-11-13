@@ -1,7 +1,8 @@
 # rv32_processor <br>
-Starting with a Basic 5 stage pipeline that handles RV32I with minimal control logic.  <br>
-Would like to add peripherals and support for other RV standards and extensions <br> 
-
+A 5 stage pipeline that handles RV32I instructions.  <br>
+Current Status: 5 stage pipeline is implemented.<br> 
+Testbench is in progress. The following instructions have been loosely verified to work: <br>
+Repition of ADDI Instruction. <br>
 Datapath Pipeline 
 ![Alt text](https://github.com/sprsr/rv32_processor/blob/main/diagrams/block_diagrams/Datapath%20Pipeline.png)
 
