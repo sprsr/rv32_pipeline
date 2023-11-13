@@ -1,0 +1,366 @@
+$date
+	Sun Nov 12 16:48:38 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module rv32_tb $end
+$var reg 1 ! clk $end
+$var reg 1 " reset $end
+$scope module c0 $end
+$var wire 1 ! clk $end
+$var wire 1 " rst $end
+$var wire 1 # w_brUn $end
+$var wire 1 $ w_sel_pc $end
+$var wire 1 % w_sign $end
+$var wire 32 & w_wr_back [31:0] $end
+$var wire 2 ' w_wb_sel [1:0] $end
+$var wire 32 ( w_reg_data_B [31:0] $end
+$var wire 32 ) w_reg_data_A [31:0] $end
+$var wire 1 * w_regWEn $end
+$var wire 1 + w_pc_sel $end
+$var wire 32 , w_pc_4 [31:0] $end
+$var wire 32 - w_pc [31:0] $end
+$var wire 1 . w_mem_rw $end
+$var wire 32 / w_instruction [31:0] $end
+$var wire 32 0 w_immediate [31:0] $end
+$var wire 4 1 w_imm_sel [3:0] $end
+$var wire 32 2 w_dmem_out [31:0] $end
+$var wire 1 3 w_brLT $end
+$var wire 1 4 w_brEq $end
+$var wire 1 5 w_b_sel $end
+$var wire 1 6 w_alu_zero_flag $end
+$var wire 4 7 w_alu_sel [3:0] $end
+$var wire 32 8 w_alu_out [31:0] $end
+$var wire 32 9 w_alu_in_B [31:0] $end
+$var wire 32 : w_alu_in_A [31:0] $end
+$var wire 1 ; w_a_sel $end
+$var wire 1 < w_BrUn $end
+$scope module inst_alu $end
+$var wire 1 % sign $end
+$var wire 32 = i_2 [31:0] $end
+$var wire 32 > i_1 [31:0] $end
+$var wire 4 ? aluSel [3:0] $end
+$var reg 32 @ r_operand_2_converted [31:0] $end
+$var reg 32 A result [31:0] $end
+$var reg 1 6 zero_flag $end
+$upscope $end
+$scope module inst_branch_comp $end
+$var wire 1 4 brEq $end
+$var wire 1 3 brLT $end
+$var wire 1 # brUn $end
+$var wire 32 B i_dataB [31:0] $end
+$var wire 32 C i_dataA [31:0] $end
+$var reg 1 D r_Eq $end
+$var reg 1 E r_LT $end
+$upscope $end
+$scope module inst_control $end
+$var wire 1 4 brEq $end
+$var wire 1 3 brLT $end
+$var wire 1 % sign $end
+$var wire 1 + pcSel $end
+$var wire 32 F inst [31:0] $end
+$var wire 2 G WBSel [1:0] $end
+$var wire 1 * RegWEn $end
+$var wire 1 . MemRW $end
+$var wire 4 H ImmSel [3:0] $end
+$var wire 1 < BrUn $end
+$var wire 1 5 BSel $end
+$var wire 1 ; ASel $end
+$var wire 4 I ALUSel [3:0] $end
+$scope module inst_instr_ctl $end
+$var wire 1 4 BrEq $end
+$var wire 1 3 BrLT $end
+$var wire 1 < BrUn $end
+$var wire 1 * RegWEn $end
+$var wire 1 ; a_sel $end
+$var wire 4 J alu_sel [3:0] $end
+$var wire 1 5 b_sel $end
+$var wire 4 K immSel [3:0] $end
+$var wire 1 . mem_wr $end
+$var wire 1 + pc_sel $end
+$var wire 1 % sign $end
+$var wire 2 L wb_sel [1:0] $end
+$var wire 32 M instruction [31:0] $end
+$var reg 1 N r_BrUn $end
+$var reg 1 O r_RegWEn $end
+$var reg 1 P r_a_sel $end
+$var reg 4 Q r_alu_sel [3:0] $end
+$var reg 1 R r_b_sel $end
+$var reg 4 S r_immSel [3:0] $end
+$var reg 1 T r_mem_wr $end
+$var reg 1 U r_pc_sel $end
+$var reg 1 V r_sign $end
+$var reg 2 W r_wb_sel [1:0] $end
+$upscope $end
+$upscope $end
+$scope module inst_dmem $end
+$var wire 1 ! clk $end
+$var wire 32 X i_addr [31:0] $end
+$var wire 1 . memRW $end
+$var wire 32 Y o_data [31:0] $end
+$var wire 1 " rst $end
+$var wire 32 Z dataW [31:0] $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 [ i [31:0] $end
+$upscope $end
+$upscope $end
+$scope module inst_imem $end
+$var wire 32 \ o_data [31:0] $end
+$var wire 32 ] i_addr [31:0] $end
+$upscope $end
+$scope module inst_immGen $end
+$var wire 4 ^ immSel [3:0] $end
+$var wire 32 _ immediate [31:0] $end
+$var wire 25 ` instr [24:0] $end
+$var reg 32 a r_immediate [31:0] $end
+$upscope $end
+$scope module inst_mux2x1_A $end
+$var wire 1 ; sel $end
+$var wire 32 b b [31:0] $end
+$var wire 32 c a [31:0] $end
+$var reg 32 d y [31:0] $end
+$upscope $end
+$scope module inst_mux2x1_B $end
+$var wire 32 e a [31:0] $end
+$var wire 1 5 sel $end
+$var wire 32 f b [31:0] $end
+$var reg 32 g y [31:0] $end
+$upscope $end
+$scope module inst_mux3x1_wb $end
+$var wire 32 h b [31:0] $end
+$var wire 32 i c [31:0] $end
+$var wire 2 j sel [1:0] $end
+$var wire 32 k a [31:0] $end
+$var reg 32 l y [31:0] $end
+$upscope $end
+$scope module inst_pc $end
+$var wire 1 ! clk $end
+$var wire 32 m in_alu [31:0] $end
+$var wire 32 n in_pc [31:0] $end
+$var wire 32 o pc_nxt [31:0] $end
+$var wire 1 " rst $end
+$var wire 1 $ sel_pc $end
+$var wire 32 p pc [31:0] $end
+$var reg 32 q w_pc [31:0] $end
+$var reg 32 r w_pc_nxt [31:0] $end
+$upscope $end
+$scope module inst_register $end
+$var wire 5 s addrA [4:0] $end
+$var wire 5 t addrB [4:0] $end
+$var wire 5 u addrD [4:0] $end
+$var wire 1 ! clk $end
+$var wire 32 v dataA [31:0] $end
+$var wire 32 w dataB [31:0] $end
+$var wire 32 x dataD [31:0] $end
+$var wire 1 * regWEn $end
+$var wire 1 " rst $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx x
+bx w
+bx v
+bx u
+bx t
+bx s
+bx r
+bx q
+bx p
+bx o
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+bx f
+bx e
+bx d
+bx c
+bx b
+bx a
+bx `
+bx _
+bx ^
+bx ]
+bx \
+b0 [
+bx Z
+bx Y
+bx X
+bx W
+xV
+xU
+xT
+bx S
+xR
+bx Q
+xP
+xO
+xN
+bx M
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+xE
+xD
+bx C
+bx B
+bx A
+bx @
+bx ?
+bx >
+bx =
+x<
+x;
+bx :
+bx 9
+bx 8
+bx 7
+06
+x5
+x4
+x3
+bx 2
+bx 1
+bx 0
+bx /
+x.
+bx -
+bx ,
+x+
+x*
+bx )
+bx (
+bx '
+bx &
+z%
+z$
+z#
+0"
+0!
+$end
+#5
+1!
+#10
+0!
+#15
+1!
+#17
+03
+0E
+04
+0D
+b11 (
+b11 =
+b11 B
+b11 Z
+b11 f
+b11 w
+b11 t
+b1000 )
+b1000 >
+b1000 C
+b1000 b
+b1000 v
+b1000 s
+b1100 u
+b1001000110100010101100 `
+0V
+b0 ,
+b0 k
+b0 n
+b0 o
+b0 r
+b10010001101000101011001111000 /
+b10010001101000101011001111000 F
+b10010001101000101011001111000 M
+b10010001101000101011001111000 \
+b0 -
+b0 ]
+b0 c
+b0 p
+b0 q
+1"
+#20
+0!
+#25
+b10000000000 [
+1!
+#28
+0"
+#30
+0!
+#35
+1!
+#40
+0!
+#45
+1!
+#50
+0!
+#55
+1!
+#57
+1"
+#60
+0!
+#65
+b10000000000 [
+1!
+#68
+0"
+#70
+0!
+#75
+1!
+#80
+0!
+#85
+1!
+#90
+0!
+#95
+1!
+#100
+0!
+#105
+1!
+#110
+0!
+#115
+1!
+#120
+0!
+#125
+1!
+#130
+0!
+#135
+1!
+#140
+0!
+#145
+1!
+#150
+0!
+#155
+1!
+#160
+0!
+#165
+1!
+#168
