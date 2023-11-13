@@ -1,0 +1,110 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Nov 13 04:58:02 2023
+[*]
+[dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
+[dumpfile_mtime] "Mon Nov 13 04:14:36 2023"
+[dumpfile_size] 7757
+[savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
+[timestart] 0
+[size] 921 1042
+[pos] 178 -372
+*-5.087204 40 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] rv32_tb.
+[treeopen] rv32_tb.c0.
+[treeopen] rv32_tb.c0.inst_control.
+[sst_width] 214
+[signals_width] 265
+[sst_expanded] 1
+[sst_vpaned_height] 339
+@28
+[color] 1
+rv32_tb.inst_pc.clk
+[color] 1
+rv32_tb.inst_pc.rst
+@200
+-PC
+@28
+[color] 2
+rv32_tb.inst_pc.sel_pc
+@22
+[color] 2
+rv32_tb.inst_pc.w_pc[31:0]
+@200
+-Immediate Generator
+@22
+[color] 3
+rv32_tb.inst_immGen.immSel[3:0]
+[color] 3
+rv32_tb.inst_immGen.immediate[31:0]
+@200
+-Register File
+@22
+[color] 4
+rv32_tb.inst_register.addrD[4:0]
+[color] 4
+rv32_tb.inst_register.addrA[4:0]
+[color] 4
+rv32_tb.inst_register.addrB[4:0]
+[color] 4
+rv32_tb.inst_register.dataA[31:0]
+[color] 4
+rv32_tb.inst_register.dataB[31:0]
+[color] 4
+rv32_tb.inst_register.dataD[31:0]
+@28
+[color] 4
+rv32_tb.inst_register.regWEn
+@200
+-Branch Compare
+@28
+[color] 5
+rv32_tb.c0.inst_branch_comp.brUn
+[color] 5
+rv32_tb.c0.inst_branch_comp.brLT
+[color] 5
+rv32_tb.c0.inst_branch_comp.brEq
+@200
+-ALU
+@22
+[color] 6
+rv32_tb.c0.inst_alu.aluSel[3:0]
+[color] 6
+rv32_tb.c0.inst_alu.i_1[31:0]
+[color] 6
+rv32_tb.c0.inst_alu.i_2[31:0]
+[color] 6
+rv32_tb.c0.inst_alu.result[31:0]
+@28
+[color] 6
+rv32_tb.c0.inst_alu.sign
+[color] 6
+rv32_tb.c0.inst_alu.zero_flag
+@200
+-DMEM
+@22
+[color] 7
+rv32_tb.c0.inst_dmem.i_addr[31:0]
+@28
+[color] 7
+rv32_tb.c0.inst_dmem.memRW
+@22
+[color] 7
+rv32_tb.c0.inst_dmem.o_data[31:0]
+@200
+-Write Back
+@22
+[color] 1
+rv32_tb.inst_mux3x1_wb.a[31:0]
+[color] 1
+rv32_tb.inst_mux3x1_wb.b[31:0]
+[color] 1
+rv32_tb.inst_mux3x1_wb.c[31:0]
+@28
+[color] 1
+rv32_tb.inst_mux3x1_wb.sel[1:0]
+@22
+[color] 1
+rv32_tb.inst_mux3x1_wb.y[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
