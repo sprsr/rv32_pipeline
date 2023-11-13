@@ -1,5 +1,5 @@
 ../src/units/top_module/rv32.v
-../tb/rv32_tb.v
+../tb/rv32_tb/rv32_tb.v
 ../src/units/alu/alu.v
 ../src/units/branch_comp/branch_comp.v
 ../src/units/common/mux2x1.v
@@ -10,5 +10,4 @@
 ../src/units/imem/imem.v
 ../src/units/immGen/immGen.v
 ../src/units/pc/PC.v
-../tb/pc_tb.v
 ../src/units/reg/reg.v

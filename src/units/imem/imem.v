@@ -9,8 +9,8 @@ module imem(
     reg  [31:0]  r_memory [0:1023];
 
     initial begin
-        r_memory[0] <= 32'b   0000	0000	0001	0101	1000	0101	1001	0011;
-        r_memory[1] <= 32'b   0000	0000	0001	0101	1000	0101	1001	0011;
+        r_memory[0] <= 32'b00000000000101011000010110010011;
+        r_memory[1] <= 32'b00000000000101011000010110010011;
     end
 
     assign o_data = r_memory[i_addr];

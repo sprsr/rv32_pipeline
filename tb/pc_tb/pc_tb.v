@@ -6,7 +6,7 @@ module pc_tb;
     reg sel_pc = 0;
     reg [31:0] in_alu = 32'h00008000;
     reg [31:0] in_pc_nxt;
-    reg pc;
+    reg [31:0] pc;
     
     PC c0 (
         .clk(clk),

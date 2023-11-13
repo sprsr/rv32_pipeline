@@ -583,6 +583,7 @@ always @(*) begin
             r_BrUn    <= 1'b0;
             r_pc_sel  <= 1'b0;
             r_wb_sel  <= 2'b0;
+        end
     endcase
 end
 endmodule
