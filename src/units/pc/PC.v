@@ -21,10 +21,10 @@ module PC(
             w_pc_nxt <=0;
         end else if (sel_pc) begin
             w_pc = in_alu;          // Increment the program counter if enabled
-            w_pc_nxt = in_alu + 'd4;
+            w_pc_nxt = in_alu + 'd1;
         end else begin
             w_pc = in_pc;          // Increment the program counter if enabled
-            w_pc_nxt = in_pc + 'd4;
+            w_pc_nxt = in_pc + 'd1;
         end
     end
 
