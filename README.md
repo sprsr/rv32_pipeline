@@ -3,8 +3,10 @@ A 5 stage pipeline that handles RV32I instructions.  <br>
 Current Status: 5 stage pipeline is implemented.<br> 
 Testbench is in progress. The following instructions have been loosely verified to work: <br>
 Repition of ADDI Instruction. <br>
-Datapath Pipeline 
+Datapath Pipeline <br>
 ![Alt text](https://github.com/sprsr/rv32_processor/blob/main/diagrams/block_diagrams/Datapath%20Pipeline.png)
+ADDI Waveform <br>
+![Alt text](https://github.com/sprsr/rv32_processor/blob/fa0ad4a512a3f50206afd149f270ab276eb7d999/diagrams/waveform/rv32_addi_instruction_testbench.png) <br>
 
 Right Now IMEM is a 4Kb Instruction Cache.  No method of fetching from main memory or dynamic cache transfer <br>
 To be added later <br> <br> <br>
