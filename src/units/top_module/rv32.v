@@ -29,6 +29,7 @@ wire [31:0] w_alu_out;
 wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
 
+// Control will need to have clk and rst inputs to properly pipeline instructions
 control inst_control(
    .inst(w_instruction),
    .brEq(w_brEq),
