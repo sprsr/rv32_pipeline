@@ -102,8 +102,8 @@ mux2x1 inst_mux2x1_B(
 );
 
 alu inst_alu(
-    .i_1(w_reg_data_A),
-    .i_2(w_reg_data_B),
+    .i_1(w_alu_in_A),
+    .i_2(w_alu_in_B),
     .aluSel(w_alu_sel),
     .sign(w_sign),
     .result(w_alu_out),
