@@ -28,6 +28,7 @@ wire [31:0] w_alu_in_B;
 wire [31:0] w_alu_out;
 wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
+wire [31:0] w_debug [31:0];
 
 // Control will need to have clk and rst inputs to properly pipeline instructions
 control inst_control(
@@ -76,7 +77,8 @@ register inst_register(
     .addrA(w_instruction[19:15]),
     .addrB(w_instruction[24:20]),
     .dataA(w_reg_data_A),
-    .dataB(w_reg_data_B)
+    .dataB(w_reg_data_B),
+    .debug(w_debug)
 );
     
 branch_comp inst_branch_comp(
