@@ -8,7 +8,8 @@ module register(
     input  [4:0]  addrA,
     input  [4:0]  addrB,
     output [31:0] dataA,
-    output [31:0] dataB
+    output [31:0] dataB,
+    output [31:0] debug [31:0]
 );
 
     reg [31:0] r_memory [31:0];
