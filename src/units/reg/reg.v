@@ -15,7 +15,7 @@ module register(
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin 
-            r_memory[0] <= 32'h0;
+            r_memory[0] <= 32'h2;
             r_memory[1] <= 32'h1;
             r_memory[2] <= 32'h2;
             r_memory[3] <= 32'h3;
