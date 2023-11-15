@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Nov 13 04:58:02 2023
+[*] Wed Nov 15 03:26:25 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Mon Nov 13 04:14:36 2023"
-[dumpfile_size] 7757
+[dumpfile_mtime] "Wed Nov 15 03:10:47 2023"
+[dumpfile_size] 8180
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
 [timestart] 0
-[size] 921 1042
-[pos] 178 -372
-*-5.087204 40 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1269 1042
+[pos] -160 71
+*-5.087204 42 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [treeopen] rv32_tb.c0.inst_control.
 [sst_width] 214
 [signals_width] 265
 [sst_expanded] 1
-[sst_vpaned_height] 339
+[sst_vpaned_height] 534
 @28
 [color] 1
 rv32_tb.inst_pc.clk
@@ -106,5 +106,32 @@ rv32_tb.inst_mux3x1_wb.sel[1:0]
 @22
 [color] 1
 rv32_tb.inst_mux3x1_wb.y[31:0]
+@200
+-Instruction
+@22
+rv32_tb.inst_imem.o_data[31:0]
+@200
+-BSel
+@22
+rv32_tb.inst_mux2x1_B.a[31:0]
+rv32_tb.inst_mux2x1_B.b[31:0]
+@28
+rv32_tb.inst_mux2x1_B.sel
+@23
+rv32_tb.inst_mux2x1_B.y[31:0]
+@200
+-ASel
+@22
+rv32_tb.inst_mux2x1_A.a[31:0]
+rv32_tb.inst_mux2x1_A.b[31:0]
+@28
+rv32_tb.inst_mux2x1_A.sel
+@22
+rv32_tb.inst_mux2x1_A.y[31:0]
+@28
+rv32_tb.inst_mux2x1_A.sel
+@22
+rv32_tb.inst_mux2x1_A.b[31:0]
+rv32_tb.inst_mux2x1_B.y[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
