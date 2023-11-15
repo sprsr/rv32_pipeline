@@ -129,4 +129,7 @@ mux3x1 inst_mux3x1_wb(
     .y(w_wr_back)
 );
 
+debug_port inst_debug(
+    .registers(w_debug)
+);
 endmodule

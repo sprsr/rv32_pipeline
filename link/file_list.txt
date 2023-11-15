@@ -11,3 +11,4 @@
 ../src/units/immGen/immGen.v
 ../src/units/pc/PC.v
 ../src/units/reg/reg.v
+../src/units/debug/debug.v
