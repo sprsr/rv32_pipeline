@@ -12,6 +12,16 @@ module debug_port(
     output [31:0] reg9,
     output [31:0] reg10,
     output [31:0] reg11,
+    output [31:0] reg12,
+    output [31:0] reg13,
+    output [31:0] reg14,
+    output [31:0] reg15,
+    output [31:0] reg16,
+    output [31:0] reg17,
+    output [31:0] reg18,
+    output [31:0] reg19,
+    output [31:0] reg20,
+    output [31:0] reg21,
     output [31:0] reg22,
     output [31:0] reg23,
     output [31:0] reg24,
@@ -24,6 +34,7 @@ module debug_port(
     output [31:0] reg31
 );
 
+assign reg_0 = registers[0];
 assign reg_1 = registers[1];
 assign reg_2 = registers[2];
 assign reg_3 = registers[3];

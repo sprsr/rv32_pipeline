@@ -130,6 +130,38 @@ mux3x1 inst_mux3x1_wb(
 );
 
 debug_port inst_debug(
-    .registers(w_debug)
+    .registers(w_debug),
+    .reg0(w_debug[0]),
+    .reg1(w_debug[1]),
+    .reg2(w_debug[2]),
+    .reg3(w_debug[3]),
+    .reg4(w_debug[4]),
+    .reg5(w_debug[5]),
+    .reg6(w_debug[6]),
+    .reg7(w_debug[7]),
+    .reg8(w_debug[8]),
+    .reg9(w_debug[9]),
+    .reg10(w_debug[10]),
+    .reg11(w_debug[11]),
+    .reg12(w_debug[12]),
+    .reg13(w_debug[13]),
+    .reg14(w_debug[14]),
+    .reg15(w_debug[15]),
+    .reg16(w_debug[16]),
+    .reg17(w_debug[17]),
+    .reg18(w_debug[18]),
+    .reg19(w_debug[19]),
+    .reg20(w_debug[20]),
+    .reg21(w_debug[21]),
+    .reg22(w_debug[22]),
+    .reg23(w_debug[23]),
+    .reg24(w_debug[24]),
+    .reg25(w_debug[25]),
+    .reg26(w_debug[26]),
+    .reg27(w_debug[27]),
+    .reg28(w_debug[28]),
+    .reg29(w_debug[29]),
+    .reg30(w_debug[30]),
+    .reg31(w_debug[31])
 );
 endmodule
