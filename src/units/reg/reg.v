@@ -57,6 +57,6 @@ module register(
 
     assign dataA = r_memory[addrA];
     assign dataB = r_memory[addrB];
-
+    assign debug = r_memory;
 endmodule
 
