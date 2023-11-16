@@ -6,6 +6,7 @@
 ../src/units/common/mux3x1.v
 ../src/units/control/control.v
 ../src/units/control/instrCtl/instr_ctl.v
+../src/units/control/fetch_ctl/fetch_ctl.v
 ../src/units/dmem/dmem.v
 ../src/units/imem/imem.v
 ../src/units/immGen/immGen.v
