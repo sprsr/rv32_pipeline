@@ -53,7 +53,7 @@ always @(posedge(clk) or posedge(rst)) begin
         r_BrUn    <= 1'bx;
         r_pc_sel  <= 1'b0;
         r_wb_sel  <= 2'b01;
-    end else begin       
+    end else begin      
         case (instruction[6:0])
             // LUI Instruction: 
             7'b0110111: begin
@@ -170,11 +170,27 @@ always @(posedge(clk) or posedge(rst)) begin
                         r_immSel  <= 4'h0;
             end
         endcase
+        instr_de <= instruction;
     end
 end
+
+always @(posedge(clk) or posedge(rst)) begin
+    if (rst) begin
+        r_a_sel   <= 1'b0;
+        r_b_sel   <= 1'b1;
+        r_alu_sel <= 4'b0110;
+        r_alu_sel <= 4'b0110;
+        r_mem_wr  <= 1'b0;
+        r_RegWEn  <= 1'b1;
+        r_immSel  <= 4'h4;
+        r_BrUn    <= 1'bx;
+        r_pc_sel  <= 1'b0;
+        r_wb_sel  <= 2'b01;
+    end else begin  
+
         // Currently every RV32I instruction is implemented in control.  
         // EFENCE, EBREAK, and ECALL require further control implementation.
-        case (instruction[6:0])
+        case (instr_de[6:0])
             // LUI Instruction: 
             7'b0110111: begin
                 r_a_sel   <= 1'b0;
