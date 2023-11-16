@@ -1,4 +1,16 @@
+module fetch_ctl(
+    input        clk,
+    input        rst,
+    input  [31:0] instruction,
+    output  [3:0] immSel,
+    output [31:0] instr_de 
+);
 
+reg  [3:0]  r_immSel   = 4'b0;
+reg [31:0]  r_instr_de;
+
+assign immSel   = r_immSel;
+assign instr_de = r_instr_de;
 always @(posedge(clk) or posedge(rst)) begin
     if (rst) begin
         r_immSel  <= 4'h4;
@@ -21,81 +33,65 @@ always @(posedge(clk) or posedge(rst)) begin
                 r_immSel  <= 4'h1;
             end
             7'b1100011: begin
-                    // BEQ Instruction:
-                    // BNE Instruction
-                    //BLT Instruction
-                    //BGE Instruction
-                    //BLTU Instruction
-                    //BGEU Instruction
-                    r_immSel  <= 4'h3;
+                // BEQ Instruction:
+                // BNE Instruction
+                //BLT Instruction
+                //BGE Instruction
+                //BLTU Instruction
+                //BGEU Instruction
+                r_immSel  <= 4'h3;
             end
             7'b0000011: begin
-                    //LB Instruction
-                    //LH Instruction
-                    //LW Instruction
-                    //LBU Instruction
-                    //LHU Instruction
-                    r_immSel  <= 4'h1;
+                //LB Instruction
+                //LH Instruction
+                //LW Instruction
+                //LBU Instruction
+                //LHU Instruction
+                r_immSel  <= 4'h1;
             end
             7'b0100011: begin
-                    // SB Instruction
-                    // SH Instruction
-                    // SW Instruction
-                    r_immSel  <= 4'h2;
+                // SB Instruction
+                // SH Instruction
+                // SW Instruction
+                r_immSel  <= 4'h2;
             end
             7'b0010011: begin
-                    // ADDI Instruction
-                    // SLTI Instruction
-                    // SLTIU Instruction
-                    // XORI Instruction
-                    // ORI Instruction
-                    // ANDI Instruction
-                    // SLLI Instruction
-                            // SRLI Instruction
-                            //7'b0000000: begin
-                            // SRAI Instruction
-                            //7'b0100000: begin
-                        r_immSel  <= 4'h1;
+                // ADDI Instruction
+                // SLTI Instruction
+                // SLTIU Instruction
+                // XORI Instruction
+                // ORI Instruction
+                // ANDI Instruction
+                // SLLI Instruction
+                // SRLI Instruction
+                // SRAI Instruction
+                r_immSel  <= 4'h1;
             end
             7'b0110011: begin
-                // case (instruction[14:12]) 
-                //    3'b000: begin
-                        //case (instruction[31:25])
-                            // ADD Instruction
-                            //7'b0000000: begin
-                            // SUB Instruction
-                            //7'b0100000: begin
-                    // SLL Instruction
-                    //3'b001: begin
-                    // SLT Instruction
-                    //3'b010: begin
-                    // SLTU Instruction
-                    //3'b011: begin
-                    // XOR Instruction
-                    //3'b100: begin
-                    // SRA Instruction
-                    //3'b100: begin
-                    // OR Instruction
-                    //3'b110: begin
-                    // AND Instruction
-                    //3'b111: begin
-                        r_immSel  <= 4'h0;
+                // ADD Instruction
+                // SUB Instruction
+                // SLL Instruction
+                // SLT Instruction
+                // SLTU Instruction
+                // XOR Instruction
+                // SRA Instruction
+                // OR Instruction
+                // AND Instruction
+                r_immSel  <= 4'h0;
             end
             //  FENCE Instruction
             7'b0001111: begin
                 r_immSel  <= 4'h0;
             end
             7'b1110011: begin
-                // case (instruction[31:20])
-                    //  @todo
-                    //  ECALL Instruction
-                    //7'h0: begin
-                    //  @todo 
-                    //  EBREAK Instruction
-                    //7'h1: begin
-                        r_immSel  <= 4'h0;
+                //  @todo
+                //  ECALL Instruction
+                //  EBREAK Instruction
+                //7'h1: begin
+                r_immSel  <= 4'h0;
             end
         endcase
-        instr_de <= instruction;
+        r_instr_de <= instruction;
     end
 end
+endmodule
