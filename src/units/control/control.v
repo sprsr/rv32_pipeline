@@ -13,8 +13,17 @@ module control( input [31:0] inst,
                 output [1:0] WBSel
 );
 
+wire w_instr_de;
+
+fetch_ctl inst_fetch_ctl(
+    .clk(clk),
+    .rst(rst),
+    .instruction(inst),
+    .immSel(ImmSel),
+    .instr_de(w_instr_de)
+);
     //Leaving this buffer module for more logic
-    //
+    /*
     instr_ctl inst_instr_ctl(
         .instruction(inst), 
         .BrEq(brEq),
@@ -30,5 +39,6 @@ module control( input [31:0] inst,
         .pc_sel(pcSel),
         .wb_sel(WBSel)
     );
+    */
 
 endmodule
