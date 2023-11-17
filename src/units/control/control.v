@@ -22,6 +22,21 @@ decode_ctl inst_decode_ctl(
     .immSel(ImmSel),
     .instr_exe(w_instr_exe)
 );
+
+execute_ctl inst_execute_ctl(
+    .clk(clk),
+    .rst(rst),
+    .BrEq(BrEq),
+    .BrLT(brLT),
+    .instruction(w_instr_exe),
+    .a_sel(ASel),
+    .b_sel(BSel),
+    .pc_sel(pcSel),
+    .sign(sign),
+    .BrUn(BrUn),
+    .alu_sel(ALUSel),
+    .instr_acc(w_instr_acc)
+)
     //Leaving this buffer module for more logic
     /*
     instr_ctl inst_instr_ctl(
