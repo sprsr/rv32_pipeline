@@ -32,12 +32,13 @@ assign instr_acc = r_instr_acc;
 
 always @(posedge(clk) or posedge(rst)) begin
     if (rst) begin
-        r_a_sel   <= 1'b0;
-        r_b_sel   <= 1'b1;
-        r_sign    <= 1'b0;
-        r_alu_sel <= 4'b0110;
-        r_BrUn    <= 1'bx;
-        r_pc_sel  <= 1'b0;
+        r_a_sel     <= 1'b0;
+        r_b_sel     <= 1'b1;
+        r_sign      <= 1'b0;
+        r_alu_sel   <= 4'b0110;
+        r_BrUn      <= 1'bx;
+        r_pc_sel    <= 1'b0;
+        r_instr_acc <= 32'h0;
     end else begin
         r_sign = 1'b0;
 
