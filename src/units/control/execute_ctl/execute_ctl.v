@@ -8,6 +8,7 @@ module execute_ctl(
     output        b_sel,
     output        pc_sel,
     output        sign,
+    output        BrUn,
     output [3:0]  alu_sel,
     output [31:0] instr_acc
 );
@@ -18,6 +19,14 @@ reg       r_b_sel   = 1'b0;
 reg       r_pc_sel  = 1'b0;
 reg [3:0] r_alu_sel = 4'b0;
 reg       r_sign    = 1'b0;
+
+assign alu_sel = r_alu_sel;
+assign a_sel   = r_a_sel;
+assign b_sel   = r_b_sel;
+assign pc_sel  = r_pc_sel;
+assign sign    = r_sign;
+assign BrUn    = r_BrUn;
+
 
 always @(posedge(clk) or posedge(rst)) begin
     r_sign = 1'b0;
