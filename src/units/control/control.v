@@ -13,14 +13,14 @@ module control( input [31:0] inst,
                 output [1:0] WBSel
 );
 
-wire w_instr_de;
+wire [31:0] w_instr_exe;
 
-fetch_ctl inst_fetch_ctl(
+decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
     .instruction(inst),
     .immSel(ImmSel),
-    .instr_de(w_instr_de)
+    .instr_exe(w_instr_exe)
 );
     //Leaving this buffer module for more logic
     /*
