@@ -12,6 +12,7 @@ module execute_ctl(
     output [31:0] instr_acc
 );
 
+reg       r_BrUn    = 1'b0;
 reg       r_a_sel   = 1'b0;
 reg       r_b_sel   = 1'b0;
 reg       r_pc_sel  = 1'b0;
@@ -27,26 +28,19 @@ always @(posedge(clk) or posedge(rst)) begin
         7'b0110111: begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b1;
+            r_sign    <= 1'b0;
             r_alu_sel <= 4'b0110;
-            r_alu_sel <= 4'b0110;
-            r_mem_wr  <= 1'b0;
-            r_RegWEn  <= 1'b1;
-            r_immSel  <= 4'h4;
             r_BrUn    <= 1'bx;
             r_pc_sel  <= 1'b0;
-            r_wb_sel  <= 2'b01;
         end
         // AUIPC Instruction: 
         7'b0010111: begin
             r_a_sel   <= 1'b1;
             r_b_sel   <= 1'b1;
+            r_sign    <= 1'b0;
             r_alu_sel <= 4'b0011;
-            r_mem_wr  <= 1'b0;
-            r_RegWEn  <= 1'b1;
-            r_immSel  <= 4'h4;
             r_BrUn    <= 1'bx;
             r_pc_sel  <= 1'b0;
-            r_wb_sel  <= 2'b01;
         end
         // JAL Instruction:
         7'b1101111: begin
@@ -54,12 +48,8 @@ always @(posedge(clk) or posedge(rst)) begin
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0011;
             r_sign    <= 1'b1;
-            r_mem_wr  <= 1'b0;
-            r_RegWEn  <= 1'b1;
-            r_immSel  <= 4'h5;
             r_BrUn    <= 1'bx; 
             r_pc_sel  <= 1'b1;
-            r_wb_sel  <= 2'b10;
         end
         // JALR Instruction:
         7'b1101111: begin
@@ -67,12 +57,8 @@ always @(posedge(clk) or posedge(rst)) begin
             r_b_sel   <= 1'b1;
             r_alu_sel <= 4'b0010;
             r_sign    <= 1'b1;
-            r_mem_wr  <= 1'b0;
-            r_RegWEn  <= 1'b1;
-            r_immSel  <= 4'h1;
             r_BrUn    <= 1'bx; 
             r_pc_sel  <= 1'b1;
-            r_wb_sel  <= 2'b10;
         end
         7'b1100011: begin
             case (instruction[14:12])
@@ -81,90 +67,66 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'bx; 
                     case (BrEq)
                         1'b0: r_pc_sel <= 1'b0;
                         1'b1: r_pc_sel <= 1'b1;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
                 // BNE Instruction
                 3'b001: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'bx; 
                     case (BrEq)
                         1'b0: r_pc_sel <= 1'b1;
                         1'b1: r_pc_sel <= 1'b0;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
                 //BLT Instruction
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'b0; 
                     case (BrLT)
                         1'b0: r_pc_sel <= 1'b0;
                         1'b1: r_pc_sel <= 1'b1;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
                 //BGE Instruction
                 3'b101: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'b0;
                     case (BrLT)
                         1'b0: r_pc_sel <= 1'b1;
                         1'b1: r_pc_sel <= 1'b0;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
                 //BLTU Instruction
                 3'b110: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'b1;
                     case (BrLT)
                         1'b0: r_pc_sel <= 1'b0;
                         1'b1: r_pc_sel <= 1'b1;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
                 //BGEU Instruction
                 3'b111: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h3;
                     r_BrUn    <= 1'b1;
                     case (BrLT)
                         1'b0: r_pc_sel <= 1'b1;
                         1'b1: r_pc_sel <= 1'b0;
                     endcase
-                    r_wb_sel  <= 2'bx;
                 end
             endcase
         end
@@ -176,12 +138,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 //LH Instruction
                 3'b001: begin
@@ -189,12 +147,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 //LW Instruction
                 3'b010: begin
@@ -202,36 +156,24 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 //LBU Instruction
                 3'b100: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 //LHU Instruction
                 3'b101: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
             endcase
         end
@@ -243,12 +185,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b1;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h2;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 // SH Instruction
                 3'b001: begin
@@ -256,12 +194,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b1;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h2;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 // SW Instruction
                 3'b010: begin
@@ -269,12 +203,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b1;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h2;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
             endcase
         end
@@ -286,36 +216,24 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0011;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SLTI Instruction
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b1100;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SLTIU Instruction
                 3'b011: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b1011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // XORI Instruction
                 3'b100: begin
@@ -323,12 +241,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0010;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // ORI Instruction
                 3'b100: begin
@@ -336,12 +250,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0001;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // ANDI Instruction
                 3'b111: begin
@@ -349,24 +259,16 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0000;
                     r_sign    <= 1'b1;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SLLI Instruction
                 3'b001: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b1;
                     r_alu_sel <= 4'b0111;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h1;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 3'b101: begin
                     case (instruction[31:25])
@@ -375,24 +277,16 @@ always @(posedge(clk) or posedge(rst)) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b1;
                             r_alu_sel <= 4'b1000;
-                            r_mem_wr  <= 1'b0;
-                            r_RegWEn  <= 1'b1;
-                            r_immSel  <= 4'h1;
                             r_BrUn    <= 1'b0;
                             r_pc_sel <= 1'b0;
-                            r_wb_sel  <= 2'b1;
                         end
                         // SRAI Instruction
                         7'b0100000: begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b1;
                             r_alu_sel <= 4'b1010;
-                            r_mem_wr  <= 1'b0;
-                            r_RegWEn  <= 1'b1;
-                            r_immSel  <= 4'h1;
                             r_BrUn    <= 1'b0;
                             r_pc_sel <= 1'b0;
-                            r_wb_sel  <= 2'b1;
                         end
                     endcase
                 end
@@ -407,24 +301,16 @@ always @(posedge(clk) or posedge(rst)) begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b0;
                             r_alu_sel <= 4'b0011;
-                            r_mem_wr  <= 1'b0;
-                            r_RegWEn  <= 1'b1;
-                            r_immSel  <= 4'h0;
                             r_BrUn    <= 1'b0;
                             r_pc_sel <= 1'b0;
-                            r_wb_sel  <= 2'b1;
                         end
                         // SUB Instruction
                         7'b0100000: begin
                             r_a_sel   <= 1'b0;
                             r_b_sel   <= 1'b0;
                             r_alu_sel <= 4'b0100;
-                            r_mem_wr  <= 1'b0;
-                            r_RegWEn  <= 1'b1;
-                            r_immSel  <= 4'h0;
                             r_BrUn    <= 1'b0;
                             r_pc_sel <= 1'b0;
-                            r_wb_sel  <= 2'b1;
                         end
                     endcase
                 end
@@ -433,84 +319,56 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0111;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SLT Instruction
                 3'b010: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1100;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SLTU Instruction
                 3'b011: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1011;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // XOR Instruction
                 3'b100: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0010;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // SRA Instruction
                 3'b100: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b1010;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // OR Instruction
                 3'b110: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0001;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
                 // AND Instruction
                 3'b111: begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b1;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b1;
                 end
             endcase
         end
@@ -519,12 +377,8 @@ always @(posedge(clk) or posedge(rst)) begin
                 r_a_sel   <= 1'b0;
                 r_b_sel   <= 1'b0;
                 r_alu_sel <= 4'b0000;
-                r_mem_wr  <= 1'b0;
-                r_RegWEn  <= 1'b0;
-                r_immSel  <= 4'h0;
                 r_BrUn    <= 1'b0;
                 r_pc_sel  <= 1'b0;
-                r_wb_sel  <= 2'b0;
             end
         7'b1110011: begin
             case (instruction[31:20])
@@ -534,12 +388,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
                 //  @todo 
                 //  EBREAK Instruction
@@ -547,12 +397,8 @@ always @(posedge(clk) or posedge(rst)) begin
                     r_a_sel   <= 1'b0;
                     r_b_sel   <= 1'b0;
                     r_alu_sel <= 4'b0000;
-                    r_mem_wr  <= 1'b0;
-                    r_RegWEn  <= 1'b0;
-                    r_immSel  <= 4'h0;
                     r_BrUn    <= 1'b0;
                     r_pc_sel  <= 1'b0;
-                    r_wb_sel  <= 2'b0;
                 end
             endcase
         end
@@ -560,12 +406,8 @@ always @(posedge(clk) or posedge(rst)) begin
             r_a_sel   <= 1'b0;
             r_b_sel   <= 1'b0;
             r_alu_sel <= 4'b0000;
-            r_mem_wr  <= 1'b0;
-            r_RegWEn  <= 1'b0;
-            r_immSel  <= 4'h0;
             r_BrUn    <= 1'b0;
             r_pc_sel  <= 1'b0;
-            r_wb_sel  <= 2'b0;
         end
     endcase
 end
