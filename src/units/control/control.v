@@ -14,6 +14,7 @@ module control( input [31:0] inst,
 );
 
 wire [31:0] w_instr_exe;
+wire [31:0] w_instr_acc;
 
 decode_ctl inst_decode_ctl(
     .clk(clk),
@@ -36,7 +37,7 @@ execute_ctl inst_execute_ctl(
     .BrUn(BrUn),
     .alu_sel(ALUSel),
     .instr_acc(w_instr_acc)
-)
+);
     //Leaving this buffer module for more logic
     /*
     instr_ctl inst_instr_ctl(
