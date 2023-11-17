@@ -21,12 +21,13 @@ reg [3:0]  r_alu_sel;
 reg        r_sign;
 reg [31:0] r_instr_acc;
 
-assign alu_sel = r_alu_sel;
-assign a_sel   = r_a_sel;
-assign b_sel   = r_b_sel;
-assign pc_sel  = r_pc_sel;
-assign sign    = r_sign;
-assign BrUn    = r_BrUn;
+assign alu_sel   = r_alu_sel;
+assign a_sel     = r_a_sel;
+assign b_sel     = r_b_sel;
+assign pc_sel    = r_pc_sel;
+assign sign      = r_sign;
+assign BrUn      = r_BrUn;
+assign instr_acc = r_instr_acc;
 
 
 always @(posedge(clk) or posedge(rst)) begin
@@ -429,7 +430,7 @@ always @(posedge(clk) or posedge(rst)) begin
                 r_pc_sel  <= 1'b0;
             end
         endcase
-        instr_acc <= r_instr_acc;
+        r_instr_acc <= instruction;
     end
 end
 endmodule
