@@ -9,6 +9,9 @@ module access_ctl(
 reg        r_mem_wr;
 reg [31:0] r_instr_wb;
 
+assign instr_wb = r_instr_wb;
+assign MemRW = r_mem_wr;
+
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_mem_wr   <= 1'b0;
