@@ -15,6 +15,7 @@ module control( input [31:0] inst,
 
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
+wire [31:0] w_instr_wb;
 
 decode_ctl inst_decode_ctl(
     .clk(clk),
@@ -45,6 +46,13 @@ access_ctl inst_access_ctl(
     .instruction(w_instr_acc),
     .instr_wb(w_instr_wb),
     .MemRW(MemRW)
+);
+
+wb_ctl inst_wb_ctl(
+    .clk(clk),
+    .rst(rst),
+    .instruction(w_instr_wb),
+    .wb_sel(WBSel)
 );
 
     //Leaving this buffer module for more logic
