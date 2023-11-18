@@ -2,20 +2,20 @@ module access_ctl(
     input clk,
     input rst,
     input [31:0] instruction,
-    output [31:0] instr_wb,
+    output [31:0] instr_acc,
     output MemRW
 );
 
 reg        r_mem_wr;
-reg [31:0] r_instr_wb;
+reg [31:0] r_instr_acc;
 
-assign instr_wb = r_instr_wb;
+assign instr_acc = r_instr_acc;
 assign MemRW = r_mem_wr;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_mem_wr   <= 1'b0;
-        r_instr_wb <= 32'h0;
+        r_instr_acc <= 32'h0;
     end else begin
         case (instruction[6:0])
             7'b0100011: begin
@@ -38,7 +38,7 @@ always @(posedge clk or posedge rst) begin
                 r_mem_wr <= 1'b0;
             end
         endcase
-        r_instr_wb <= instruction;
+        r_instr_acc <= instruction;
     end
 end
 endmodule
