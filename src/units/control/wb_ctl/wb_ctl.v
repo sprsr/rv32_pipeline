@@ -6,13 +6,16 @@ module wb_ctl(
 );
 
 reg [1:0] r_wb_sel;
+reg [31:0] r_instr_wb;
 
 assign wb_sel = r_wb_sel;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_wb_sel <= 1'b0;
+        r_instr_wb <= 32'h0;
     end else begin
+        r_instr_wb <= instruction
         case (instruction[6:0])
             // LUI Instruction: 
             7'b0110111: begin
