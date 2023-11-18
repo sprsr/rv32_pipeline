@@ -9,7 +9,7 @@ reg [1:0] r_wb_sel;
 
 assign wb_sel = r_wb_sel;
 
-always @(posedge(clk) or posedge(rst)) begin
+always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_wb_sel <= 1'b0;
     end else begin

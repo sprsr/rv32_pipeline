@@ -9,7 +9,7 @@ module access_ctl(
 reg        r_mem_wr;
 reg [31:0] r_instr_wb;
 
-always @(posedge(clk) or posedge(rst)) begin
+always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_mem_wr   <= 1'b0;
         r_instr_wb <= 32'h0;

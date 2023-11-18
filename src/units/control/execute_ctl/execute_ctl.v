@@ -30,7 +30,7 @@ assign BrUn      = r_BrUn;
 assign instr_acc = r_instr_acc;
 
 
-always @(posedge(clk) or posedge(rst)) begin
+always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_a_sel     <= 1'b0;
         r_b_sel     <= 1'b1;
