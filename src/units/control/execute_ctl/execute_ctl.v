@@ -10,7 +10,7 @@ module execute_ctl(
     output        sign,
     output        BrUn,
     output [3:0]  alu_sel,
-    output [31:0] instr_acc
+    output [31:0] instr_exe
 );
 
 reg        r_BrUn;
@@ -19,7 +19,7 @@ reg        r_b_sel;
 reg        r_pc_sel;
 reg [3:0]  r_alu_sel;
 reg        r_sign;
-reg [31:0] r_instr_acc;
+reg [31:0] r_instr_exe;
 
 assign alu_sel   = r_alu_sel;
 assign a_sel     = r_a_sel;
@@ -27,7 +27,7 @@ assign b_sel     = r_b_sel;
 assign pc_sel    = r_pc_sel;
 assign sign      = r_sign;
 assign BrUn      = r_BrUn;
-assign instr_acc = r_instr_acc;
+assign instr_exe = r_instr_exe;
 
 
 always @(posedge clk or posedge rst) begin
@@ -38,7 +38,7 @@ always @(posedge clk or posedge rst) begin
         r_alu_sel   <= 4'b0110;
         r_BrUn      <= 1'bx;
         r_pc_sel    <= 1'b0;
-        r_instr_acc <= 32'h0;
+        r_instr_exe <= 32'h0;
     end else begin
         r_sign = 1'b0;
 
@@ -431,7 +431,7 @@ always @(posedge clk or posedge rst) begin
                 r_pc_sel  <= 1'b0;
             end
         endcase
-        r_instr_acc <= instruction;
+        r_instr_exe <= instruction;
     end
 end
 endmodule
