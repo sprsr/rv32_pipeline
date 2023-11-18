@@ -38,6 +38,14 @@ execute_ctl inst_execute_ctl(
     .alu_sel(ALUSel),
     .instr_acc(w_instr_acc)
 );
+
+access_ctl inst_access_ctl(
+    .clk(clk),
+    .rst(rst),
+    .instruction(w_instr_acc),
+    .
+)
+
     //Leaving this buffer module for more logic
     /*
     instr_ctl inst_instr_ctl(
