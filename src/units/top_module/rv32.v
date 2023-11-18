@@ -30,23 +30,46 @@ wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
 wire [31:0] w_debug [31:0];
 
-// Control will need to have clk and rst inputs to properly pipeline instructions
-control inst_control(
+wire [31:0] w_instr_de;
+wire [31:0] w_instr_exe;
+wire [31:0] w_instr_acc;
+
+decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
-    .inst(w_instruction),
-    .brEq(w_brEq),
-    .brLT(w_brLT),
-    .pcSel(w_pc_sel),
-    .ImmSel(w_imm_sel),
-    .RegWEn(w_regWEn),
-    .BrUn(w_BrUn),
-    .BSel(w_b_sel),
-    .ASel(w_a_sel),
-    .ALUSel(w_alu_sel),
+    .instruction(w_instruction),
+    .immSel(w_imm_sel),
+    .instr_de(w_instr_de)
+);
+
+execute_ctl inst_execute_ctl(
+    .clk(clk),
+    .rst(rst),
+    .BrEq(w_brEq),
+    .BrLT(w_brLT),
+    .instruction(w_instr_de),
+    .a_sel(w_a_sel),
+    .b_sel(w_b_sel),
+    .pc_sel(w_pc_sel),
     .sign(w_sign),
-    .MemRW(w_mem_rw),
-    .WBSel(w_wb_sel)
+    .BrUn(w_BrUn),
+    .alu_sel(w_alu_sel),
+    .instr_exe(w_instr_exe)
+);
+
+access_ctl inst_access_ctl(
+    .clk(clk),
+    .rst(rst),
+    .instruction(w_instr_exe),
+    .instr_acc(w_instr_acc),
+    .MemRW(w_mem_rw)
+);
+
+wb_ctl inst_wb_ctl(
+    .clk(clk),
+    .rst(rst),
+    .instruction(w_instr_acc),
+    .wb_sel(w_wb_sel)
 );
 
 PC inst_pc(
@@ -66,7 +89,7 @@ imem inst_imem(
 
 immGen inst_immGen(
     .immSel(w_imm_sel),
-    .instr(w_instruction[31:7]),
+    .instr(w_instr_de[31:7]),
     .immediate(w_immediate)
 );
 
@@ -75,9 +98,9 @@ register inst_register(
     .rst(rst),
     .regWEn(w_regWEn),
     .dataD(w_wr_back),
-    .addrD(w_instruction[11:7]),
-    .addrA(w_instruction[19:15]),
-    .addrB(w_instruction[24:20]),
+    .addrD(w_instr_de[11:7]),
+    .addrA(w_instr_de[19:15]),
+    .addrB(w_instr_de[24:20]),
     .dataA(w_reg_data_A),
     .dataB(w_reg_data_B),
     .debug(w_debug)
