@@ -32,19 +32,21 @@ wire [31:0] w_debug [31:0];
 
 // Control will need to have clk and rst inputs to properly pipeline instructions
 control inst_control(
-   .inst(w_instruction),
-   .brEq(w_brEq),
-   .brLT(w_brLT),
-   .pcSel(w_pc_sel),
-   .ImmSel(w_imm_sel),
-   .RegWEn(w_regWEn),
-   .BrUn(w_BrUn),
-   .BSel(w_b_sel),
-   .ASel(w_a_sel),
-   .ALUSel(w_alu_sel),
-   .sign(w_sign),
-   .MemRW(w_mem_rw),
-   .WBSel(w_wb_sel)
+    .clk(clk),
+    .rst(rst),
+    .inst(w_instruction),
+    .brEq(w_brEq),
+    .brLT(w_brLT),
+    .pcSel(w_pc_sel),
+    .ImmSel(w_imm_sel),
+    .RegWEn(w_regWEn),
+    .BrUn(w_BrUn),
+    .BSel(w_b_sel),
+    .ASel(w_a_sel),
+    .ALUSel(w_alu_sel),
+    .sign(w_sign),
+    .MemRW(w_mem_rw),
+    .WBSel(w_wb_sel)
 );
 
 PC inst_pc(
@@ -80,7 +82,7 @@ register inst_register(
     .dataB(w_reg_data_B),
     .debug(w_debug)
 );
-    
+
 branch_comp inst_branch_comp(
     .i_dataA(w_reg_data_A),
     .i_dataB(w_reg_data_B),
@@ -113,12 +115,12 @@ alu inst_alu(
 );
 
 dmem inst_dmem(
-   .clk(clk),
-   .rst(rst),
-   .i_addr(w_alu_out),
-   .dataW(w_reg_data_B),
-   .memRW(w_mem_rw),
-   .o_data(w_dmem_out)
+    .clk(clk),
+    .rst(rst),
+    .i_addr(w_alu_out),
+    .dataW(w_reg_data_B),
+    .memRW(w_mem_rw),
+    .o_data(w_dmem_out)
 );
 
 mux3x1 inst_mux3x1_wb(
