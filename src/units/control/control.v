@@ -16,6 +16,7 @@ module control(
     output [1:0] WBSel
 );
 
+wire [31:0] w_instr_de;
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
 
@@ -24,7 +25,7 @@ decode_ctl inst_decode_ctl(
     .rst(rst),
     .instruction(inst),
     .immSel(ImmSel),
-    .instr_exe(w_instr_de)
+    .instr_de(w_instr_de)
 );
 
 execute_ctl inst_execute_ctl(
@@ -39,14 +40,14 @@ execute_ctl inst_execute_ctl(
     .sign(sign),
     .BrUn(BrUn),
     .alu_sel(ALUSel),
-    .instr_acc(w_instr_exe)
+    .instr_exe(w_instr_exe)
 );
 
 access_ctl inst_access_ctl(
     .clk(clk),
     .rst(rst),
     .instruction(w_instr_exe),
-    .instr_wb(w_instr_acc),
+    .instr_acc(w_instr_acc),
     .MemRW(MemRW)
 );
 
