@@ -43,8 +43,9 @@ access_ctl inst_access_ctl(
     .clk(clk),
     .rst(rst),
     .instruction(w_instr_acc),
-    .
-)
+    .instr_wb(w_instr_wb),
+    .MemRW(MemRW)
+);
 
     //Leaving this buffer module for more logic
     /*
