@@ -15,6 +15,7 @@ assign instr_exe = r_instr_exe;
 always @(posedge(clk) or posedge(rst)) begin
     if (rst) begin
         r_immSel  <= 4'h4;
+        r_instr_exe <= 32'h0;
     end else begin      
         r_instr_exe <= instruction;
     end
