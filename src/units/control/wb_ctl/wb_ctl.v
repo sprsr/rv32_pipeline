@@ -26,185 +26,33 @@ always @(posedge(clk) or posedge(rst)) begin
             7'b1101111: begin
                 r_wb_sel  <= 2'b10;
             end
-            // JALR Instruction:
-            7'b1101111: begin
-                r_wb_sel  <= 2'b10;
-            end
             7'b1100011: begin
-                case (instruction[14:12])
-                    // BEQ Instruction:
-                    3'b000: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                    // BNE Instruction
-                    3'b001: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                    //BLT Instruction
-                    3'b010: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                    //BGE Instruction
-                    3'b101: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                    //BLTU Instruction
-                    3'b110: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                    //BGEU Instruction
-                    3'b111: begin
-                        r_wb_sel  <= 2'bx;
-                    end
-                endcase
+                r_wb_sel  <= 2'bx;
             end
             7'b0000011: begin
-                case (instruction[14:12])
-                    //LB Instruction
-                    3'b000: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    //LH Instruction
-                    3'b001: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    //LW Instruction
-                    3'b010: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    //LBU Instruction
-                    3'b100: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    //LHU Instruction
-                    3'b101: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                endcase
+                r_wb_sel  <= 2'b0;
+
             end
             7'b0100011: begin
-                case (instruction[14:12])
-                    // SB Instruction
-                    3'b000: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    // SH Instruction
-                    3'b001: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    // SW Instruction
-                    3'b010: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                endcase
+                r_wb_sel  <= 2'b0;
             end
             7'b0010011: begin
-                case (instruction[14:12])
-                    // ADDI Instruction
-                    3'b000: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SLTI Instruction
-                    3'b010: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SLTIU Instruction
-                    3'b011: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // XORI Instruction
-                    3'b100: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // ORI Instruction
-                    3'b100: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // ANDI Instruction
-                    3'b111: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SLLI Instruction
-                    3'b001: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    3'b101: begin
-                        case (instruction[31:25])
-                            // SRLI Instruction
-                            7'b0000000: begin
-                                r_wb_sel  <= 2'b1;
-                            end
-                            // SRAI Instruction
-                            7'b0100000: begin
-                                r_wb_sel  <= 2'b1;
-                            end
-                        endcase
-                    end
-                endcase
+                r_wb_sel  <= 2'b1;
             end
             7'b0110011: begin
-                case (instruction[14:12]) 
-                    3'b000: begin
-                        case (instruction[31:25])
-                            // ADD Instruction
-                            7'b0000000: begin
-                                r_wb_sel  <= 2'b1;
-                            end
-                            // SUB Instruction
-                            7'b0100000: begin
-                                r_wb_sel  <= 2'b1;
-                            end
-                        endcase
-                    end
-                    // SLL Instruction
-                    3'b001: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SLT Instruction
-                    3'b010: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SLTU Instruction
-                    3'b011: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // XOR Instruction
-                    3'b100: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // SRA Instruction
-                    3'b100: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // OR Instruction
-                    3'b110: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                    // AND Instruction
-                    3'b111: begin
-                        r_wb_sel  <= 2'b1;
-                    end
-                endcase
+                r_wb_sel  <= 2'b1;
             end
             //  FENCE Instruction
             7'b0001111: begin
                 r_wb_sel  <= 2'b0;
             end
             7'b1110011: begin
-                case (instruction[31:20])
-                    //  @todo
-                    //  ECALL Instruction
-                    7'h0: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                    //  @todo 
-                    //  EBREAK Instruction
-                    7'h1: begin
-                        r_wb_sel  <= 2'b0;
-                    end
-                endcase
+                r_wb_sel  <= 2'b0;
             end
             default: begin
                 r_wb_sel  <= 2'b0;
             end
         endcase
+    end
+end
+endmodule
