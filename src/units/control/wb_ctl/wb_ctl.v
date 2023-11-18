@@ -70,39 +70,14 @@ always @(posedge(clk) or posedge(rst)) begin
                     end
                     //LW Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                     //LBU Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                     //LHU Instruction
                     3'b101: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                 endcase
@@ -111,41 +86,14 @@ always @(posedge(clk) or posedge(rst)) begin
                 case (instruction[14:12])
                     // SB Instruction
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b1;
-                        r_RegWEn  <= 1'b0;
-                        r_immSel  <= 4'h2;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                     // SH Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b1;
-                        r_RegWEn  <= 1'b0;
-                        r_immSel  <= 4'h2;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                     // SW Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b1;
-                        r_RegWEn  <= 1'b0;
-                        r_immSel  <= 4'h2;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                 endcase
@@ -154,116 +102,40 @@ always @(posedge(clk) or posedge(rst)) begin
                 case (instruction[14:12])
                     // ADDI Instruction
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0011;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SLTI Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b1100;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SLTIU Instruction
                     3'b011: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b1011;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // XORI Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0010;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // ORI Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0001;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // ANDI Instruction
                     3'b111: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0000;
-                        r_sign    <= 1'b1;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SLLI Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b1;
-                        r_alu_sel <= 4'b0111;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h1;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     3'b101: begin
                         case (instruction[31:25])
                             // SRLI Instruction
                             7'b0000000: begin
-                                r_a_sel   <= 1'b0;
-                                r_b_sel   <= 1'b1;
-                                r_alu_sel <= 4'b1000;
-                                r_mem_wr  <= 1'b0;
-                                r_RegWEn  <= 1'b1;
-                                r_immSel  <= 4'h1;
-                                r_BrUn    <= 1'b0;
-                                r_pc_sel <= 1'b0;
                                 r_wb_sel  <= 2'b1;
                             end
                             // SRAI Instruction
                             7'b0100000: begin
-                                r_a_sel   <= 1'b0;
-                                r_b_sel   <= 1'b1;
-                                r_alu_sel <= 4'b1010;
-                                r_mem_wr  <= 1'b0;
-                                r_RegWEn  <= 1'b1;
-                                r_immSel  <= 4'h1;
-                                r_BrUn    <= 1'b0;
-                                r_pc_sel <= 1'b0;
                                 r_wb_sel  <= 2'b1;
                             end
                         endcase
@@ -276,126 +148,46 @@ always @(posedge(clk) or posedge(rst)) begin
                         case (instruction[31:25])
                             // ADD Instruction
                             7'b0000000: begin
-                                r_a_sel   <= 1'b0;
-                                r_b_sel   <= 1'b0;
-                                r_alu_sel <= 4'b0011;
-                                r_mem_wr  <= 1'b0;
-                                r_RegWEn  <= 1'b1;
-                                r_immSel  <= 4'h0;
-                                r_BrUn    <= 1'b0;
-                                r_pc_sel <= 1'b0;
                                 r_wb_sel  <= 2'b1;
                             end
                             // SUB Instruction
                             7'b0100000: begin
-                                r_a_sel   <= 1'b0;
-                                r_b_sel   <= 1'b0;
-                                r_alu_sel <= 4'b0100;
-                                r_mem_wr  <= 1'b0;
-                                r_RegWEn  <= 1'b1;
-                                r_immSel  <= 4'h0;
-                                r_BrUn    <= 1'b0;
-                                r_pc_sel <= 1'b0;
                                 r_wb_sel  <= 2'b1;
                             end
                         endcase
                     end
                     // SLL Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0111;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SLT Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b1100;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SLTU Instruction
                     3'b011: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b1011;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // XOR Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0010;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // SRA Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b1010;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // OR Instruction
                     3'b110: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0001;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                     // AND Instruction
                     3'b111: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0000;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b1;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b1;
                     end
                 endcase
             end
             //  FENCE Instruction
             7'b0001111: begin
-                r_a_sel   <= 1'b0;
-                r_b_sel   <= 1'b0;
-                r_alu_sel <= 4'b0000;
-                r_mem_wr  <= 1'b0;
-                r_RegWEn  <= 1'b0;
-                r_immSel  <= 4'h0;
-                r_BrUn    <= 1'b0;
-                r_pc_sel  <= 1'b0;
                 r_wb_sel  <= 2'b0;
             end
             7'b1110011: begin
@@ -403,40 +195,16 @@ always @(posedge(clk) or posedge(rst)) begin
                     //  @todo
                     //  ECALL Instruction
                     7'h0: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0000;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b0;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                     //  @todo 
                     //  EBREAK Instruction
                     7'h1: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0000;
-                        r_mem_wr  <= 1'b0;
-                        r_RegWEn  <= 1'b0;
-                        r_immSel  <= 4'h0;
-                        r_BrUn    <= 1'b0;
-                        r_pc_sel  <= 1'b0;
                         r_wb_sel  <= 2'b0;
                     end
                 endcase
             end
             default: begin
-                r_a_sel   <= 1'b0;
-                r_b_sel   <= 1'b0;
-                r_alu_sel <= 4'b0000;
-                r_mem_wr  <= 1'b0;
-                r_RegWEn  <= 1'b0;
-                r_immSel  <= 4'h0;
-                r_BrUn    <= 1'b0;
-                r_pc_sel  <= 1'b0;
                 r_wb_sel  <= 2'b0;
             end
         endcase
