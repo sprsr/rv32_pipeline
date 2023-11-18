@@ -15,7 +15,6 @@ always @(posedge clk or posedge rst) begin
         r_wb_sel <= 1'b0;
         r_instr_wb <= 32'h0;
     end else begin
-        r_instr_wb <= instruction;
         case (instruction[6:0])
             // LUI Instruction: 
             7'b0110111: begin
@@ -34,7 +33,6 @@ always @(posedge clk or posedge rst) begin
             end
             7'b0000011: begin
                 r_wb_sel  <= 2'b0;
-
             end
             7'b0100011: begin
                 r_wb_sel  <= 2'b0;
@@ -56,6 +54,7 @@ always @(posedge clk or posedge rst) begin
                 r_wb_sel  <= 2'b0;
             end
         endcase
+        r_instr_wb <= instruction;
     end
 end
 endmodule
