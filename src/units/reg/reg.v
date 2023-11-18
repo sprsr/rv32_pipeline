@@ -51,7 +51,7 @@ module register(
 
         // Control.v will determine if we need to write back.
         end else if (regWEn) begin
-            r_memory[addrD] <= dataD;
+            r_memory[addrD] = dataD;
         end
     end
 
