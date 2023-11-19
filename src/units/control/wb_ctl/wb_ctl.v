@@ -2,7 +2,7 @@ module wb_ctl(
     input clk,
     input rst,
     input [31:0] instruction,
-    output [1:0] wb_sel
+    output [1:0] wb_sel,
     output       regWEn
 );
 
@@ -11,6 +11,7 @@ reg       r_regWEn;
 reg [31:0] r_instr_wb;
 
 assign wb_sel = r_wb_sel;
+assign regWEn = r_regWEn;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
