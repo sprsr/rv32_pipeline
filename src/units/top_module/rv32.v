@@ -18,7 +18,6 @@ wire  [3:0] w_imm_sel;
 wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_pc;
-wire [31:0] w_instruction;
 wire [31:0] w_immediate;
 wire [31:0] w_wr_back;
 wire [31:0] w_reg_data_A;
@@ -30,9 +29,15 @@ wire [31:0] w_dmem_out;
 wire        w_alu_zero_flag;
 wire [31:0] w_debug [31:0];
 
+wire [31:0] w_instr_fetch;
 wire [31:0] w_instr_de;
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
+
+imem inst_imem(
+    .i_addr(w_pc),
+    .o_data(w_instr_fetch)
+);
 
 PC inst_pc(
     .clk(clk),
@@ -44,15 +49,10 @@ PC inst_pc(
     .pc(w_pc)
 );
 
-imem inst_imem(
-    .i_addr(w_pc),
-    .o_data(w_instruction)
-);
-
 decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
-    .instruction(w_instruction),
+    .instruction(w_instr_fetch),
     .immSel(w_imm_sel),
     .instr_de(w_instr_de)
 );
