@@ -42,7 +42,8 @@ PC inst_pc(
     .in_pc(w_pc_4),
     .in_alu(w_alu_out),
     .pc_nxt(w_pc_4),
-    .pc(w_pc)
+    .pc(w_pc),
+    .instr_fetch(w_instr_fetch)
 );
 
 decode_ctl inst_decode_ctl(
@@ -63,7 +64,7 @@ execute_ctl inst_execute_ctl(
     .b_sel(w_b_sel),
     .pc_sel(w_pc_sel),
     .sign(w_sign),
-    .BrUn(w_BrUn),
+    .BrUn(w_brUn),
     .alu_sel(w_alu_sel),
     .instr_exe(w_instr_exe)
 );
@@ -81,11 +82,6 @@ wb_ctl inst_wb_ctl(
     .rst(rst),
     .instruction(w_instr_acc),
     .wb_sel(w_wb_sel)
-);
-
-imem inst_imem(
-    .i_addr(w_pc),
-    .o_data(w_instr_fetch)
 );
 
 immGen inst_immGen(
