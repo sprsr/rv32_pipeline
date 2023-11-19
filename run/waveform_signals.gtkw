@@ -1,10 +1,10 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sun Nov 19 05:52:46 2023
+[*] Sun Nov 19 06:30:14 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Sun Nov 19 05:51:05 2023"
-[dumpfile_size] 11936
+[dumpfile_mtime] "Sun Nov 19 06:26:00 2023"
+[dumpfile_size] 11010
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
 [timestart] 0
 [size] 1499 1042
@@ -111,12 +111,12 @@ rv32_tb.c0.clk
 rv32_tb.c0.rst
 @200
 -Instruction
+@23
+rv32_tb.c0.w_instr_fetch[31:0]
 @22
-rv32_tb.c0.w_instruction[31:0]
 rv32_tb.c0.w_instr_de[31:0]
 rv32_tb.c0.w_instr_exe[31:0]
 rv32_tb.c0.w_instr_acc[31:0]
-@23
 rv32_tb.c0.inst_decode_ctl.r_instr_de[31:0]
 @200
 -BSel
