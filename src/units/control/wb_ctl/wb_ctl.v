@@ -29,8 +29,8 @@ always @(posedge clk or posedge rst) begin
                 r_wb_sel  <= 2'b01;
                 r_regWEn <= 1'b1;
             end
-            // JAL Instruction:
-            7'b1101111: begin
+            // JALR Instruction:
+            7'b1100111: begin
                 r_wb_sel  <= 2'b10;
                 r_regWEn <= 1'b1;
             end
