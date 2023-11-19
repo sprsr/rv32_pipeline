@@ -41,6 +41,7 @@ module PC(
         if (rst) begin
             w_pc <= 0;  // Reset the program counter to 0
             w_pc_nxt <=0;
+            r_instr_fetch <= 32'h0;
         end else begin
             if (sel_pc) begin
             w_pc <= in_alu;          // Increment the program counter if enabled
