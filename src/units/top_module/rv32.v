@@ -34,10 +34,6 @@ wire [31:0] w_instr_de;
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
 
-imem inst_imem(
-    .i_addr(w_pc),
-    .o_data(w_instr_fetch)
-);
 
 PC inst_pc(
     .clk(clk),
@@ -85,6 +81,11 @@ wb_ctl inst_wb_ctl(
     .rst(rst),
     .instruction(w_instr_acc),
     .wb_sel(w_wb_sel)
+);
+
+imem inst_imem(
+    .i_addr(w_pc),
+    .o_data(w_instr_fetch)
 );
 
 immGen inst_immGen(
