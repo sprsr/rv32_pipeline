@@ -81,7 +81,8 @@ wb_ctl inst_wb_ctl(
     .clk(clk),
     .rst(rst),
     .instruction(w_instr_acc),
-    .wb_sel(w_wb_sel)
+    .wb_sel(w_wb_sel),
+    .regWEn(w_regWEn)
 );
 
 immGen inst_immGen(
