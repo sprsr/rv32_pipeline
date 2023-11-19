@@ -33,6 +33,7 @@ wire [31:0] w_instr_fetch;
 wire [31:0] w_instr_de;
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
+wire [31:0] w_instr_wb;
 
 
 PC inst_pc(
@@ -82,7 +83,8 @@ wb_ctl inst_wb_ctl(
     .rst(rst),
     .instruction(w_instr_acc),
     .wb_sel(w_wb_sel),
-    .regWEn(w_regWEn)
+    .regWEn(w_regWEn),
+    .instr_wb(w_instr_wb);
 );
 
 immGen inst_immGen(
@@ -96,7 +98,7 @@ register inst_register(
     .rst(rst),
     .regWEn(w_regWEn),
     .dataD(w_wr_back),
-    .addrD(w_instr_de[11:7]),
+    .addrD(w_instr_wb[11:7]),
     .addrA(w_instr_de[19:15]),
     .addrB(w_instr_de[24:20]),
     .dataA(w_reg_data_A),
