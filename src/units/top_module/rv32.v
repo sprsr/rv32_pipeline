@@ -34,6 +34,21 @@ wire [31:0] w_instr_de;
 wire [31:0] w_instr_exe;
 wire [31:0] w_instr_acc;
 
+PC inst_pc(
+    .clk(clk),
+    .rst(rst),
+    .sel_pc(w_sel_pc),
+    .in_pc(w_pc_4),
+    .in_alu(w_alu_out),
+    .pc_nxt(w_pc_4),
+    .pc(w_pc)
+);
+
+imem inst_imem(
+    .i_addr(w_pc),
+    .o_data(w_instruction)
+);
+
 decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
@@ -70,21 +85,6 @@ wb_ctl inst_wb_ctl(
     .rst(rst),
     .instruction(w_instr_acc),
     .wb_sel(w_wb_sel)
-);
-
-PC inst_pc(
-    .clk(clk),
-    .rst(rst),
-    .sel_pc(w_sel_pc),
-    .in_pc(w_pc_4),
-    .in_alu(w_alu_out),
-    .pc_nxt(w_pc_4),
-    .pc(w_pc)
-);
-
-imem inst_imem(
-    .i_addr(w_pc),
-    .o_data(w_instruction)
 );
 
 immGen inst_immGen(
