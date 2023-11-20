@@ -18,6 +18,7 @@ wire  [3:0] w_imm_sel;
 wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_pc;
+wire [31:0] w_pc_de;
 wire [31:0] w_immediate;
 wire [31:0] w_wr_back;
 wire [31:0] w_reg_data_A;
@@ -52,6 +53,7 @@ decode_ctl inst_decode_ctl(
     .rst(rst),
     .instruction(w_instr_fetch),
     .immSel(w_imm_sel),
+    .pc_de(w_pc_de),
     .instr_de(w_instr_de)
 );
 
