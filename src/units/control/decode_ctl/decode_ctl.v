@@ -1,20 +1,25 @@
 module decode_ctl(
     input        clk,
     input        rst,
+    input [31:0] pc,
     input [31:0] instruction,
     output  [3:0] immSel,
+    output [31:0] pc_de,
     output [31:0] instr_de
 );
 
 reg  [3:0]  r_immSel;
+reg [31:0]  r_pc_de;
 reg [31:0]  r_instr_de;
 
 assign immSel   = r_immSel;
+assign pc_de = r_pc_de;
 assign instr_de = r_instr_de;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_immSel  <= 4'h4;
+        r_pc_de   <= 32'h0;
         r_instr_de <= 32'h0;
     end else begin      
         case (instruction[6:0])
@@ -93,6 +98,7 @@ always @(posedge clk or posedge rst) begin
                 r_immSel  <= 4'h0;
             end
         endcase
+        r_pc_de    <= pc;
         r_instr_de <= instruction;
     end
 end
