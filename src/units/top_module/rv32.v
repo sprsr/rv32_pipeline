@@ -19,10 +19,12 @@ wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_pc;
 wire [31:0] w_pc_de;
+wire [31:0] w_pc_exe;
 wire [31:0] w_immediate;
 wire [31:0] w_wr_back;
 wire [31:0] w_reg_data_A;
-wire [31:0] w_reg_data_B;
+wire [31:0] w_reg_data_A_exe;
+wire [31:0] w_reg_data_B_exe;
 wire [31:0] w_alu_in_A;
 wire [31:0] w_alu_in_B;
 wire [31:0] w_alu_out;
@@ -61,6 +63,9 @@ execute_ctl inst_execute_ctl(
     .rst(rst),
     .BrEq(w_brEq),
     .BrLT(w_brLT),
+    .data_a(w_reg_data_A),
+    .data_b(w_reg_data_B),
+    .pc_de(w_pc_de),
     .instruction(w_instr_de),
     .a_sel(w_a_sel),
     .b_sel(w_b_sel),
@@ -69,6 +74,9 @@ execute_ctl inst_execute_ctl(
     .sign(w_sign),
     .BrUn(w_brUn),
     .alu_sel(w_alu_sel),
+    .data_a_exe(w_reg_data_A_exe),
+    .data_b_exe(w_reg_data_B_exe),
+    .pc_exe(w_pc_exe),
     .instr_exe(w_instr_exe)
 );
 
@@ -117,7 +125,7 @@ branch_comp inst_branch_comp(
 );
 
 mux2x1 inst_mux2x1_A(
-    .a(w_pc),
+    .a(w_pc_exe),
     .b(w_reg_data_A),
     .sel(w_a_sel),
     .y(w_alu_in_A)
