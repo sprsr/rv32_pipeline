@@ -20,6 +20,9 @@ reg [31:0] r_instr_acc;
 
 assign instr_acc = r_instr_acc;
 assign MemRW = r_mem_wr;
+assign pc_4_acc = r_pc_4_acc;
+assign alu_out_acc = r_alu_out_acc;
+assign data_b_acc = r_data_b_acc;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
@@ -47,7 +50,7 @@ always @(posedge clk or posedge rst) begin
                 r_mem_wr <= 1'b0;
             end
         endcase
-        r_pc_4_acc    <= pc_exe + 'h4;
+        r_pc_4_acc    <= pc_exe + 'h1;
         r_alu_out_acc <= alu_out;
         r_data_b_acc  <= data_b_exe;
         r_instr_acc   <= instruction;
