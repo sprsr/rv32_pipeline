@@ -60,6 +60,7 @@ PC inst_pc(
 decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
+    .pc(w_pc),
     .instruction(w_instr_fetch),
     .pc_de(w_pc_de),
     .instr_de(w_instr_de)
