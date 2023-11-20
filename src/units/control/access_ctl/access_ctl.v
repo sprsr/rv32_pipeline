@@ -1,12 +1,21 @@
 module access_ctl(
     input clk,
     input rst,
+    input [31:0] pc_exe,
+    input [31:0] alu_out,
+    input [31:0] data_b_exe,
     input [31:0] instruction,
+    output [31:0] pc_4_acc,
+    output [31:0] alu_out_acc,
+    output [31:0] data_b_acc,
     output [31:0] instr_acc,
     output MemRW
 );
 
 reg        r_mem_wr;
+reg [31:0] r_pc_4_acc;
+reg [31:0] r_alu_out_acc;
+reg [31:0] r_data_b_acc;
 reg [31:0] r_instr_acc;
 
 assign instr_acc = r_instr_acc;
@@ -38,7 +47,10 @@ always @(posedge clk or posedge rst) begin
                 r_mem_wr <= 1'b0;
             end
         endcase
-        r_instr_acc <= instruction;
+        r_pc_4_acc    <= pc_exe + 'h4;
+        r_alu_out_acc <= alu_out;
+        r_data_b_acc  <= data_b_exe;
+        r_instr_acc   <= instruction;
     end
 end
 endmodule
