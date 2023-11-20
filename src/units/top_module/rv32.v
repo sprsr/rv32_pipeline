@@ -52,7 +52,6 @@ decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
     .instruction(w_instr_fetch),
-    .immSel(w_imm_sel),
     .pc_de(w_pc_de),
     .instr_de(w_instr_de)
 );
@@ -65,6 +64,7 @@ execute_ctl inst_execute_ctl(
     .instruction(w_instr_de),
     .a_sel(w_a_sel),
     .b_sel(w_b_sel),
+    .immSel(w_imm_sel),
     .pc_sel(w_pc_sel),
     .sign(w_sign),
     .BrUn(w_brUn),
