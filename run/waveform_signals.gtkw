@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Nov 20 18:46:00 2023
+[*] Mon Nov 20 18:48:27 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Mon Nov 20 18:41:29 2023"
-[dumpfile_size] 15324
+[dumpfile_mtime] "Mon Nov 20 18:46:31 2023"
+[dumpfile_size] 16676
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
 [timestart] 0
 [size] 1499 1042
-[pos] 65731 65906
+[pos] 66618 65965
 *-5.087204 165 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
@@ -42,12 +42,11 @@ rv32_tb.inst_execute_ctl.r_instr_exe[31:0]
 -Access CTL
 @22
 rv32_tb.c0.inst_access_ctl.pc_exe[31:0]
-@23
 rv32_tb.c0.inst_access_ctl.alu_out[31:0]
-@22
-rv32_tb.c0.inst_access_ctl.r_instr_acc[31:0]
-rv32_tb.c0.inst_access_ctl.r_data_b_acc[31:0]
+rv32_tb.c0.inst_access_ctl.data_b_exe[31:0]
 rv32_tb.c0.inst_access_ctl.r_pc_4_acc[31:0]
 rv32_tb.c0.inst_access_ctl.alu_out_acc[31:0]
+rv32_tb.c0.inst_access_ctl.r_data_b_acc[31:0]
+rv32_tb.c0.inst_access_ctl.r_instr_acc[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
