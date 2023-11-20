@@ -18,6 +18,7 @@ wire  [3:0] w_imm_sel;
 wire  [1:0] w_wb_sel;
 wire [31:0] w_pc_4;
 wire [31:0] w_pc_4_acc;
+wire [31:0] w_pc_4_wb;
 wire [31:0] w_pc;
 wire [31:0] w_pc_de;
 wire [31:0] w_pc_exe;
@@ -31,7 +32,9 @@ wire [31:0] w_alu_in_A;
 wire [31:0] w_alu_in_B;
 wire [31:0] w_alu_out;
 wire [31:0] w_alu_out_acc;
+wire [31:0] w_alu_out_wb;
 wire [31:0] w_dmem_out;
+wire [31:0] w_dmem_out_wb;
 wire        w_alu_zero_flag;
 wire [31:0] w_debug [31:0];
 
@@ -87,7 +90,7 @@ access_ctl inst_access_ctl(
     .clk(clk),
     .rst(rst),
     .pc_exe(w_pc_exe),
-    .alu_out(w_alu_out)
+    .alu_out(w_alu_out),
     .data_b_exe(w_reg_data_B_exe),
     .instruction(w_instr_exe),
     .pc_4_acc(w_pc_4_acc),
@@ -100,9 +103,15 @@ access_ctl inst_access_ctl(
 wb_ctl inst_wb_ctl(
     .clk(clk),
     .rst(rst),
+    .pc_4_acc(w_pc_4_acc),
+    .alu_out_acc(w_alu_out_acc),
+    .dmem_out(w_dmem_out),
     .instruction(w_instr_acc),
     .wb_sel(w_wb_sel),
     .regWEn(w_regWEn),
+    .pc_4_wb(w_pc_4_wb),
+    .alu_out_acc(w_alu_out_wb),
+    .dmem_out_wb(w_dmem_out_wb),
     .instr_wb(w_instr_wb)
 );
 
@@ -166,9 +175,9 @@ dmem inst_dmem(
 );
 
 mux3x1 inst_mux3x1_wb(
-    .a(w_pc_4),
-    .b(w_alu_out),
-    .c(w_dmem_out),
+    .a(w_pc_4_wb),
+    .b(w_alu_out_wb),
+    .c(w_dmem_out_wb),
     .sel(w_wb_sel),
     .y(w_wr_back)
 );
