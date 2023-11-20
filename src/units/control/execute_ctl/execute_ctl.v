@@ -3,6 +3,9 @@ module execute_ctl(
     input         rst,
     input         BrEq,
     input         BrLT,
+    input  [31:0] data_a,
+    input  [31:0] data_b,
+    input  [31:0] pc_de,
     input  [31:0] instruction,
     output        a_sel,
     output        b_sel,
@@ -11,6 +14,9 @@ module execute_ctl(
     output        sign,
     output        BrUn,
     output [3:0]  alu_sel,
+    output [31:0] data_a_exe,
+    output [31:0] data_b_exe,
+    output [31:0] pc_exe,
     output [31:0] instr_exe
 );
 
@@ -21,6 +27,9 @@ reg        r_pc_sel;
 reg [3:0]  r_immSel;
 reg [3:0]  r_alu_sel;
 reg        r_sign;
+reg [31:0] r_data_a_exe;
+reg [31:0] r_data_b_exe;
+reg [31:0] r_pc_exe;
 reg [31:0] r_instr_exe;
 
 assign immSel    = r_immSel;
@@ -30,6 +39,7 @@ assign b_sel     = r_b_sel;
 assign pc_sel    = r_pc_sel;
 assign sign      = r_sign;
 assign BrUn      = r_BrUn;
+assign pc_exe    = r_pc_exe;
 assign instr_exe = r_instr_exe;
 
 
@@ -42,6 +52,7 @@ always @(posedge clk or posedge rst) begin
         r_alu_sel   <= 4'b0110;
         r_BrUn      <= 1'bx;
         r_pc_sel    <= 1'b0;
+        r_pc_exe    <= 32'h0;
         r_instr_exe <= 32'h0;
     end else begin
         r_sign = 1'b0;
@@ -448,7 +459,10 @@ always @(posedge clk or posedge rst) begin
                 r_pc_sel  <= 1'b0;
             end
         endcase
-        r_instr_exe <= instruction;
+        r_data_a_exe <= data_a;
+        r_data_b_exe <= data_b;
+        r_pc_exe     <= pc_de;
+        r_instr_exe  <= instruction;
     end
 end
 endmodule
