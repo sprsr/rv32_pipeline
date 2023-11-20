@@ -39,6 +39,8 @@ assign b_sel     = r_b_sel;
 assign pc_sel    = r_pc_sel;
 assign sign      = r_sign;
 assign BrUn      = r_BrUn;
+assign data_a_exe = r_data_a_exe;
+assign data_b_exe = r_data_b_exe;
 assign pc_exe    = r_pc_exe;
 assign instr_exe = r_instr_exe;
 
