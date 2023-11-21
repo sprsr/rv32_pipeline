@@ -35,33 +35,33 @@ function [2:0] write_back_check;
     case (instruction[6:0])
         // LUI Instruction: 
         7'b0110111: begin
-            write_back_check  <= 2'b01;
+            write_back_check  = 2'b01;
         end
         // AUIPC Instruction: 
         7'b0010111: begin
-            write_back_check  <= 2'b01;
+            write_back_check  = 2'b01;
         end
         // JALR Instruction:
         7'b1100111: begin
-            write_back_check  <= 2'b10;
+            write_back_check  = 2'b10;
         end
         7'b1100011: begin
-            write_back_check  <= 2'bx;
+            write_back_check  = 2'bx;
         end
         7'b0000011: begin
-            write_back_check  <= 2'b0;
+            write_back_check  = 2'b0;
         end
         7'b0100011: begin
-            write_back_check  <= 2'b0;
+            write_back_check  = 2'b0;
         end
         7'b0010011: begin
-            write_back_check  <= 2'b1;
+            write_back_check  = 2'b1;
         end
         7'b0110011: begin
-            write_back_check  <= 2'b1;
+            write_back_check  = 2'b1;
         end
         default: begin
-            write_back_check  <= 2'b11;
+            write_back_check  = 2'b11;
         end
     endcase
 endfunction
