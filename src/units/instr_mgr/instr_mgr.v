@@ -11,6 +11,11 @@ module instr_mgr(
 );
 
 reg [3:0] r_conflict_map;
+reg [2:0] r_wb_acc;
+reg [2:0] r_wb_exe;
+reg [31:0] r_data_mgr;
+reg [31:0] r_data_a_mgr;
+reg [31:0] r_data_a_mgr;
 
 //Function checking if the instruction is a write back instruction
 function [2:0] write_back_check;
@@ -62,18 +67,27 @@ always @(posedge clk or posedge rst) begin
         end else if(instr_exe[11:7] == instr_de[24:20]) begin
             r_conflict_map[0] = 1'b1;
         end
-        if (r_conflict_map[3]) begin
-            r_acc_wb = write_back_check(instr_acc);
-            case (r_acc_wb):
+        if (r_conflict_map[3] or r_conflict_map[2]) begin
+            r_wb_acc = write_back_check(instr_acc);
+            case (r_wb_acc)
                 3'b00: begin
-                    r_data_out_a = dmem_out_acc;
+                    r_data_mgr = dmem_out_acc;
                 end
                 3'b01: begin
-                    r_data_out_a = alu_out_acc;
+                    r_data_mgr = alu_out_acc;
                 end
                 3'b10: begin
-                    r_data_out_a = pc_4_acc;
+                    r_data_mgr = pc_4_acc;
                 end
+                default: begin
+                    r_data_mgr = 32'hx;
+                end
+            endcase
+            if (r_conflict_map[3]) begin
+                r_data_a_mgr = r_data_mgr;
+            end else if (r_conflict_map[2]) begin
+                r_data_b_mgr = r_data_mgr;
+            end
                     
 
             acc_wb = write_back_check(instr_exe);
