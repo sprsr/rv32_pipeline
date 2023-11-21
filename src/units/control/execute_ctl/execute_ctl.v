@@ -17,7 +17,10 @@ module execute_ctl(
     output [31:0] data_a_exe,
     output [31:0] data_b_exe,
     output [31:0] pc_exe,
-    output [31:0] instr_exe
+    output [31:0] instr_exe,
+    output        reach_alu,
+    output        reach_dmem,
+    output        reach_pc_4
 );
 
 reg        r_BrUn;
@@ -31,6 +34,11 @@ reg [31:0] r_data_a_exe;
 reg [31:0] r_data_b_exe;
 reg [31:0] r_pc_exe;
 reg [31:0] r_instr_exe;
+//These are two register addresses that may be getting written to in future stages 
+reg [31:0] r_write_reg[1:0];
+reg        r_reach_alu;
+reg        r_reach_dmem;
+reg        r_reach_pc_4;
 
 assign immSel    = r_immSel;
 assign alu_sel   = r_alu_sel;
