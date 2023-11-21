@@ -3,19 +3,31 @@ module instr_mgr(
     input        rst,
     input [31:0] instr_de,
     input [31:0] instr_exe,
+    input [31:0] alu_out_exe,
+    input [31:0] pc_4_exe,
     input [31:0] instr_acc,
+    input [31:0] alu_out_acc,
+    input [31:0] dmem_out_acc,
+    input [31:0] pc_4_acc,
     output       stall,
     output       hazard,
     output[31:0] data_a_mgr,
     output[31:0] data_b_mgr
 );
 
+reg       r_stall;
+reg       r_hazard;
 reg [3:0] r_conflict_map;
 reg [2:0] r_wb_acc;
 reg [2:0] r_wb_exe;
 reg [31:0] r_data_mgr;
 reg [31:0] r_data_a_mgr;
-reg [31:0] r_data_a_mgr;
+reg [31:0] r_data_b_mgr;
+
+assign stall = r_stall;
+assign hazard = r_hazard;
+assign data_a_mgr = r_data_a_mgr;
+assign data_b_mgr = r_data_b_mgr;
 
 //Function checking if the instruction is a write back instruction
 function [2:0] write_back_check;
@@ -58,6 +70,7 @@ always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_conflict_map = 4'b0;
         r_stall = 1'b0;
+        r_hazard = 1'b0;
     end else begin
         if (instr_acc[11:7] == instr_de[19:15]) begin
             r_conflict_map[3] = 1'b1;
@@ -74,15 +87,19 @@ always @(posedge clk or posedge rst) begin
                 3'b00: begin
                     r_stall = 1'b1;
                     r_data_mgr = 32'hx;
+                    r_hazard = 1'b1;
                 end
                 3'b01: begin
                     r_data_mgr = alu_out_exe;
+                    r_hazard = 1'b1;
                 end
                 3'b10: begin
                     r_data_mgr = pc_4_exe;
+                    r_hazard = 1'b1;
                 end
                 default: begin
                     r_data_mgr = 32'hx;
+                    r_hazard = 1'b0;
                 end
             endcase
             if (r_conflict_map[1]) begin
@@ -96,15 +113,19 @@ always @(posedge clk or posedge rst) begin
             case (r_wb_acc)
                 3'b00: begin
                     r_data_mgr = dmem_out_acc;
+                    r_hazard = 1'b1;
                 end
                 3'b01: begin
                     r_data_mgr = alu_out_acc;
+                    r_hazard = 1'b1;
                 end
                 3'b10: begin
                     r_data_mgr = pc_4_acc;
+                    r_hazard = 1'b1;
                 end
                 default: begin
                     r_data_mgr = 32'hx;
+                    r_hazard = 1'b0;
                 end
             endcase
             if (r_conflict_map[3] && !r_conflict_map[1]) begin
