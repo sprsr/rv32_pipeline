@@ -7,8 +7,6 @@ module execute_ctl(
     input  [31:0] data_b,
     input  [31:0] pc_de,
     input  [31:0] instruction,
-    input  [31:0] instr_exe,
-    input  [31:0] instr_acc,
     output        a_sel,
     output        b_sel,
     output  [3:0] immSel,
@@ -33,9 +31,6 @@ reg [31:0] r_data_a_exe;
 reg [31:0] r_data_b_exe;
 reg [31:0] r_pc_exe;
 reg [31:0] r_instr_exe;
-reg        r_reach_alu;
-reg        r_reach_dmem;
-reg        r_reach_pc_4;
 
 assign immSel    = r_immSel;
 assign alu_sel   = r_alu_sel;
