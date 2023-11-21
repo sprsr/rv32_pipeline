@@ -57,6 +57,7 @@ endfunction
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_conflict_map = 4'b0;
+        r_stall = 1'b0;
     end else begin
         if (instr_acc[11:7] == instr_de[19:15]) begin
             r_conflict_map[3] = 1'b1;
@@ -67,7 +68,30 @@ always @(posedge clk or posedge rst) begin
         end else if(instr_exe[11:7] == instr_de[24:20]) begin
             r_conflict_map[0] = 1'b1;
         end
-        if (r_conflict_map[3] or r_conflict_map[2]) begin
+        if (r_conflict_map[1] || r_conflict_map[0]) begin
+            r_wb_exe = write_back_check(instr_exe);
+            case (r_wb_exe)
+                3'b00: begin
+                    r_stall = 1'b1;
+                    r_data_mgr = 32'hx;
+                end
+                3'b01: begin
+                    r_data_mgr = alu_out_exe;
+                end
+                3'b10: begin
+                    r_data_mgr = pc_4_exe;
+                end
+                default: begin
+                    r_data_mgr = 32'hx;
+                end
+            endcase
+            if (r_conflict_map[1]) begin
+                r_data_a_mgr = r_data_mgr;
+            end else if (r_conflict_map[0]) begin
+                r_data_b_mgr = r_data_mgr;
+            end
+        end 
+        if (r_conflict_map[3] || r_conflict_map[2]) begin
             r_wb_acc = write_back_check(instr_acc);
             case (r_wb_acc)
                 3'b00: begin
@@ -83,35 +107,11 @@ always @(posedge clk or posedge rst) begin
                     r_data_mgr = 32'hx;
                 end
             endcase
-            if (r_conflict_map[3]) begin
+            if (r_conflict_map[3] && !r_conflict_map[1]) begin
                 r_data_a_mgr = r_data_mgr;
-            end else if (r_conflict_map[2]) begin
+            end else if (r_conflict_map[2] && !r_conflict_map[0]) begin
                 r_data_b_mgr = r_data_mgr;
             end
-        if (r_conflict_map[1] or r_conflict_map[0]) begin
-            r_wb_exe = write_back_check(instr_exe);
-            case (r_wb_exe)
-                3'b00: begin
-                    r_data_mgr = dmem_out_acc;
-                end
-                3'b01: begin
-                    r_data_mgr = alu_out_acc;
-                end
-                3'b10: begin
-                    r_data_mgr = pc_4_acc;
-                end
-                default: begin
-                    r_data_mgr = 32'hx;
-                end
-            endcase
-            if (r_conflict_map[3]) begin
-                r_data_a_mgr = r_data_mgr;
-            end else if (r_conflict_map[2]) begin
-                r_data_b_mgr = r_data_mgr;
-            end
-                    
-
-            acc_wb = write_back_check(instr_exe);
         end
     end
 end
