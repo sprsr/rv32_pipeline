@@ -117,6 +117,19 @@ wb_ctl inst_wb_ctl(
     .instr_wb(w_instr_wb)
 );
 
+instr_mgr inst_instr_mgr(
+    .clk(clk),
+    .rst(rst),
+    .instr_de(w_instr_de),
+    .instr_exe(w_instr_exe),
+    .alu_out_exe(),
+    .pc_exe(w_pc_exe),
+    .instr_acc(w_instr_acc),
+    .alu_out_acc(),
+    .pc_4_acc(w_pc_4_acc),
+
+)
+
 immGen inst_immGen(
     .immSel(w_imm_sel),
     .instr(w_instr_de[31:7]),
