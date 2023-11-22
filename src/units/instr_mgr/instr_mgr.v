@@ -81,14 +81,19 @@ always @(posedge clk or posedge rst) begin
         r_data_a_mgr = 32'hx;
         r_data_b_mgr = 32'hx;
     end else begin
-        if (instr_acc[11:7] == instr_de[19:15]) begin
-            r_conflict_map[3] = 1'b1;
-        end if (instr_acc[11:7] == instr_de[24:20]) begin
-            r_conflict_map[2] = 1'b1;
-        end if (instr_exe[11:7] == instr_de[19:15]) begin
-            r_conflict_map[1] = 1'b1;
-        end if(instr_exe[11:7] == instr_de[24:20]) begin
-            r_conflict_map[0] = 1'b1;
+        if (pc_4_acc > 1) begin
+            if (instr_acc[11:7] == instr_de[19:15]) begin
+                r_conflict_map[3] = 1'b1;
+            end if (instr_acc[11:7] == instr_de[24:20]) begin
+                r_conflict_map[2] = 1'b1;
+            end 
+        end 
+        if (pc_exe > 0) begin
+            if (instr_exe[11:7] == instr_de[19:15]) begin
+                r_conflict_map[1] = 1'b1;
+            end if(instr_exe[11:7] == instr_de[24:20]) begin
+                r_conflict_map[0] = 1'b1;
+            end
         end
         if (r_conflict_map[1] || r_conflict_map[0]) begin
             r_wb_exe = write_back_check(instr_exe);
