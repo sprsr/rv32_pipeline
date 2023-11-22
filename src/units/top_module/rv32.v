@@ -127,8 +127,11 @@ instr_mgr inst_instr_mgr(
     .instr_acc(w_instr_acc),
     .alu_out_acc(),
     .pc_4_acc(w_pc_4_acc),
-
-)
+    .stall(w_stall),
+    .hazard(w_hazard),
+    .data_a_mgr(w_data_a_mgr),
+    .data_b_mgr(w_data_b_mgr)
+);
 
 immGen inst_immGen(
     .immSel(w_imm_sel),
