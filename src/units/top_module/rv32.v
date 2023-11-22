@@ -24,9 +24,11 @@ wire [31:0] w_pc_de;
 wire [31:0] w_pc_exe;
 wire [31:0] w_immediate;
 wire [31:0] w_wr_back;
+wire [31:0] w_data_a_mgr;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_A_exe;
 wire [31:0] w_reg_data_B;
+wire [31:0] w_data_b_mgr;
 wire [31:0] w_reg_data_B_exe;
 wire [31:0] w_reg_data_B_acc;
 wire [31:0] w_alu_in_A;
@@ -37,6 +39,8 @@ wire [31:0] w_alu_out_wb;
 wire [31:0] w_dmem_out;
 wire [31:0] w_dmem_out_wb;
 wire        w_alu_zero_flag;
+wire        w_hazard;
+wire        w_stall;
 wire [31:0] w_debug [31:0];
 
 wire [31:0] w_instr_fetch;
@@ -122,10 +126,10 @@ instr_mgr inst_instr_mgr(
     .rst(rst),
     .instr_de(w_instr_de),
     .instr_exe(w_instr_exe),
-    .alu_out_exe(),
+    .alu_out_exe(w_alu_out),
     .pc_exe(w_pc_exe),
     .instr_acc(w_instr_acc),
-    .alu_out_acc(),
+    .alu_out_acc(w_alu_out_acc),
     .pc_4_acc(w_pc_4_acc),
     .stall(w_stall),
     .hazard(w_hazard),
