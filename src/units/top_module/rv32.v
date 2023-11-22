@@ -137,6 +137,8 @@ instr_mgr inst_instr_mgr(
     .data_b_mgr(w_data_b_mgr)
 );
 
+
+
 immGen inst_immGen(
     .immSel(w_imm_sel),
     .instr(w_instr_de[31:7]),
@@ -162,6 +164,14 @@ branch_comp inst_branch_comp(
     .brUn(w_brUn),
     .brEq(w_brEq),
     .brLT(w_brLT)
+);
+
+
+mux2x1 inst_hazard_mux_A(
+    .a(w_data_a_mgr),
+    .b(w_reg_data_A_exe),
+    .sel(w_hazard),
+    .y(w_data_a)
 );
 
 mux2x1 inst_mux2x1_A(
