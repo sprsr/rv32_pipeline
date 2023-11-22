@@ -4,7 +4,7 @@ module instr_mgr(
     input [31:0] instr_de,
     input [31:0] instr_exe,
     input [31:0] alu_out_exe,
-    input [31:0] pc_4_exe,
+    input [31:0] pc_exe,
     input [31:0] instr_acc,
     input [31:0] alu_out_acc,
     input [31:0] dmem_out_acc,
@@ -94,7 +94,7 @@ always @(posedge clk or posedge rst) begin
                     r_hazard = 1'b1;
                 end
                 3'b10: begin
-                    r_data_mgr = pc_4_exe;
+                    r_data_mgr = pc_exe + 1'b1;
                     r_hazard = 1'b1;
                 end
                 default: begin
