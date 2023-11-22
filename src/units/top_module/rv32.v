@@ -132,6 +132,7 @@ instr_mgr inst_instr_mgr(
     .pc_exe(w_pc_exe),
     .instr_acc(w_instr_acc),
     .alu_out_acc(w_alu_out_acc),
+    .dmem_out_acc(w_dmem_out),
     .pc_4_acc(w_pc_4_acc),
     .stall(w_stall),
     .hazard_a(w_hazard_a),
