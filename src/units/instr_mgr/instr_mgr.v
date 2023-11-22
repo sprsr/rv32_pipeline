@@ -75,6 +75,11 @@ always @(posedge clk or posedge rst) begin
         r_stall = 1'b0;
         r_hazard_a = 1'b0;
         r_hazard_b = 1'b0;
+        r_wb_acc   = 4'h0;
+        r_wb_exe   = 4'h0;
+        r_data_mgr = 32'hx;
+        r_data_a_mgr = 32'hx;
+        r_data_b_mgr = 32'hx;
     end else begin
         if (instr_acc[11:7] == instr_de[19:15]) begin
             r_conflict_map[3] = 1'b1;
