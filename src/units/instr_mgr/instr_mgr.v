@@ -83,11 +83,11 @@ always @(posedge clk or posedge rst) begin
     end else begin
         if (instr_acc[11:7] == instr_de[19:15]) begin
             r_conflict_map[3] = 1'b1;
-        end else if (instr_acc[11:7] == instr_de[24:20]) begin
+        end if (instr_acc[11:7] == instr_de[24:20]) begin
             r_conflict_map[2] = 1'b1;
-        end else if (instr_exe[11:7] == instr_de[19:15]) begin
+        end if (instr_exe[11:7] == instr_de[19:15]) begin
             r_conflict_map[1] = 1'b1;
-        end else if(instr_exe[11:7] == instr_de[24:20]) begin
+        end if(instr_exe[11:7] == instr_de[24:20]) begin
             r_conflict_map[0] = 1'b1;
         end
         if (r_conflict_map[1] || r_conflict_map[0]) begin
