@@ -27,9 +27,11 @@ wire [31:0] w_wr_back;
 wire [31:0] w_data_a_mgr;
 wire [31:0] w_reg_data_A;
 wire [31:0] w_reg_data_A_exe;
+wire [31:0] w_data_a;
 wire [31:0] w_reg_data_B;
 wire [31:0] w_data_b_mgr;
 wire [31:0] w_reg_data_B_exe;
+wire [31:0] w_data_b;
 wire [31:0] w_reg_data_B_acc;
 wire [31:0] w_alu_in_A;
 wire [31:0] w_alu_in_B;
@@ -170,20 +172,27 @@ branch_comp inst_branch_comp(
 mux2x1 inst_hazard_mux_A(
     .a(w_data_a_mgr),
     .b(w_reg_data_A_exe),
-    .sel(w_hazard),
+    .sel(w_hazard_a),
     .y(w_data_a)
+);
+
+mux2x1 inst_hazard_mux_B(
+    .a(w_data_b_mgr),
+    .b(w_reg_data_B_exe),
+    .sel(w_hazard_b),
+    .y(w_data_b)
 );
 
 mux2x1 inst_mux2x1_A(
     .a(w_pc_exe),
-    .b(w_reg_data_A),
+    .b(w_data_a),
     .sel(w_a_sel),
     .y(w_alu_in_A)
 );
 
 mux2x1 inst_mux2x1_B(
     .a(w_immediate),
-    .b(w_reg_data_B_exe),
+    .b(w_data_b),
     .sel(w_b_sel),
     .y(w_alu_in_B)
 );
