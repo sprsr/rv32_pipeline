@@ -134,7 +134,8 @@ instr_mgr inst_instr_mgr(
     .alu_out_acc(w_alu_out_acc),
     .pc_4_acc(w_pc_4_acc),
     .stall(w_stall),
-    .hazard(w_hazard),
+    .hazard_a(w_hazard_a),
+    .hazard_b(w_hazard_b),
     .data_a_mgr(w_data_a_mgr),
     .data_b_mgr(w_data_b_mgr)
 );
