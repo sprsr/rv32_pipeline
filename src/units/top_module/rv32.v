@@ -145,7 +145,7 @@ instr_mgr inst_instr_mgr(
 
 immGen inst_immGen(
     .immSel(w_imm_sel),
-    .instr(w_instr_de[31:7]),
+    .instr(w_instr_exe[31:7]),
     .immediate(w_immediate)
 );
 
