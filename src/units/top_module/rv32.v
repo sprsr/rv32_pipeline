@@ -159,7 +159,7 @@ register inst_register(
     .addrB(w_instr_de[24:20]),
     .dataA(w_reg_data_A),
     .dataB(w_reg_data_B),
-    .debug(w_debug)
+    .debug()
 );
 
 branch_comp inst_branch_comp(
@@ -224,7 +224,7 @@ mux3x1 inst_mux3x1_wb(
     .sel(w_wb_sel),
     .y(w_wr_back)
 );
-
+/*
 debug_port inst_debug(
     .registers(w_debug),
     .reg0(w_debug[0]),
@@ -260,4 +260,5 @@ debug_port inst_debug(
     .reg30(w_debug[30]),
     .reg31(w_debug[31])
 );
+*/
 endmodule
