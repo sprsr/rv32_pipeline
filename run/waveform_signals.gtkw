@@ -1,19 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Wed Nov 22 17:29:24 2023
+[*] Thu Nov 23 06:22:22 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Wed Nov 22 17:22:29 2023"
-[dumpfile_size] 18904
+[dumpfile_mtime] "Thu Nov 23 06:19:41 2023"
+[dumpfile_size] 19172
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
 [timestart] 0
 [size] 1499 1271
-[pos] 99474 98891
-*-5.087204 66 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 133167 131898
+*-5.087204 90 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
-[sst_width] 214
-[signals_width] 202
+[sst_width] 243
+[signals_width] 248
 [sst_expanded] 1
 [sst_vpaned_height] 670
 @200
@@ -72,7 +72,11 @@ rv32_tb.inst_instr_mgr.hazard_a
 rv32_tb.inst_instr_mgr.hazard_b
 @22
 rv32_tb.inst_instr_mgr.r_data_a_mgr[31:0]
-@23
 rv32_tb.inst_instr_mgr.r_data_b_mgr[31:0]
+@28
+rv32_tb.inst_instr_mgr.r_wb_acc[2:0]
+rv32_tb.inst_instr_mgr.r_wb_exe[2:0]
+@23
+rv32_tb.inst_instr_mgr.r_conflict_map[3:0]
 [pattern_trace] 1
 [pattern_trace] 0
