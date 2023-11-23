@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Thu Nov 23 06:22:22 2023
+[*] Thu Nov 23 06:29:48 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Thu Nov 23 06:19:41 2023"
-[dumpfile_size] 19172
+[dumpfile_mtime] "Thu Nov 23 06:29:26 2023"
+[dumpfile_size] 19231
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
-[timestart] 0
+[timestart] 39
 [size] 1499 1271
 [pos] 133167 131898
-*-5.087204 90 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-5.087204 70 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [sst_width] 243
@@ -71,12 +71,38 @@ rv32_tb.inst_instr_mgr.pc_4_acc[31:0]
 rv32_tb.inst_instr_mgr.hazard_a
 rv32_tb.inst_instr_mgr.hazard_b
 @22
+rv32_tb.inst_immGen.r_immediate[31:0]
+rv32_tb.inst_immGen.immediate[31:0]
+rv32_tb.inst_immGen.immSel[3:0]
+@23
+rv32_tb.inst_immGen.instr[24:0]
+@22
 rv32_tb.inst_instr_mgr.r_data_a_mgr[31:0]
 rv32_tb.inst_instr_mgr.r_data_b_mgr[31:0]
 @28
 rv32_tb.inst_instr_mgr.r_wb_acc[2:0]
 rv32_tb.inst_instr_mgr.r_wb_exe[2:0]
-@23
+@22
 rv32_tb.inst_instr_mgr.r_conflict_map[3:0]
+rv32_tb.inst_mux3x1_wb.y[31:0]
+rv32_tb.inst_mux3x1_wb.a[31:0]
+rv32_tb.inst_mux3x1_wb.b[31:0]
+rv32_tb.inst_mux3x1_wb.c[31:0]
+@28
+rv32_tb.inst_mux3x1_wb.sel[1:0]
+@22
+rv32_tb.c0.inst_alu.i_1[31:0]
+rv32_tb.c0.inst_alu.i_2[31:0]
+rv32_tb.c0.inst_alu.r_operand_2_converted[31:0]
+rv32_tb.c0.inst_alu.result[31:0]
+rv32_tb.c0.inst_alu.aluSel[3:0]
+rv32_tb.inst_register.dataA[31:0]
+rv32_tb.inst_register.dataB[31:0]
+rv32_tb.inst_mux2x1_B.a[31:0]
+rv32_tb.inst_mux2x1_B.b[31:0]
+@28
+rv32_tb.inst_mux2x1_B.sel
+@22
+rv32_tb.inst_mux2x1_B.y[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
