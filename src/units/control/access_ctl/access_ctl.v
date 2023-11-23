@@ -26,6 +26,7 @@ assign data_b_acc = r_data_b_acc;
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
+        r_pc_4_acc <= 32'b1;
         r_mem_wr   <= 1'b0;
         r_instr_acc <= 32'h0;
     end else begin
@@ -50,7 +51,7 @@ always @(posedge clk or posedge rst) begin
                 r_mem_wr <= 1'b0;
             end
         endcase
-        r_pc_4_acc    <= pc_exe + 'h1;
+        r_pc_4_acc    <= pc_exe + 'b1;
         r_alu_out_acc <= alu_out;
         r_data_b_acc  <= data_b_exe;
         r_instr_acc   <= instruction;
