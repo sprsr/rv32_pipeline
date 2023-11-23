@@ -1,19 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Thu Nov 23 06:29:48 2023
+[*] Thu Nov 23 06:44:18 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Thu Nov 23 06:29:26 2023"
-[dumpfile_size] 19231
+[dumpfile_mtime] "Thu Nov 23 06:33:05 2023"
+[dumpfile_size] 19627
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
-[timestart] 39
+[timestart] 0
 [size] 1499 1271
-[pos] 133167 131898
-*-5.087204 70 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-5.087204 77 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [sst_width] 243
-[signals_width] 248
+[signals_width] 331
 [sst_expanded] 1
 [sst_vpaned_height] 670
 @200
@@ -67,16 +67,15 @@ rv32_tb.inst_instr_mgr.pc_exe[31:0]
 rv32_tb.inst_instr_mgr.alu_out_acc[31:0]
 rv32_tb.inst_instr_mgr.dmem_out_acc[31:0]
 rv32_tb.inst_instr_mgr.pc_4_acc[31:0]
-@28
+@29
 rv32_tb.inst_instr_mgr.hazard_a
+@28
 rv32_tb.inst_instr_mgr.hazard_b
 @22
 rv32_tb.inst_immGen.r_immediate[31:0]
 rv32_tb.inst_immGen.immediate[31:0]
 rv32_tb.inst_immGen.immSel[3:0]
-@23
 rv32_tb.inst_immGen.instr[24:0]
-@22
 rv32_tb.inst_instr_mgr.r_data_a_mgr[31:0]
 rv32_tb.inst_instr_mgr.r_data_b_mgr[31:0]
 @28
@@ -104,5 +103,6 @@ rv32_tb.inst_mux2x1_B.b[31:0]
 rv32_tb.inst_mux2x1_B.sel
 @22
 rv32_tb.inst_mux2x1_B.y[31:0]
+rv32_tb.c0.inst_debug.reg11[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
