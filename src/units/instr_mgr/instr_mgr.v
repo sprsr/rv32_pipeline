@@ -136,10 +136,10 @@ always @(posedge clk or posedge rst) begin
                     r_data_mgr = 32'hx;
                 end
             endcase
-            if (r_conflict_map[3] && !r_conflict_map[1] &&  r_wb_exe != 3'b11) begin
+            if (r_conflict_map[3] && !r_conflict_map[1] &&  r_wb_acc != 3'b11) begin
                 r_data_a_mgr = r_data_mgr;
                 r_hazard_a = 1'b1;
-            end else if (r_conflict_map[2] && !r_conflict_map[0] &&  r_wb_exe != 3'b11) begin
+            end else if (r_conflict_map[2] && !r_conflict_map[0] &&  r_wb_acc != 3'b11) begin
                 r_data_b_mgr = r_data_mgr;
                 r_hazard_b = 1'b1;
             end
