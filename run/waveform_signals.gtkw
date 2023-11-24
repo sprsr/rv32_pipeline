@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Nov 24 05:34:47 2023
+[*] Fri Nov 24 05:52:06 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Fri Nov 24 05:34:33 2023"
-[dumpfile_size] 27933
+[dumpfile_mtime] "Fri Nov 24 05:44:43 2023"
+[dumpfile_size] 28177
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
-[timestart] 0
-[size] 1686 1271
-[pos] -1 -1
-*-5.087204 81 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 13
+[size] 1257 1271
+[pos] 425 -1
+*-5.087204 99 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [treeopen] rv32_tb.inst_instr_mgr.
@@ -53,9 +53,7 @@ rv32_tb.c0.inst_access_ctl.data_b_exe[31:0]
 -Instruction Manager
 @22
 rv32_tb.inst_instr_mgr.instr_de[31:0]
-@23
 rv32_tb.inst_instr_mgr.instr_exe[31:0]
-@22
 rv32_tb.inst_instr_mgr.instr_acc[31:0]
 rv32_tb.inst_instr_mgr.r_conflict_map[3:0]
 @28
@@ -110,5 +108,11 @@ rv32_tb.inst_mux3x1_wb.y[31:0]
 @22
 rv32_tb.c0.inst_debug.reg5[31:0]
 rv32_tb.c0.inst_debug.reg1[31:0]
+@200
+-Debug Registers
+@22
+rv32_tb.c0.inst_debug.reg11[31:0]
+@23
+rv32_tb.c0.inst_debug.reg5[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
