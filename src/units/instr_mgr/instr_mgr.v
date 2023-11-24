@@ -8,6 +8,8 @@ module instr_mgr(
     input [31:0] instr_acc,
     input [31:0] alu_out_acc,
     input [31:0] dmem_out_acc,
+    input [31:0] instr_wb,
+    input [31:0] data_d_wb,
     input [31:0] pc_4_acc,
     output       stall,
     output       hazard_a,
@@ -19,9 +21,10 @@ module instr_mgr(
 reg       r_stall;
 reg       r_hazard_a;
 reg       r_hazard_b;
-reg [3:0] r_conflict_map;
+reg [5:0] r_conflict_map;
 reg [2:0] r_wb_acc;
 reg [2:0] r_wb_exe;
+reg [2:0] r_wb_wb;
 reg [31:0] r_data_mgr;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
@@ -71,7 +74,7 @@ endfunction
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
-        r_conflict_map = 4'b0;
+        r_conflict_map = 6'b0;
         r_stall = 1'b0;
         r_hazard_a = 1'b0;
         r_hazard_b = 1'b0;
@@ -81,24 +84,25 @@ always @(posedge clk or posedge rst) begin
         r_data_a_mgr = 32'hx;
         r_data_b_mgr = 32'hx;
     end else begin
-        r_conflict_map = 4'h0;
+        r_conflict_map = 6'h0;
         r_stall = 1'b0;
         r_hazard_a = 1'b0;
         r_hazard_b = 1'b0;
-        if (pc_4_acc > 1) begin
+            if (instr_wb[11:7] == instr_de[19:15]) begin
+                r_conflict_map[5] = 1'b1;
+            end if (instr_wb[11:7] == instr_de[24:20]) begin
+                r_conflict_map[4] = 1'b1;
+            end 
             if (instr_acc[11:7] == instr_de[19:15]) begin
                 r_conflict_map[3] = 1'b1;
             end if (instr_acc[11:7] == instr_de[24:20]) begin
                 r_conflict_map[2] = 1'b1;
             end 
-        end 
-        if (pc_exe > 0) begin
             if (instr_exe[11:7] == instr_de[19:15]) begin
                 r_conflict_map[1] = 1'b1;
             end if(instr_exe[11:7] == instr_de[24:20]) begin
                 r_conflict_map[0] = 1'b1;
             end
-        end
         if (r_conflict_map[1] || r_conflict_map[0]) begin
             r_wb_exe = write_back_check(instr_exe);
             case (r_wb_exe)
@@ -145,6 +149,16 @@ always @(posedge clk or posedge rst) begin
                 r_hazard_a = 1'b1;
             end else if (r_conflict_map[2] && !r_conflict_map[0] &&  r_wb_acc != 3'b11) begin
                 r_data_b_mgr = r_data_mgr;
+                r_hazard_b = 1'b1;
+            end
+        end
+        if (r_conflict_map[5] || r_conflict_map[4]) begin
+            r_wb_wb = write_back_check(instr_wb);
+            if (r_conflict_map[5] && !r_conflict_map[3] && !r_conflict_map[1] &&  r_wb_wb != 3'b11) begin
+                r_data_a_mgr = data_d_wb;
+                r_hazard_a = 1'b1;
+            end else if (r_conflict_map[4] && !r_conflict_map[2] && !r_conflict_map[0] &&  r_wb_wb != 3'b11) begin
+                r_data_b_mgr = data_d_wb;
                 r_hazard_b = 1'b1;
             end
         end
