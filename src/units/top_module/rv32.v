@@ -55,6 +55,7 @@ wire [31:0] w_instr_wb;
 PC inst_pc(
     .clk(clk),
     .rst(rst),
+    .stall(w_stall),
     .sel_pc(w_pc_sel),
     .in_pc(w_pc_4),
     .in_alu(w_alu_out),
@@ -66,6 +67,7 @@ PC inst_pc(
 decode_ctl inst_decode_ctl(
     .clk(clk),
     .rst(rst),
+    .stall(w_stall),
     .pc(w_pc),
     .instruction(w_instr_fetch),
     .pc_de(w_pc_de),
