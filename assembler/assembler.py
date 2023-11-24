@@ -16,7 +16,7 @@ def convert_file(file):
     # Removing all whitespace for easy copying
     with open(output, 'r') as file:
         content = file.read()
-    new_content = re.sub(r'\s+', '', content)
+    new_content = re.sub(r'[ \t\f\v\r]+', '', content)
     with open(output, 'w') as file:
         file.write(new_content)
     print(f'Generated Machine Code: {output}')
