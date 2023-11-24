@@ -1,6 +1,7 @@
 module execute_ctl(
     input         clk,
     input         rst,
+    input         stall,
     input         BrEq,
     input         BrLT,
     input  [31:0] data_a,
@@ -56,7 +57,7 @@ always @(posedge clk or posedge rst) begin
         r_pc_sel    <= 1'b0;
         r_pc_exe    <= 32'h0;
         r_instr_exe <= 32'hxxxxxxxx;
-    end else begin
+    end else if (!stall) begin
         r_sign = 1'b0;
 
         // Currently every RV32I instruction is implemented in control.  
