@@ -77,6 +77,7 @@ decode_ctl inst_decode_ctl(
 execute_ctl inst_execute_ctl(
     .clk(clk),
     .rst(rst),
+    .stall(w_stall),
     .BrEq(w_brEq),
     .BrLT(w_brLT),
     .data_a(w_reg_data_A),
