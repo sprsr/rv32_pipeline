@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 
 from riscv_assembler.convert import AssemblyConverter
 
