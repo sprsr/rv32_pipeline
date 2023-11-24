@@ -81,6 +81,7 @@ always @(posedge clk or posedge rst) begin
         r_data_a_mgr = 32'hx;
         r_data_b_mgr = 32'hx;
     end else begin
+        r_conflict_map = 4'h0;
         if (pc_4_acc > 1) begin
             if (instr_acc[11:7] == instr_de[19:15]) begin
                 r_conflict_map[3] = 1'b1;
