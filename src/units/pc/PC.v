@@ -50,7 +50,7 @@ module PC(
                 w_pc <= in_pc;          // Increment the program counter if enabled
                 w_pc_nxt <= in_pc + 'd1;
             end
-            r_instr_fetch <= r_memory[w_pc];
+            r_instr_fetch <= r_memory[in_pc];
         end
     end
 
