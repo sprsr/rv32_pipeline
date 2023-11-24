@@ -1,6 +1,7 @@
 module decode_ctl(
     input        clk,
     input        rst,
+    input        stall,
     input [31:0] pc,
     input [31:0] instruction,
     output  [3:0] immSel,
@@ -18,7 +19,7 @@ always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_pc_de   <= 32'h0;
         r_instr_de <= 32'hxxxxxxxx;
-    end else begin      
+    end else if (!stall) begin      
         r_pc_de    <= pc;
         r_instr_de <= instruction;
     end
