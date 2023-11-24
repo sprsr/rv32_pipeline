@@ -1,12 +1,12 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Nov 24 04:51:05 2023
+[*] Fri Nov 24 04:56:38 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Fri Nov 24 04:21:45 2023"
-[dumpfile_size] 22401
+[dumpfile_mtime] "Fri Nov 24 04:51:39 2023"
+[dumpfile_size] 21743
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
-[timestart] 0
+[timestart] 48
 [size] 1686 1271
 [pos] -1 -1
 *-5.087204 80 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
@@ -25,9 +25,7 @@ rv32_tb.c0.rst
 @28
 rv32_tb.inst_pc.sel_pc
 @22
-rv32_tb.inst_pc.in_pc[31:0]
 rv32_tb.inst_pc.w_pc[31:0]
-rv32_tb.inst_pc.w_pc_nxt[31:0]
 rv32_tb.inst_pc.r_instr_fetch[31:0]
 @200
 -Decode CTL
@@ -89,7 +87,6 @@ rv32_tb.inst_wb_ctl.r_instr_wb[31:0]
 rv32_tb.inst_wb_ctl.r_dmem_out_wb[31:0]
 @28
 rv32_tb.inst_wb_ctl.r_wb_sel[1:0]
-@29
 rv32_tb.inst_wb_ctl.regWEn
 @200
 -WB MUX
@@ -101,5 +98,11 @@ rv32_tb.inst_mux3x1_wb.c[31:0]
 rv32_tb.inst_mux3x1_wb.sel[1:0]
 @22
 rv32_tb.inst_mux3x1_wb.y[31:0]
+@200
+-Register Debug
+@22
+rv32_tb.c0.inst_debug.reg5[31:0]
+@23
+rv32_tb.c0.inst_debug.reg1[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
