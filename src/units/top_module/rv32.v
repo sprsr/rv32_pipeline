@@ -55,7 +55,7 @@ wire [31:0] w_instr_wb;
 PC inst_pc(
     .clk(clk),
     .rst(rst),
-    .sel_pc(w_sel_pc),
+    .sel_pc(w_pc_sel),
     .in_pc(w_pc_4),
     .in_alu(w_alu_out),
     .pc_nxt(w_pc_4),
