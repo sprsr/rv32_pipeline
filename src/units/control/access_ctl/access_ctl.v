@@ -28,7 +28,7 @@ always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_pc_4_acc <= 32'b1;
         r_mem_wr   <= 1'b0;
-        r_instr_acc <= 32'h0;
+        r_instr_acc <= 32'hxxxxxxxx;
     end else begin
         case (instruction[6:0])
             7'b0100011: begin

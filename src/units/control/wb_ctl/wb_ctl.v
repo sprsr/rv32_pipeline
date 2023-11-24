@@ -30,7 +30,7 @@ assign instr_wb = r_instr_wb;
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_wb_sel <= 1'b0;
-        r_instr_wb <= 32'h0;
+        r_instr_wb <= 32'hxxxxxxxx;
         r_regWEn <= 1'b0;
     end else begin
         case (instruction[6:0])

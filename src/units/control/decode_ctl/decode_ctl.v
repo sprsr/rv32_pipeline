@@ -17,7 +17,7 @@ assign instr_de = r_instr_de;
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_pc_de   <= 32'h0;
-        r_instr_de <= 32'h0;
+        r_instr_de <= 32'hxxxxxxxx;
     end else begin      
         r_pc_de    <= pc;
         r_instr_de <= instruction;

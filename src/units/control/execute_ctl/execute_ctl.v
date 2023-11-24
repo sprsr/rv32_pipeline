@@ -55,7 +55,7 @@ always @(posedge clk or posedge rst) begin
         r_BrUn      <= 1'bx;
         r_pc_sel    <= 1'b0;
         r_pc_exe    <= 32'h0;
-        r_instr_exe <= 32'h0;
+        r_instr_exe <= 32'hxxxxxxxx;
     end else begin
         r_sign = 1'b0;
 
