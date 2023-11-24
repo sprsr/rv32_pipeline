@@ -31,10 +31,10 @@ module PC(
         r_memory[2] <= 32'b00000000000000000000000010110011;
         r_memory[3] <= 32'b00000010000001000000001010010011;
         r_memory[4] <= 32'b00000000100000010010000000100011;
-        r_memory[5] <= 32'b0;
-        r_memory[6] <= 32'b0;
-        r_memory[7] <= 32'b0;
-        r_memory[8] <= 32'b0;
+        r_memory[5] <= 32'hxxxxxxxx;
+        r_memory[6] <= 32'hxxxxxxxx;
+        r_memory[7] <= 32'hxxxxxxxx;
+        r_memory[8] <= 32'hxxxxxxxx;
     end
 
     always @(posedge clk or posedge rst) begin
