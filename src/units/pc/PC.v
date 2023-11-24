@@ -2,6 +2,7 @@
 module PC(
   input         clk,     // Clock input
   input         rst,     // Reset input
+  input         stall,
   input         sel_pc,  // PC Select Control Signal
   input  [31:0] in_pc,   // input ALU
   input  [31:0] in_alu,  // input PC
@@ -44,7 +45,7 @@ module PC(
             w_pc <= 0;  // Reset the program counter to 0
             w_pc_nxt <=0;
             r_instr_fetch <= 32'h0;
-        end else begin
+        end else if (!stall) begin
             if (sel_pc) begin
             w_pc <= in_alu;          // Increment the program counter if enabled
             w_pc_nxt <= in_alu + 'd1;
