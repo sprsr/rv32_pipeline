@@ -37,8 +37,8 @@ reg [31:0] r_data_b;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
 reg r_brUn;
-reg r_brEq;
-reg r_brLT;
+wire r_brEq;
+wire r_brLT;
 
 assign pc_sel = r_pc_sel;
 assign false_path = r_false_path;
@@ -218,10 +218,10 @@ always @(posedge clk or posedge rst) begin
             case (instr_exe[14:12])
                 // BEQ Instruction:
                 3'b000: begin
-                    case (r_BrEq)
-                        1'b0: r_pc_sel = 1'b0;
-                        1'b1: r_pc_sel = 1'b1;
-                    endcase
+                    if (r_BrEq)
+                       r_pc_sel = 1'b1;
+                    else
+                        r_pc_sel = 1'b0;
                 end
                 // BNE Instruction
                 3'b001: begin
