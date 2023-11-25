@@ -248,7 +248,7 @@ always @(posedge clk or posedge rst) begin
             case (instr_exe[14:12])
                 // BEQ Instruction:
                 3'b000: begin
-                    branch_compare()
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     if (r_BrEq)
                        r_pc_sel = 1'b1;
                     else
@@ -256,6 +256,7 @@ always @(posedge clk or posedge rst) begin
                 end
                 // BNE Instruction
                 3'b001: begin
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     case (BrEq)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
@@ -264,6 +265,7 @@ always @(posedge clk or posedge rst) begin
                 //BLT Instruction
                 3'b010: begin
                     r_BrUn    = 1'b0; 
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     case (BrLT)
                         1'b0: r_pc_sel = 1'b0;
                         1'b1: condtitional_branch = 1'b1;
@@ -272,6 +274,7 @@ always @(posedge clk or posedge rst) begin
                 //BGE Instruction
                 3'b101: begin
                     r_BrUn    = 1'b0;
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     case (BrLT)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
@@ -280,6 +283,7 @@ always @(posedge clk or posedge rst) begin
                 //BLTU Instruction
                 3'b110: begin
                     r_BrUn    <= 1'b1;
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     case (BrLT)
                         1'b0: r_pc_sel = 1'b0;
                         1'b1: r_pc_sel = 1'b1;
@@ -288,6 +292,7 @@ always @(posedge clk or posedge rst) begin
                 //BGEU Instruction
                 3'b111: begin
                     r_BrUn    = 1'b1;
+                    branch_compare(r_data_a,r_data_b, r_BrUn)
                     case (BrLT)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
