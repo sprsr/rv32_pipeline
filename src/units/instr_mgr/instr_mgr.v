@@ -36,14 +36,17 @@ reg [31:0] r_data_a;
 reg [31:0] r_data_b;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
+reg r_brUn;
+reg r_brEq;
+reg r_brLT;
 
 assign pc_sel = r_pc_sel;
 assign false_path = r_false_path;
 assign stall = r_stall;
 assign hazard_a = r_hazard_a;
 assign hazard_b = r_hazard_b;
-assign data_a_mgr = r_data_a_mgr;
-assign data_b_mgr = r_data_b_mgr;
+assign data_a_mgr = r_data_a;
+assign data_b_mgr = r_data_b;
 
 mux2x1 inst_hazard_mux_A(
     .a(r_data_a_mgr),
@@ -58,10 +61,6 @@ mux2x1 inst_hazard_mux_B(
     .sel(r_hazard_b),
     .y(r_data_b)
 );
-
-reg r_brUn;
-reg r_brEq;
-reg r_brLT;
 
 branch_comp inst_branch_comp(
     .i_dataA(r_data_a),
@@ -121,6 +120,8 @@ always @(posedge clk or posedge rst) begin
         r_data_mgr = 32'hx;
         r_data_a_mgr = 32'hx;
         r_data_b_mgr = 32'hx;
+        r_pc_sel = 1'b0;
+        r_false_path = 1'b0;
     end else begin
         r_conflict_map = 6'h0;
         r_stall = 1'b0;
