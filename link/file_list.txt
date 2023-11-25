@@ -4,7 +4,6 @@
 ../src/units/branch_comp/branch_comp.v
 ../src/units/common/mux2x1.v
 ../src/units/common/mux3x1.v
-../src/units/control/control.v
 ../src/units/control/decode_ctl/decode_ctl.v
 ../src/units/control/execute_ctl/execute_ctl.v
 ../src/units/control/access_ctl/access_ctl.v
