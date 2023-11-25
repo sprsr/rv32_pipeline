@@ -292,7 +292,7 @@ always @(posedge clk or posedge rst) begin
                         r_pc_sel <= 1'b0;
                     end
                     // ORI Instruction
-                    3'b100: begin
+                    3'b110: begin
                         r_a_sel   <= 1'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0001;
