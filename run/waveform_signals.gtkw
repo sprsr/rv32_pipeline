@@ -1,20 +1,20 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Nov 24 06:23:47 2023
+[*] Sat Nov 25 07:54:51 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Fri Nov 24 06:19:43 2023"
-[dumpfile_size] 29188
+[dumpfile_mtime] "Sat Nov 25 07:43:56 2023"
+[dumpfile_size] 25446
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
-[timestart] 19
+[timestart] 0
 [size] 1724 1346
 [pos] -1 -1
-*-5.087204 186 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-5.087204 110 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [treeopen] rv32_tb.inst_instr_mgr.
 [sst_width] 243
-[signals_width] 371
+[signals_width] 323
 [sst_expanded] 1
 [sst_vpaned_height] 716
 @28
@@ -66,9 +66,22 @@ rv32_tb.inst_immGen.immediate[31:0]
 -ALU
 @22
 rv32_tb.c0.inst_alu.aluSel[3:0]
+@28
+rv32_tb.inst_mux2x1_A.sel
+rv32_tb.inst_mux2x1_B.sel
+@22
 rv32_tb.c0.inst_alu.i_1[31:0]
 rv32_tb.c0.inst_alu.i_2[31:0]
 rv32_tb.c0.inst_alu.result[31:0]
+@200
+-Branch Compare
+@28
+rv32_tb.c0.inst_branch_comp.brUn
+rv32_tb.c0.inst_branch_comp.brEq
+rv32_tb.c0.inst_branch_comp.brLT
+@22
+rv32_tb.c0.inst_branch_comp.i_dataA[31:0]
+rv32_tb.c0.inst_branch_comp.i_dataB[31:0]
 @200
 -Access CTL
 @22
@@ -105,6 +118,10 @@ rv32_tb.inst_mux3x1_wb.y[31:0]
 @200
 -Register Debug
 @22
+rv32_tb.c0.inst_debug.reg2[31:0]
+rv32_tb.c0.inst_debug.reg3[31:0]
+rv32_tb.c0.inst_debug.reg4[31:0]
+rv32_tb.c0.inst_debug.reg3[31:0]
 rv32_tb.c0.inst_debug.reg5[31:0]
 rv32_tb.c0.inst_debug.reg11[31:0]
 [pattern_trace] 1
