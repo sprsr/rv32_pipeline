@@ -168,8 +168,8 @@ register inst_register(
 );
 
 branch_comp inst_branch_comp(
-    .i_dataA(w_reg_data_A_exe),
-    .i_dataB(w_reg_data_B_exe),
+    .i_dataA(w_data_a),
+    .i_dataB(w_data_b),
     .brUn(w_brUn),
     .brEq(w_brEq),
     .brLT(w_brLT)
