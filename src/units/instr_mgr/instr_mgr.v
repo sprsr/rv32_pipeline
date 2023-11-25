@@ -70,6 +70,36 @@ branch_comp inst_branch_comp(
     .brLT(r_brLT)
 );
 
+function branch_compare;
+    input [31:0] i_dataA;
+    input [31:0] i_datab;
+    input        brUn;
+        if (brUn) begin
+            if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
+                r_BrEq <= 1'b1;
+                r_BrLT <= 1'b0;
+            end else if ($unsigned(i_dataA) < $unsigned(i_dataB)) begin
+                r_BrEq <= 1'b0;
+                r_BrLT <= 1'b1;
+            end else begin
+                r_BrEq <= 1'b0;
+                r_BrLT <= 1'b0;
+            end
+        end else begin
+            if ($signed(i_dataA) == $signed(i_dataB)) begin
+                r_BrEq <= 1'b1;
+                r_BrLT <= 1'b0;
+            end else if ($signed(i_dataA) < $signed(i_dataB)) begin
+                r_BrEq <= 1'b0;
+                r_BrLT <= 1'b1;
+            end else begin
+                r_BrEq <= 1'b0;
+                r_BrLT <= 1'b0;
+            end    
+        end
+    endfunction
+
+
 //Function checking if the instruction is a write back instruction
 function [2:0] write_back_check;
     input [31:0] instruction;
@@ -218,6 +248,7 @@ always @(posedge clk or posedge rst) begin
             case (instr_exe[14:12])
                 // BEQ Instruction:
                 3'b000: begin
+                    branch_compare()
                     if (r_BrEq)
                        r_pc_sel = 1'b1;
                     else
