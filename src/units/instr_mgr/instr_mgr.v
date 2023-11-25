@@ -23,6 +23,7 @@ module instr_mgr(
     output[31:0] data_b_mgr
 );
 reg       r_pc_sel;
+reg       r_false_path;
 reg       r_stall;
 reg       r_hazard_a;
 reg       r_hazard_b;
@@ -31,9 +32,13 @@ reg [2:0] r_wb_acc;
 reg [2:0] r_wb_exe;
 reg [2:0] r_wb_wb;
 reg [31:0] r_data_mgr;
+reg [31:0] r_data_a;
+reg [31:0] r_data_b;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
 
+assign pc_sel = r_pc_sel;
+assign false_path = r_false_path;
 assign stall = r_stall;
 assign hazard_a = r_hazard_a;
 assign hazard_b = r_hazard_b;
@@ -44,14 +49,14 @@ mux2x1 inst_hazard_mux_A(
     .a(r_data_a_mgr),
     .b(data_a_de),
     .sel(r_hazard_a),
-    .y(w_data_a)
+    .y(r_data_a)
 );
 
 mux2x1 inst_hazard_mux_B(
     .a(r_data_b_mgr),
     .b(data_b_de),
     .sel(r_hazard_b),
-    .y(w_data_b)
+    .y(r_data_b)
 );
 
 reg r_brUn;
@@ -65,59 +70,6 @@ branch_comp inst_branch_comp(
     .brEq(r_brEq),
     .brLT(r_brLT)
 );
-
-function conditional_branch;
-    input [31:0] instruction;
-    case (instruction[14:12])
-        // BEQ Instruction:
-        3'b000: begin
-            case (r_BrEq)
-                1'b0: conditional_branch = 1'b0;
-                1'b1: conditional_branch = 1'b1;
-            endcase
-        end
-        // BNE Instruction
-        3'b001: begin
-            case (BrEq)
-                1'b0: conditional_branch = 1'b1;
-                1'b1: conditional_branch = 1'b0;
-            endcase
-        end
-        //BLT Instruction
-        3'b010: begin
-            r_BrUn    = 1'b0; 
-            case (BrLT)
-                1'b0: conditional_branch = 1'b0;
-                1'b1: condtitional_branch = 1'b1;
-            endcase
-        end
-        //BGE Instruction
-        3'b101: begin
-            r_BrUn    = 1'b0;
-            case (BrLT)
-                1'b0: conditional_branch = 1'b1;
-                1'b1: conditional_branch = 1'b0;
-            endcase
-        end
-        //BLTU Instruction
-        3'b110: begin
-            r_BrUn    <= 1'b1;
-            case (BrLT)
-                1'b0: conditional_branch = 1'b0;
-                1'b1: conditional_branch = 1'b1;
-            endcase
-        end
-        //BGEU Instruction
-        3'b111: begin
-            r_BrUn    = 1'b1;
-            case (BrLT)
-                1'b0: conditional_branch = 1'b1;
-                1'b1: conditional_branch = 1'b0;
-            endcase
-        end
-    endcase
-endfunction
-
 
 //Function checking if the instruction is a write back instruction
 function [2:0] write_back_check;
@@ -261,17 +213,65 @@ always @(posedge clk or posedge rst) begin
                 r_pc_sel = 1'b0;
             end
         endcase
-        if (instr_exe[6:0] == 7'b1100011) begin:
-            r_pc_sel = branch(instr_exe);
-        if (r_pc_sel) begin
-            false_path <= 1'b1;
+        if (instr_exe[6:0] == 7'b1100011) begin
+            case (instr_exe[14:12])
+                // BEQ Instruction:
+                3'b000: begin
+                    case (r_BrEq)
+                        1'b0: r_pc_sel = 1'b0;
+                        1'b1: r_pc_sel = 1'b1;
+                    endcase
+                end
+                // BNE Instruction
+                3'b001: begin
+                    case (BrEq)
+                        1'b0: r_pc_sel = 1'b1;
+                        1'b1: r_pc_sel = 1'b0;
+                    endcase
+                end
+                //BLT Instruction
+                3'b010: begin
+                    r_BrUn    = 1'b0; 
+                    case (BrLT)
+                        1'b0: r_pc_sel = 1'b0;
+                        1'b1: condtitional_branch = 1'b1;
+                    endcase
+                end
+                //BGE Instruction
+                3'b101: begin
+                    r_BrUn    = 1'b0;
+                    case (BrLT)
+                        1'b0: r_pc_sel = 1'b1;
+                        1'b1: r_pc_sel = 1'b0;
+                    endcase
+                end
+                //BLTU Instruction
+                3'b110: begin
+                    r_BrUn    <= 1'b1;
+                    case (BrLT)
+                        1'b0: r_pc_sel = 1'b0;
+                        1'b1: r_pc_sel = 1'b1;
+                    endcase
+                end
+                //BGEU Instruction
+                3'b111: begin
+                    r_BrUn    = 1'b1;
+                    case (BrLT)
+                        1'b0: r_pc_sel = 1'b1;
+                        1'b1: r_pc_sel = 1'b0;
+                    endcase
+                end
+            endcase
+            if (r_pc_sel) begin
+                r_false_path = 1'b1;
+            end
+        end else begin
+            r_pc_sel = 1'b0;
+            r_false_path = 1'b0;
         end
     end
 end
 
-end
 
-    end
-end
 
 endmodule
