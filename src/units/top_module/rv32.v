@@ -139,7 +139,7 @@ instr_mgr inst_instr_mgr(
     .data_d_wb(w_wr_back),
     .pc_4_acc(w_pc_4_acc),
     .pc_sel(w_pc_sel),
-    .w_false_path(w_false_path),
+    .false_path(w_false_path),
     .stall(w_stall),
     .hazard_a(w_hazard_a),
     .hazard_b(w_hazard_b),

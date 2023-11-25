@@ -37,8 +37,8 @@ reg [31:0] r_data_b;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
 reg r_brUn;
-wire r_brEq;
-wire r_brLT;
+reg r_brEq;
+reg r_brLT;
 
 assign pc_sel = r_pc_sel;
 assign false_path = r_false_path;
@@ -62,39 +62,31 @@ mux2x1 inst_hazard_mux_B(
     .y(r_data_b)
 );
 
-branch_comp inst_branch_comp(
-    .i_dataA(r_data_a),
-    .i_dataB(r_data_b),
-    .brUn(r_brUn),
-    .brEq(r_brEq),
-    .brLT(r_brLT)
-);
-
 function branch_compare;
     input [31:0] i_dataA;
-    input [31:0] i_datab;
+    input [31:0] i_dataB;
     input        brUn;
         if (brUn) begin
             if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
-                r_BrEq <= 1'b1;
-                r_BrLT <= 1'b0;
+                r_BrEq = 1'b1;
+                r_BrLT = 1'b0;
             end else if ($unsigned(i_dataA) < $unsigned(i_dataB)) begin
-                r_BrEq <= 1'b0;
-                r_BrLT <= 1'b1;
+                r_BrEq = 1'b0;
+                r_BrLT = 1'b1;
             end else begin
-                r_BrEq <= 1'b0;
-                r_BrLT <= 1'b0;
+                r_BrEq = 1'b0;
+                r_BrLT = 1'b0;
             end
         end else begin
             if ($signed(i_dataA) == $signed(i_dataB)) begin
-                r_BrEq <= 1'b1;
-                r_BrLT <= 1'b0;
+                r_BrEq = 1'b1;
+                r_BrLT = 1'b0;
             end else if ($signed(i_dataA) < $signed(i_dataB)) begin
-                r_BrEq <= 1'b0;
-                r_BrLT <= 1'b1;
+                r_BrEq = 1'b0;
+                r_BrLT = 1'b1;
             end else begin
-                r_BrEq <= 1'b0;
-                r_BrLT <= 1'b0;
+                r_BrEq = 1'b0;
+                r_BrLT = 1'b0;
             end    
         end
     endfunction
@@ -248,7 +240,7 @@ always @(posedge clk or posedge rst) begin
             case (instr_exe[14:12])
                 // BEQ Instruction:
                 3'b000: begin
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
                     if (r_BrEq)
                        r_pc_sel = 1'b1;
                     else
@@ -256,8 +248,8 @@ always @(posedge clk or posedge rst) begin
                 end
                 // BNE Instruction
                 3'b001: begin
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
-                    case (BrEq)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
+                    case (r_BrEq)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
                     endcase
@@ -265,8 +257,8 @@ always @(posedge clk or posedge rst) begin
                 //BLT Instruction
                 3'b010: begin
                     r_BrUn    = 1'b0; 
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
-                    case (BrLT)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
+                    case (r_BrLT)
                         1'b0: r_pc_sel = 1'b0;
                         1'b1: condtitional_branch = 1'b1;
                     endcase
@@ -274,8 +266,8 @@ always @(posedge clk or posedge rst) begin
                 //BGE Instruction
                 3'b101: begin
                     r_BrUn    = 1'b0;
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
-                    case (BrLT)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
+                    case (r_BrLT)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
                     endcase
@@ -283,8 +275,8 @@ always @(posedge clk or posedge rst) begin
                 //BLTU Instruction
                 3'b110: begin
                     r_BrUn    <= 1'b1;
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
-                    case (BrLT)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
+                    case (r_BrLT)
                         1'b0: r_pc_sel = 1'b0;
                         1'b1: r_pc_sel = 1'b1;
                     endcase
@@ -292,8 +284,8 @@ always @(posedge clk or posedge rst) begin
                 //BGEU Instruction
                 3'b111: begin
                     r_BrUn    = 1'b1;
-                    branch_compare(r_data_a,r_data_b, r_BrUn)
-                    case (BrLT)
+                    branch_compare(r_data_a,r_data_b, r_BrUn);
+                    case (r_BrLT)
                         1'b0: r_pc_sel = 1'b1;
                         1'b1: r_pc_sel = 1'b0;
                     endcase
