@@ -129,7 +129,10 @@ wb_ctl inst_wb_ctl(
 instr_mgr inst_instr_mgr(
     .clk(clk),
     .rst(rst),
+    .instr_fetch(w_instr_fetch),
     .instr_de(w_instr_de),
+    .data_a_de(w_reg_data_A_exe),
+    .data_b_de(w_reg_data_B_exe),
     .instr_exe(w_instr_exe),
     .alu_out_exe(w_alu_out),
     .pc_exe(w_pc_exe),
@@ -139,14 +142,14 @@ instr_mgr inst_instr_mgr(
     .instr_wb(w_instr_wb),
     .data_d_wb(w_wr_back),
     .pc_4_acc(w_pc_4_acc),
+    .pc_sel(w_pc_sel),
+    .w_false_path(w_false_path),
     .stall(w_stall),
     .hazard_a(w_hazard_a),
     .hazard_b(w_hazard_b),
     .data_a_mgr(w_data_a_mgr),
     .data_b_mgr(w_data_b_mgr)
 );
-
-
 
 immGen inst_immGen(
     .immSel(w_imm_sel),
@@ -167,6 +170,7 @@ register inst_register(
     .debug(w_debug)
 );
 
+/*
 branch_comp inst_branch_comp(
     .i_dataA(w_data_a),
     .i_dataB(w_data_b),
@@ -174,7 +178,7 @@ branch_comp inst_branch_comp(
     .brEq(w_brEq),
     .brLT(w_brLT)
 );
-
+*/
 
 mux2x1 inst_hazard_mux_A(
     .a(w_data_a_mgr),
@@ -190,6 +194,7 @@ mux2x1 inst_hazard_mux_B(
     .y(w_data_b)
 );
 
+/*
 mux2x1 inst_mux2x1_A(
     .a(w_pc_exe),
     .b(w_data_a),
@@ -203,6 +208,7 @@ mux2x1 inst_mux2x1_B(
     .sel(w_b_sel),
     .y(w_alu_in_B)
 );
+*/
 
 alu inst_alu(
     .i_1(w_alu_in_A),
