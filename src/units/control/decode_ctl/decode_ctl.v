@@ -19,9 +19,12 @@ always @(posedge clk or posedge rst) begin
     if (rst) begin
         r_pc_de   <= 32'h0;
         r_instr_de <= 32'hxxxxxxxx;
-    end else if (!stall) begin      
+    end else begin      
         r_pc_de    <= pc;
-        r_instr_de <= instruction;
+        if (stall)
+            r_instr_de <= 32'b00000000000000000000000000010011;
+        else
+            r_instr_de <= instruction;
     end
 end
 endmodule
