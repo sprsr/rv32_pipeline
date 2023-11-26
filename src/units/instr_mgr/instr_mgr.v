@@ -90,6 +90,7 @@ always @(posedge clk or posedge rst) begin
         r_data_b_mgr = 32'hx;
     end else begin
         r_conflict_map = 6'h0;
+        r_pc_sel = 1'b0;
         r_stall = 1'b0;
         r_hazard_a = 1'b0;
         r_hazard_b = 1'b0;
@@ -177,9 +178,20 @@ always @(posedge clk or posedge rst) begin
             end
         */
        case (instr_exe[6:0])
+            // JAL Instruction:
+            7'b1101111: begin
+                r_pc_sel <= 1'b1;
+                r_stall <= 1'b1;
+            end
+            // JALR Instruction:
+            7'b1101111: begin
+                r_pc_sel <= 1'b1;
+                r_stall <= 1'b1;
+            end
             7'b1100011: begin
                 if (br_success)
                     r_pc_sel <= 1'b1;
+                    r_stall <= 1'b1;
             end
             default: r_pc_sel <= 1'b0;
         endcase
