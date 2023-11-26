@@ -43,7 +43,8 @@ wire [31:0] w_dmem_out_wb;
 wire        w_alu_zero_flag;
 wire        w_hazard;
 wire        w_stall;
-wire        w_br_comp;
+wire        w_br_success;
+wire [3:0]  w_br_expect;
 wire [31:0] w_debug [31:0];
 
 wire [31:0] w_instr_fetch;
@@ -79,8 +80,6 @@ execute_ctl inst_execute_ctl(
     .clk(clk),
     .rst(rst),
     .stall(w_stall),
-    .BrEq(w_brEq),
-    .BrLT(w_brLT),
     .data_a(w_reg_data_A),
     .data_b(w_reg_data_B),
     .pc_de(w_pc_de),
@@ -89,9 +88,8 @@ execute_ctl inst_execute_ctl(
     .b_sel(w_b_sel),
     .immSel(w_imm_sel),
     .pc_sel(w_pc_sel),
-    .br_comp(w_br_comp),
+    .br_expect(w_br_expect),
     .sign(w_sign),
-    .BrUn(w_brUn),
     .alu_sel(w_alu_sel),
     .data_a_exe(w_reg_data_A_exe),
     .data_b_exe(w_reg_data_B_exe),
@@ -173,10 +171,8 @@ register inst_register(
 branch_comp inst_branch_comp(
     .i_dataA(w_data_a),
     .i_dataB(w_data_b),
-    .br_comp(w_br_comp),
-    .brUn(w_brUn),
-    .brEq(w_brEq),
-    .brLT(w_brLT)
+    .br_expect(w_br_expect),
+    .br_success(w_br_success)
 );
 
 

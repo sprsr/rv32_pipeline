@@ -1,47 +1,25 @@
 module branch_comp(
     input [31:0] i_dataA,
     input [31:0] i_dataB,
-    input        brUn,
-    input        br_comp,
-    output  wire brEq,
-    output  wire brLT
+    input [3:0]  br_expect,
+    output       br_success 
 );
 
-reg r_Eq;
-reg r_LT;
+reg r_br_success;
 
-assign brEq = r_Eq;
-assign brLT = r_LT;
+assign br_success = r_br_success;
 
 always @(*) begin
-    if (br_comp) begin
-        if (brUn) begin
-            if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
-                r_Eq <= 1'b1;
-                r_LT <= 1'b0;
-            end else if ($unsigned(i_dataA) < $unsigned(i_dataB)) begin
-                r_Eq <= 1'b0;
-                r_LT <= 1'b1;
-            end else begin
-                r_Eq <= 1'b0;
-                r_LT <= 1'b0;
-            end
-        end else begin
-            if ($signed(i_dataA) == $signed(i_dataB)) begin
-                r_Eq <= 1'b1;
-                r_LT <= 1'b0;
-            end else if ($signed(i_dataA) < $signed(i_dataB)) begin
-                r_Eq <= 1'b0;
-                r_LT <= 1'b1;
-            end else begin
-                r_Eq <= 1'b0;
-                r_LT <= 1'b0;
-            end    
-        end
-    end else begin
-        r_Eq <= 1'b0;
-        r_LT <= 1'b0;
-    end
+
+            case (br_expect)
+                3'b001: r_br_success <= (i_dataA == i_dataB);
+                3'b010: r_br_success <= !(i_dataA == i_dataB);
+                3'b011: r_br_success <= ($signed(i_dataA) < $signed(i_dataB));
+                3'b100: r_br_success <= !($signed(i_dataA) < $signed(i_dataB));
+                3'b101: r_br_success <= ($unsigned(i_dataA) < $unsigned(i_dataB));
+                3'b110: r_br_success <= !($unsigned(i_dataA) < $unsigned(i_dataB));
+                default: r_br_success <= 1'b0;
+            endcase
 
 end
 endmodule
