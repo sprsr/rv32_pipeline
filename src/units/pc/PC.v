@@ -42,7 +42,7 @@ module PC(
             w_pc <= 0;  // Reset the program counter to 0
             w_pc_nxt <=0;
             r_instr_fetch <= 32'h0;
-        end else if (!stall) begin
+        end else begin
             if (sel_pc) begin
             w_pc <= in_alu;          // Increment the program counter if enabled
             w_pc_nxt <= in_alu + 'd1;
@@ -50,7 +50,11 @@ module PC(
                 w_pc <= in_pc;          // Increment the program counter if enabled
                 w_pc_nxt <= in_pc + 'd1;
             end
-            r_instr_fetch <= r_memory[in_pc];
+            // If stall is true we force a NOP instruction
+            if (stall)
+                r_instr_fetch <= 32'b00000000000000000000000000010011;
+            else
+                r_instr_fetch <= r_memory[in_pc];
         end
     end
 
