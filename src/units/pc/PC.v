@@ -35,6 +35,13 @@ module PC(
         r_memory[5] <= 32'b00000000100000010000001000010011;
         r_memory[6] <= 32'b00000000010000011000010001100011;
         r_memory[7] <= 32'b00000000000100010110000100010011;
+        r_memory[8] <= 32'b00000000000100010110000100010011;
+        r_memory[9] <= 32'b00000000000100010110000100010011;
+        r_memory[10] <= 32'b00000000000100010110000100010011;
+        r_memory[11] <= 32'b00000000000100010110000100010011;
+        r_memory[12] <= 32'b00000000000100010110000100010011;
+        r_memory[13] <= 32'b00000000000100010110000100010011;
+        r_memory[14] <= 32'b00000000010000011110000110010011;
     end
 
     always @(posedge clk or posedge rst) begin
@@ -46,12 +53,19 @@ module PC(
             if (sel_pc) begin
             w_pc <= in_alu;          // Increment the program counter if enabled
             w_pc_nxt <= in_alu + 'd1;
+            r_instr_fetch <= r_memory[in_alu];
             end else begin
                 w_pc <= in_pc;          // Increment the program counter if enabled
                 w_pc_nxt <= in_pc + 'd1;
+                r_instr_fetch <= r_memory[in_pc];
             end
             // If stall is true we force a NOP instruction
-                r_instr_fetch <= r_memory[in_pc];
+            /*
+            if (stall)
+                r_instr_fetch <= 32'b00000000000000000000000000010011;
+            else
+                */
+                //r_instr_fetch <= r_memory[in_pc];
         end
     end
 
