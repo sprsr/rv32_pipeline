@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sat Nov 25 07:54:51 2023
+[*] Sun Nov 26 06:25:40 2023
 [*]
 [dumpfile] "/home/sp/repos/rv32_processor/run/rv32_tb.vcd"
-[dumpfile_mtime] "Sat Nov 25 07:43:56 2023"
-[dumpfile_size] 25446
+[dumpfile_mtime] "Sun Nov 26 06:23:38 2023"
+[dumpfile_size] 25857
 [savefile] "/home/sp/repos/rv32_processor/run/waveform_signals.gtkw"
 [timestart] 0
-[size] 1724 1346
-[pos] -1 -1
-*-5.087204 110 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1455 1346
+[pos] 33798 32995
+*-5.087204 112 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] rv32_tb.
 [treeopen] rv32_tb.c0.
 [treeopen] rv32_tb.inst_instr_mgr.
@@ -49,6 +49,21 @@ rv32_tb.inst_register.regWEn
 rv32_tb.inst_execute_ctl.r_instr_exe[31:0]
 rv32_tb.inst_execute_ctl.data_a_exe[31:0]
 rv32_tb.c0.inst_access_ctl.data_b_exe[31:0]
+@200
+-Branch Compare
+@28
+rv32_tb.c0.inst_branch_comp.br_comp
+@22
+rv32_tb.c0.inst_branch_comp.i_dataA[31:0]
+rv32_tb.c0.inst_branch_comp.i_dataB[31:0]
+@28
+rv32_tb.c0.inst_branch_comp.brUn
+rv32_tb.c0.inst_branch_comp.brEq
+@29
+rv32_tb.c0.inst_branch_comp.brLT
+@28
+rv32_tb.c0.inst_branch_comp.r_Eq
+rv32_tb.c0.inst_branch_comp.r_LT
 @200
 -Instruction Manager
 @22
