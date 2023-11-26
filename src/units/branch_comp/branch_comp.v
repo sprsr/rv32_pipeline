@@ -2,17 +2,19 @@ module branch_comp(
     input [31:0] i_dataA,
     input [31:0] i_dataB,
     input        brUn,
+    input        br_comp,
     output  wire brEq,
     output  wire brLT
 );
 
-    reg r_Eq;
-    reg r_LT;
+reg r_Eq;
+reg r_LT;
 
-    assign brEq = r_Eq;
-    assign brLT = r_LT;
-    
-    always @(i_dataA or i_dataB) begin
+assign brEq = r_Eq;
+assign brLT = r_LT;
+
+always @(*) begin
+    if (br_comp) begin
         if (brUn) begin
             if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
                 r_Eq <= 1'b1;
@@ -36,5 +38,10 @@ module branch_comp(
                 r_LT <= 1'b0;
             end    
         end
+    end else begin
+        r_Eq <= 1'b0;
+        r_LT <= 1'b0;
     end
+
+end
 endmodule
