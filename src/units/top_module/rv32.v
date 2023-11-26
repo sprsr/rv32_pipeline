@@ -6,7 +6,7 @@ module rv32(
 
 wire        w_regWEn;
 wire        w_pc_sel;
-wire        w_a_sel;
+wire [1:0]  w_a_sel;
 wire        w_b_sel;
 wire        w_sign;
 wire        w_brEq;
@@ -192,10 +192,10 @@ mux2x1 inst_hazard_mux_B(
     .y(w_data_b)
 );
 
-mux2x1 inst_mux2x1_A(
+mux2x1 inst_mux3x1_A(
     .a(w_pc_exe),
     .b(w_data_a),
-    .sel(w_a_sel),
+    .sel(w_a_sel[0]),
     .y(w_alu_in_A)
 );
 

@@ -6,7 +6,7 @@ module execute_ctl(
     input  [31:0] data_b,
     input  [31:0] pc_de,
     input  [31:0] instruction,
-    output        a_sel,
+    output [1:0]  a_sel,
     output        b_sel,
     output  [3:0] immSel,
     output        sign,
@@ -20,7 +20,7 @@ module execute_ctl(
 );
 
 reg [3:0]  r_br_expect;
-reg        r_a_sel;
+reg [1:0]  r_a_sel;
 reg        r_b_sel;
 reg [3:0]  r_immSel;
 reg [3:0]  r_alu_sel;
@@ -60,7 +60,7 @@ always @(posedge clk or posedge rst) begin
         case (instruction[6:0])
             // LUI Instruction: 
             7'b0110111: begin
-                r_a_sel   <= 1'b0;
+                r_a_sel   <= 2'b0;
                 r_b_sel   <= 1'b1;
                 r_immSel  <= 4'h4;
                 r_sign    <= 1'b0;
@@ -69,7 +69,7 @@ always @(posedge clk or posedge rst) begin
             end
             // AUIPC Instruction: 
             7'b0010111: begin
-                r_a_sel   <= 1'b1;
+                r_a_sel   <= 2'b1;
                 r_b_sel   <= 1'b1;
                 r_immSel  <= 4'h4;
                 r_sign    <= 1'b0;
@@ -78,7 +78,7 @@ always @(posedge clk or posedge rst) begin
             end
             // JAL Instruction:
             7'b1101111: begin
-                r_a_sel   <= 1'b1;
+                r_a_sel   <= 2'b1;
                 r_b_sel   <= 1'b1;
                 r_immSel  <= 4'h5;
                 r_alu_sel <= 4'b0011;
@@ -87,7 +87,7 @@ always @(posedge clk or posedge rst) begin
             end
             // JALR Instruction:
             7'b1101111: begin
-                r_a_sel   <= 1'b0;
+                r_a_sel   <= 2'b0;
                 r_b_sel   <= 1'b1;
                 r_immSel  <= 4'h1;
                 r_alu_sel <= 4'b0010;
@@ -96,47 +96,32 @@ always @(posedge clk or posedge rst) begin
             end
             7'b1100011: begin
                 r_immSel  <= 4'h3;
+                r_a_sel   <= 2'b1;
+                r_b_sel   <= 1'b1;
+                r_alu_sel <= 4'b0011;
                 case (instruction[14:12])
                     // BEQ Instruction:
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b001;
                     end
                     // BNE Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b010;
                     end
                     //BLT Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b011;
                     end
                     //BGE Instruction
                     3'b101: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b100;
                     end
                     //BLTU Instruction
                     3'b110: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b101;
                     end
                     //BGEU Instruction
                     3'b111: begin
-                        r_a_sel   <= 1'b0;
-                        r_b_sel   <= 1'b0;
-                        r_alu_sel <= 4'b0011;
                         r_br_expect <= 3'b110;
                     end
                 endcase
@@ -147,34 +132,34 @@ always @(posedge clk or posedge rst) begin
                 case (instruction[14:12])
                     //LB Instruction
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
                     end
                     //LH Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
                     end
                     //LW Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
                     end
                     //LBU Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                     end
                     //LHU Instruction
                     3'b101: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                     end
@@ -186,14 +171,14 @@ always @(posedge clk or posedge rst) begin
                 case (instruction[14:12])
                     // SB Instruction
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
                     end
                     // SW Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
@@ -206,47 +191,47 @@ always @(posedge clk or posedge rst) begin
                 case (instruction[14:12])
                     // ADDI Instruction
                     3'b000: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0011;
                         r_sign    <= 1'b1;
                     end
                     // SLTI Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b1100;
                     end
                     // SLTIU Instruction
                     3'b011: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b1011;
                     end
                     // XORI Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0010;
                         r_sign    <= 1'b1;
                     end
                     // ORI Instruction
                     3'b110: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0001;
                         r_sign    <= 1'b1;
                     end
                     // ANDI Instruction
                     3'b111: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0000;
                         r_sign    <= 1'b1;
                     end
                     // SLLI Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b1;
                         r_alu_sel <= 4'b0111;
                     end
@@ -254,13 +239,13 @@ always @(posedge clk or posedge rst) begin
                         case (instruction[31:25])
                             // SRLI Instruction
                             7'b0000000: begin
-                                r_a_sel   <= 1'b0;
+                                r_a_sel   <= 2'b0;
                                 r_b_sel   <= 1'b1;
                                 r_alu_sel <= 4'b1000;
                             end
                             // SRAI Instruction
                             7'b0100000: begin
-                                r_a_sel   <= 1'b0;
+                                r_a_sel   <= 2'b0;
                                 r_b_sel   <= 1'b1;
                                 r_alu_sel <= 4'b1010;
                             end
@@ -276,13 +261,13 @@ always @(posedge clk or posedge rst) begin
                         case (instruction[31:25])
                             // ADD Instruction
                             7'b0000000: begin
-                                r_a_sel   <= 1'b0;
+                                r_a_sel   <= 2'b0;
                                 r_b_sel   <= 1'b0;
                                 r_alu_sel <= 4'b0011;
                             end
                             // SUB Instruction
                             7'b0100000: begin
-                                r_a_sel   <= 1'b0;
+                                r_a_sel   <= 2'b0;
                                 r_b_sel   <= 1'b0;
                                 r_alu_sel <= 4'b0100;
                             end
@@ -290,43 +275,43 @@ always @(posedge clk or posedge rst) begin
                     end
                     // SLL Instruction
                     3'b001: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b0111;
                     end
                     // SLT Instruction
                     3'b010: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b1100;
                     end
                     // SLTU Instruction
                     3'b011: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b1011;
                     end
                     // XOR Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b0010;
                     end
                     // SRA Instruction
                     3'b100: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b1010;
                     end
                     // OR Instruction
                     3'b110: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b0001;
                     end
                     // AND Instruction
                     3'b111: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_alu_sel <= 4'b0000;
                     end
@@ -335,7 +320,7 @@ always @(posedge clk or posedge rst) begin
             //  FENCE Instruction
             7'b0001111: begin
                 r_br_expect <= 3'b000;
-                r_a_sel   <= 1'b0;
+                r_a_sel   <= 2'b0;
                 r_b_sel   <= 1'b0;
                 r_immSel  <= 4'h0;
                 r_alu_sel <= 4'b0000;
@@ -346,7 +331,7 @@ always @(posedge clk or posedge rst) begin
                     //  @todo
                     //  ECALL Instruction
                     7'h0: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_immSel  <= 4'h0;
                         r_alu_sel <= 4'b0000;
@@ -354,7 +339,7 @@ always @(posedge clk or posedge rst) begin
                     //  @todo 
                     //  EBREAK Instruction
                     7'h1: begin
-                        r_a_sel   <= 1'b0;
+                        r_a_sel   <= 2'b0;
                         r_b_sel   <= 1'b0;
                         r_immSel  <= 4'h0;
                         r_alu_sel <= 4'b0000;
@@ -363,7 +348,7 @@ always @(posedge clk or posedge rst) begin
             end
             default: begin
                 r_br_expect <= 3'b000;
-                r_a_sel   <= 1'b0;
+                r_a_sel   <= 2'b0;
                 r_b_sel   <= 1'b0;
                 r_immSel  <= 4'h0;
                 r_alu_sel <= 4'b0000;
