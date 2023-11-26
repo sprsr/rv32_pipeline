@@ -56,7 +56,7 @@ always @(posedge clk or posedge rst) begin
             end
             7'b1100011: begin
                 r_wb_sel  <= 2'b10;
-                r_regWEn <= 1'b1;
+                r_regWEn <= 1'b0;
             end
             7'b0000011: begin
                 r_wb_sel  <= 2'b0;
