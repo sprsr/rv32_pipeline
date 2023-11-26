@@ -236,68 +236,6 @@ always @(posedge clk or posedge rst) begin
                 r_pc_sel = 1'b0;
             end
         endcase
-        if (instr_exe[6:0] == 7'b1100011) begin
-            case (instr_exe[14:12])
-                // BEQ Instruction:
-                3'b000: begin
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    if (r_BrEq)
-                       r_pc_sel = 1'b1;
-                    else
-                        r_pc_sel = 1'b0;
-                end
-                // BNE Instruction
-                3'b001: begin
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    case (r_BrEq)
-                        1'b0: r_pc_sel = 1'b1;
-                        1'b1: r_pc_sel = 1'b0;
-                    endcase
-                end
-                //BLT Instruction
-                3'b010: begin
-                    r_BrUn    = 1'b0; 
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    case (r_BrLT)
-                        1'b0: r_pc_sel = 1'b0;
-                        1'b1: condtitional_branch = 1'b1;
-                    endcase
-                end
-                //BGE Instruction
-                3'b101: begin
-                    r_BrUn    = 1'b0;
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    case (r_BrLT)
-                        1'b0: r_pc_sel = 1'b1;
-                        1'b1: r_pc_sel = 1'b0;
-                    endcase
-                end
-                //BLTU Instruction
-                3'b110: begin
-                    r_BrUn    <= 1'b1;
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    case (r_BrLT)
-                        1'b0: r_pc_sel = 1'b0;
-                        1'b1: r_pc_sel = 1'b1;
-                    endcase
-                end
-                //BGEU Instruction
-                3'b111: begin
-                    r_BrUn    = 1'b1;
-                    branch_compare(r_data_a,r_data_b, r_BrUn);
-                    case (r_BrLT)
-                        1'b0: r_pc_sel = 1'b1;
-                        1'b1: r_pc_sel = 1'b0;
-                    endcase
-                end
-            endcase
-            if (r_pc_sel) begin
-                r_false_path = 1'b1;
-            end
-        end else begin
-            r_pc_sel = 1'b0;
-            r_false_path = 1'b0;
-        end
     end
 end
 
