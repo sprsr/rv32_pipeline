@@ -52,7 +52,16 @@ always @(posedge clk or posedge rst) begin
         r_br_expect <= 3'b000;
         r_pc_exe    <= 32'h0;
         r_instr_exe <= 32'hxxxxxxxx;
-    end else if (!stall) begin
+    end else if (stall) begin
+        r_a_sel     <= 1'b0;
+        r_b_sel     <= 1'b1;
+        r_immSel    <= 4'h0;
+        r_sign      <= 1'b0;
+        r_alu_sel   <= 4'b0110;
+        r_br_expect <= 3'b000;
+        r_pc_exe    <= 32'h0;
+        r_instr_exe <= 32'b00000000000000000000000000010011;
+    end else begin
         r_sign = 1'b0;
 
         // Currently every RV32I instruction is implemented in control.  
