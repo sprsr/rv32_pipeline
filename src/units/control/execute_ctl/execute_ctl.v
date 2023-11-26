@@ -95,7 +95,7 @@ always @(posedge clk or posedge rst) begin
                 r_br_expect <= 3'b000;
             end
             // JALR Instruction:
-            7'b1101111: begin
+            7'b1100111: begin
                 r_a_sel   <= 2'b0;
                 r_b_sel   <= 1'b1;
                 r_immSel  <= 4'h1;
