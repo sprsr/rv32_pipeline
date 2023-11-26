@@ -61,7 +61,7 @@ PC inst_pc(
     .stall(w_stall),
     .sel_pc(w_pc_sel),
     .in_pc(w_pc_4),
-    .in_alu(w_alu_out),
+    .in_alu(w_alu_out_acc),
     .pc_nxt(w_pc_4),
     .pc(w_pc),
     .instr_fetch(w_instr_fetch)
@@ -140,6 +140,7 @@ instr_mgr inst_instr_mgr(
     .instr_wb(w_instr_wb),
     .data_d_wb(w_wr_back),
     .pc_4_acc(w_pc_4_acc),
+    .br_success(w_br_success),
     .stall(w_stall),
     .hazard_a(w_hazard_a),
     .hazard_b(w_hazard_b),
