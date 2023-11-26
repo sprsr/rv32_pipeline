@@ -51,9 +51,6 @@ module PC(
                 w_pc_nxt <= in_pc + 'd1;
             end
             // If stall is true we force a NOP instruction
-            if (stall)
-                r_instr_fetch <= 32'b00000000000000000000000000010011;
-            else
                 r_instr_fetch <= r_memory[in_pc];
         end
     end
