@@ -12,14 +12,17 @@ module instr_mgr(
     input [31:0] instr_wb,
     input [31:0] data_d_wb,
     input [31:0] pc_4_acc,
+    input        br_success,
     output       stall,
     output       hazard_a,
     output       hazard_b,
+    output       pc_sel,
     output[31:0] data_a_mgr,
     output[31:0] data_b_mgr
 );
 reg       r_false_path;
 reg       r_stall;
+reg       r_pc_sel;
 reg       r_hazard_a;
 reg       r_hazard_b;
 reg [5:0] r_conflict_map;
@@ -30,7 +33,7 @@ reg [31:0] r_data_mgr;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
 
-assign false_path = r_false_path;
+assign pc_sel = r_pc_sel;
 assign stall = r_stall;
 assign hazard_a = r_hazard_a;
 assign hazard_b = r_hazard_b;
@@ -164,6 +167,7 @@ always @(posedge clk or posedge rst) begin
                 r_hazard_b = 1'b1;
             end
         end
+        /*
         case (instr_fetch[6:0])
             // JAL Instruction:
             7'b1101111: begin
@@ -171,8 +175,13 @@ always @(posedge clk or posedge rst) begin
             // JALR Instruction:
             7'b1101111: begin
             end
-            default: begin
+        */
+       case (instr_exe[6:0])
+            7'b1100011: begin
+                if (br_success)
+                    r_pc_sel <= 1'b1;
             end
+            default: r_pc_sel <= 1'b0;
         endcase
     end
 end

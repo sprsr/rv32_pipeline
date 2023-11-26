@@ -41,7 +41,8 @@ wire [31:0] w_alu_out_wb;
 wire [31:0] w_dmem_out;
 wire [31:0] w_dmem_out_wb;
 wire        w_alu_zero_flag;
-wire        w_hazard;
+wire        w_hazard_a;
+wire        w_hazard_b;
 wire        w_stall;
 wire        w_br_success;
 wire [3:0]  w_br_expect;
@@ -87,7 +88,6 @@ execute_ctl inst_execute_ctl(
     .a_sel(w_a_sel),
     .b_sel(w_b_sel),
     .immSel(w_imm_sel),
-    .pc_sel(w_pc_sel),
     .br_expect(w_br_expect),
     .sign(w_sign),
     .alu_sel(w_alu_sel),
@@ -143,6 +143,7 @@ instr_mgr inst_instr_mgr(
     .stall(w_stall),
     .hazard_a(w_hazard_a),
     .hazard_b(w_hazard_b),
+    .pc_sel(w_pc_sel),
     .data_a_mgr(w_data_a_mgr),
     .data_b_mgr(w_data_b_mgr)
 );
