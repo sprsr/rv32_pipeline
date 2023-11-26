@@ -43,6 +43,7 @@ wire [31:0] w_dmem_out_wb;
 wire        w_alu_zero_flag;
 wire        w_hazard;
 wire        w_stall;
+wire        w_br_comp;
 wire [31:0] w_debug [31:0];
 
 wire [31:0] w_instr_fetch;
@@ -88,6 +89,7 @@ execute_ctl inst_execute_ctl(
     .b_sel(w_b_sel),
     .immSel(w_imm_sel),
     .pc_sel(w_pc_sel),
+    .br_comp(w_br_comp),
     .sign(w_sign),
     .BrUn(w_brUn),
     .alu_sel(w_alu_sel),
@@ -171,6 +173,7 @@ register inst_register(
 branch_comp inst_branch_comp(
     .i_dataA(w_data_a),
     .i_dataB(w_data_b),
+    .br_comp(w_br_comp),
     .brUn(w_brUn),
     .brEq(w_brEq),
     .brLT(w_brLT)
