@@ -3,8 +3,6 @@ module instr_mgr(
     input        rst,
     input [31:0] instr_fetch,
     input [31:0] instr_de,
-    input [31:0] data_a_de,
-    input [31:0] data_b_de,
     input [31:0] instr_exe,
     input [31:0] alu_out_exe,
     input [31:0] pc_exe,
@@ -14,15 +12,12 @@ module instr_mgr(
     input [31:0] instr_wb,
     input [31:0] data_d_wb,
     input [31:0] pc_4_acc,
-    output       pc_sel,
-    output       false_path,
     output       stall,
     output       hazard_a,
     output       hazard_b,
     output[31:0] data_a_mgr,
     output[31:0] data_b_mgr
 );
-reg       r_pc_sel;
 reg       r_false_path;
 reg       r_stall;
 reg       r_hazard_a;
@@ -32,65 +27,15 @@ reg [2:0] r_wb_acc;
 reg [2:0] r_wb_exe;
 reg [2:0] r_wb_wb;
 reg [31:0] r_data_mgr;
-reg [31:0] r_data_a;
-reg [31:0] r_data_b;
 reg [31:0] r_data_a_mgr;
 reg [31:0] r_data_b_mgr;
-reg r_brUn;
-reg r_brEq;
-reg r_brLT;
 
-assign pc_sel = r_pc_sel;
 assign false_path = r_false_path;
 assign stall = r_stall;
 assign hazard_a = r_hazard_a;
 assign hazard_b = r_hazard_b;
-assign data_a_mgr = r_data_a;
-assign data_b_mgr = r_data_b;
-
-mux2x1 inst_hazard_mux_A(
-    .a(r_data_a_mgr),
-    .b(data_a_de),
-    .sel(r_hazard_a),
-    .y(r_data_a)
-);
-
-mux2x1 inst_hazard_mux_B(
-    .a(r_data_b_mgr),
-    .b(data_b_de),
-    .sel(r_hazard_b),
-    .y(r_data_b)
-);
-
-function branch_compare;
-    input [31:0] i_dataA;
-    input [31:0] i_dataB;
-    input        brUn;
-        if (brUn) begin
-            if ($unsigned(i_dataA) == $unsigned(i_dataB)) begin
-                r_BrEq = 1'b1;
-                r_BrLT = 1'b0;
-            end else if ($unsigned(i_dataA) < $unsigned(i_dataB)) begin
-                r_BrEq = 1'b0;
-                r_BrLT = 1'b1;
-            end else begin
-                r_BrEq = 1'b0;
-                r_BrLT = 1'b0;
-            end
-        end else begin
-            if ($signed(i_dataA) == $signed(i_dataB)) begin
-                r_BrEq = 1'b1;
-                r_BrLT = 1'b0;
-            end else if ($signed(i_dataA) < $signed(i_dataB)) begin
-                r_BrEq = 1'b0;
-                r_BrLT = 1'b1;
-            end else begin
-                r_BrEq = 1'b0;
-                r_BrLT = 1'b0;
-            end    
-        end
-    endfunction
-
+assign data_a_mgr = r_data_a_mgr;
+assign data_b_mgr = r_data_b_mgr;
 
 //Function checking if the instruction is a write back instruction
 function [2:0] write_back_check;
@@ -131,8 +76,6 @@ endfunction
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
-        r_pc_sel = 1'b0;
-        r_false_path = 1'b0;
         r_conflict_map = 6'b0;
         r_stall = 1'b0;
         r_hazard_a = 1'b0;
@@ -142,8 +85,6 @@ always @(posedge clk or posedge rst) begin
         r_data_mgr = 32'hx;
         r_data_a_mgr = 32'hx;
         r_data_b_mgr = 32'hx;
-        r_pc_sel = 1'b0;
-        r_false_path = 1'b0;
     end else begin
         r_conflict_map = 6'h0;
         r_stall = 1'b0;
@@ -226,14 +167,11 @@ always @(posedge clk or posedge rst) begin
         case (instr_fetch[6:0])
             // JAL Instruction:
             7'b1101111: begin
-                r_pc_sel = 1'b1;
             end
             // JALR Instruction:
             7'b1101111: begin
-                r_pc_sel = 1'b1;
             end
             default: begin
-                r_pc_sel = 1'b0;
             end
         endcase
     end
