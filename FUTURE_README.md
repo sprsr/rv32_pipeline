@@ -41,18 +41,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
+
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Verilog 2012](https://ece.uah.edu/~gaede/cpe526/2012%20System%20Verilog%20Language%20Reference%20Manual.pdf) - Language
+- [Icarus Verilog](https://github.com/steveicarus/iverilog) - Compiler
+- [GTKWave](https://github.com/gtkwave/gtkwave) - Waveform Simulator
+- [Risc V Manual]([https://github.com/YosysHQ/yosys](https://riscv.org/wp-content/uploads/2019/12/riscv-spec-20191213.pdf)) - Instruction Set Architecture
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@sprsr](https://github.com/sprsr) - Idea & Initial work
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Open Source EDA Tools
+- Risc V Org
+- [Onur Mutlu](ttps://www.youtube.com/channel/UCIwQ8uOeRFgOEvBLYc3kc3g) (Computer Architecture lectures on Youtube)
