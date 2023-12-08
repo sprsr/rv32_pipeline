@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> A simple 5 stage pipeline processor in conformance with RISC V Standards.  <br>
+<p align="center"> A simple 5 stage pipeline in conformance with RISC V Standards.  <br>
   A single core capable of handling every RV32I Instruction.  Minimal verification has been conducted thusfar, however the framework to run simulations and view waveforms are in place.
     <br> 
 </p>
