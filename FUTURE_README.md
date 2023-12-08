@@ -46,7 +46,7 @@ These instructions will get you a copy of the project up and running on your loc
 - [Verilog 2012](https://ece.uah.edu/~gaede/cpe526/2012%20System%20Verilog%20Language%20Reference%20Manual.pdf) - Language
 - [Icarus Verilog](https://github.com/steveicarus/iverilog) - Compiler
 - [GTKWave](https://github.com/gtkwave/gtkwave) - Waveform Simulator
-- [Risc V Manual]([https://github.com/YosysHQ/yosys] - (https://riscv.org/wp-content/uploads/2019/12/riscv-spec-20191213.pdf)) - Instruction Set Architecture
+- [Risc V Manual] (https://riscv.org/wp-content/uploads/2019/12/riscv-spec-20191213.pdf)) - Instruction Set Architecture
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@sprsr](https://github.com/sprsr) - Idea & Initial work
